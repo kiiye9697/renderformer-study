@@ -79,4 +79,6 @@ metal-g01-v0 的 C 图中可观察到背景右侧竖带与边界伪影；这不�
 - 正式运行配置、逐步训练/验证日志、最佳 checkpoint 选择依据。
 - result.json 与 test-summary.json：已核验同一最佳 checkpoint SHA 与 16 帧完整集合。
 - [清洁公开版 docs/training.json](../docs/training.json)、真实曲线和 A/B/C 图：由[训练展示入口](https://www.kiiye9697.cn/renderformer-study/#training)读取；training-summary.json 是本地暂存产物名，不是公开下载文件名。
-- [历史八例回
+- [历史八例回归](../docs/historical-regression.json)与[多视角十二帧](../docs/multiview.json)：分别对应[回归区](https://www.kiiye9697.cn/renderformer-study/#historical-regression)与[多视角区](https://www.kiiye9697.cn/renderformer-study/#multiview)，与正式留出测试分开解释。
+
+打印主报告保持原实验版本，本扩展单独记录；是否替换打印稿应在结果完整、页数与图幅复核之后决定。
