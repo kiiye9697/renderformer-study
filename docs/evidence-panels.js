@@ -95,7 +95,7 @@ function publicImage(path, label) {
 function renderTests(data) {
   // Never display held-out frames before the selected checkpoint's final evaluation.
   if (data.test_evaluated !== true) {
-    $('#training-test-status').textContent = '留出测试集尚未做最终评估。这里不展示测试帧用于挑模型；最终 checkpoint 确定后，再并列展示 A 预训练 / B 微调 / C Cycles 参考。';
+    $('#training-test-status').textContent = '留出测试集尚未做最终评估。这里不展示测试帧用于挑模型；最终 checkpoint 确定后，再并列展示 A Cycles 参考 / B 预训练模型 / C 微调模型。';
     return;
   }
   const cases = Array.isArray(data.test_cases) ? data.test_cases : [];
@@ -108,7 +108,7 @@ function renderTests(data) {
     const article = element('article', undefined, 'training-case');
     article.append(element('h4', record.title || record.id));
     const grid = element('div', undefined, 'training-triptych');
-    for (const [key, label] of [['pretrained', 'A · 预训练模型'], ['finetuned', 'B · 微调模型'], ['reference', 'C · Cycles 参考']]) {
+    for (const [key, label] of [['reference', 'A · Cycles 参考'], ['pretrained', 'B · 预训练模型'], ['finetuned', 'C · 微调模型']]) {
       grid.append(publicImage(record[key], label) || element('p', `${label}：没有可公开图像`));
     }
     article.append(grid);
