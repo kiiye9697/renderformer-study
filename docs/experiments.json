@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "label_convention": {
+    "A": "Cycles reference",
+    "B": "RenderFormer prediction"
+  },
+  "experiments": [
+    {
+      "id": "sponza-architecture",
+      "title": "Sponza · 中庭建筑骨架",
+      "status": "complete",
+      "note": "边界/失败实例：模型明显偏暗并出现结构错误。建筑骨架与常量材质近似；内部近距离相机与7328三角形不同于论文训练设置，训练资产关系未核实；不宣称严格OOD，也不独断失败原因。",
+      "reference": "assets/sponza-architecture/A_reference.png",
+      "prediction": "assets/sponza-architecture/B_prediction.png",
+      "error": "assets/sponza-architecture/error.png",
+      "error_note": "显示域误差固定色标[0,0.25]；本例58.23%像素达到色标上限。A/B同曝光，同EV=0/Reinhard/sRGB；未单独提亮预测。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 7.780195303455482,
+          "psnr_exact_match": false,
+          "ssim_display": 0.3202838599681854,
+          "mae_linear_hdr": 0.35834553837776184,
+          "rmse_linear_hdr": 0.6127126216888428,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 0.58233642578125,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 7328,
+          "load_to_gpu_seconds": 2.825627300000633,
+          "inference_seconds": [
+            1.9979280999978073,
+            1.3968587999988813,
+            1.4318677999981446
+          ],
+          "h5_read_seconds": 0.8375950000045123,
+          "input_to_gpu_seconds": 0.30006110000249464,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 1.414363299998513,
+          "peak_allocated_bytes": 2343034880,
+          "peak_reserved_bytes": 2631925760,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 0.1884765625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 101.08607829999528,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "边界/失败实例：模型明显偏暗并出现结构错误。建筑骨架与常量材质近似；内部近距离相机与7328三角形不同于论文训练设置，训练资产关系未核实；不宣称严格OOD，也不独断失败原因。",
+        "source_credit": "Sponza: Frank Meinl/Crytek; earlier Marko Dabrovic; modifications Morgan McGuire and Kristijonas Jalnionis. Geometry and textures not redistributed.",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "official-cornell",
+      "title": "官方康奈尔盒 · 基线",
+      "status": "complete",
+      "note": "官方场景，修正shader后发布的base权重。",
+      "reference": "assets/official-cornell/A_reference.png",
+      "prediction": "assets/official-cornell/B_prediction.png",
+      "error": "assets/official-cornell/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 33.651102800516156,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9764258861541748,
+          "mae_linear_hdr": 0.017444854602217674,
+          "rmse_linear_hdr": 0.026344938203692436,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 3.814697265625e-06,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 5633,
+          "load_to_gpu_seconds": 2.96497059999092,
+          "inference_seconds": [
+            1.7240527999965707,
+            1.0594665000098757,
+            1.087305599998217
+          ],
+          "h5_read_seconds": 0.632134400002542,
+          "input_to_gpu_seconds": 0.2206196000042837,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 1.0733860500040464,
+          "peak_allocated_bytes": 2158609920,
+          "peak_reserved_bytes": 2483027968,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 1.556640625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 29.844603499994264,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "官方场景，修正shader后发布的base权重。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "metal-015",
+      "title": "金属茶壶 · 粗糙度 0.15",
+      "status": "complete",
+      "note": "无色金属近似：diffuse=0，specular=0.9；不是有色金属。",
+      "reference": "assets/metal-015/A_reference.png",
+      "prediction": "assets/metal-015/B_prediction.png",
+      "error": "assets/metal-015/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 31.6912834208534,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9633522033691406,
+          "mae_linear_hdr": 0.034456297755241394,
+          "rmse_linear_hdr": 1.1801538467407227,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 0.0005645751953125,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 2561,
+          "load_to_gpu_seconds": 2.6599474000104237,
+          "inference_seconds": [
+            1.2983841999957804,
+            0.6852128000027733,
+            0.7225407999940217
+          ],
+          "h5_read_seconds": 0.32960199999797624,
+          "input_to_gpu_seconds": 0.10652970000228379,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 0.7038767999983975,
+          "peak_allocated_bytes": 1822265856,
+          "peak_reserved_bytes": 2126512128,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 120.875
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 40.73533369999495,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "无色金属近似：diffuse=0，specular=0.9；不是有色金属。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "metal-040",
+      "title": "金属茶壶 · 粗糙度 0.40",
+      "status": "complete",
+      "note": "无色金属近似：diffuse=0，specular=0.9；粗糙度组固定其他条件。",
+      "reference": "assets/metal-040/A_reference.png",
+      "prediction": "assets/metal-040/B_prediction.png",
+      "error": "assets/metal-040/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 33.974096596758244,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9767027497291565,
+          "mae_linear_hdr": 0.02284502051770687,
+          "rmse_linear_hdr": 0.1420808732509613,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 3.0517578125e-05,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 2561,
+          "load_to_gpu_seconds": 2.8962659999961033,
+          "inference_seconds": [
+            1.3833833999960916,
+            0.6953572999918833,
+            0.6062737000029301
+          ],
+          "h5_read_seconds": 0.3146703000093112,
+          "input_to_gpu_seconds": 0.10248809999029618,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 0.6508154999974067,
+          "peak_allocated_bytes": 1822265856,
+          "peak_reserved_bytes": 2126512128,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 22.765625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 43.892468899997766,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "无色金属近似：diffuse=0，specular=0.9；粗糙度组固定其他条件。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "metal-075",
+      "title": "金属茶壶 · 粗糙度 0.75",
+      "status": "complete",
+      "note": "与粗糙度0.15/0.40共用几何、材质其他参数与相机。",
+      "reference": "assets/metal-075/A_reference.png",
+      "prediction": "assets/metal-075/B_prediction.png",
+      "error": "assets/metal-075/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 34.16857108360898,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9769428372383118,
+          "mae_linear_hdr": 0.020898839458823204,
+          "rmse_linear_hdr": 0.03674650564789772,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 1.1444091796875e-05,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 2561,
+          "load_to_gpu_seconds": 2.598528999995324,
+          "inference_seconds": [
+            1.4011357999988832,
+            0.7059021999884862,
+            0.7302330000093207
+          ],
+          "h5_read_seconds": 0.34104900000966154,
+          "input_to_gpu_seconds": 0.1095253999956185,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 0.7180675999989035,
+          "peak_allocated_bytes": 1822265856,
+          "peak_reserved_bytes": 2126512128,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 3.31640625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 56.88644950000162,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "与粗糙度0.15/0.40共用几何、材质其他参数与相机。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "wall-000",
+      "title": "金属茶壶 · 红墙强度 0.0",
+      "status": "complete",
+      "note": "固定粗糙度0.40，只改变侧墙颜色强度。",
+      "reference": "assets/wall-000/A_reference.png",
+      "prediction": "assets/wall-000/B_prediction.png",
+      "error": "assets/wall-000/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 34.1094865202092,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9765899181365967,
+          "mae_linear_hdr": 0.021040955558419228,
+          "rmse_linear_hdr": 0.1422584354877472,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 5.7220458984375e-05,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 2561,
+          "load_to_gpu_seconds": 2.669182500001625,
+          "inference_seconds": [
+            1.2997343000024557,
+            0.6966335000033723,
+            0.7001659999950789
+          ],
+          "h5_read_seconds": 0.31446670000150334,
+          "input_to_gpu_seconds": 0.10526070000196341,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 0.6983997499992256,
+          "peak_allocated_bytes": 1822265856,
+          "peak_reserved_bytes": 2126512128,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 22.65625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 61.56046009999409,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "固定粗糙度0.40，只改变侧墙颜色强度。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "wall-050",
+      "title": "金属茶壶 · 红墙强度 0.5",
+      "status": "complete",
+      "note": "固定粗糙度0.40；红墙强度1.0对应基线。",
+      "reference": "assets/wall-050/A_reference.png",
+      "prediction": "assets/wall-050/B_prediction.png",
+      "error": "assets/wall-050/error.png",
+      "error_note": "显示域逐像素误差；全组固定色标[0,0.25]，超过0.25饱和。统一EV=0、Reinhard、sRGB。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 34.1224064867236,
+          "psnr_exact_match": false,
+          "ssim_display": 0.977307140827179,
+          "mae_linear_hdr": 0.02078421227633953,
+          "rmse_linear_hdr": 0.1420164406299591,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 3.0517578125e-05,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 2561,
+          "load_to_gpu_seconds": 2.7123417999973753,
+          "inference_seconds": [
+            1.439304900006391,
+            0.719672699997318,
+            0.685612500004936
+          ],
+          "h5_read_seconds": 0.36985279999498744,
+          "input_to_gpu_seconds": 0.11096740000357386,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 0.702642600001127,
+          "peak_allocated_bytes": 1822265856,
+          "peak_reserved_bytes": 2126512128,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 22.765625
+        },
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 62.94056669999554,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        },
+        "experiment_note": "固定粗糙度0.40；红墙强度1.0对应基线。",
+        "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+      }
+    },
+    {
+      "id": "sponza-exterior",
+      "title": "Sponza · 外部相机补充诊断",
+      "status": "complete",
+      "note": "补充外部视角诊断：只改相机，几何/法线/材质逐元素相同；预测仍明显失效。外部视角黑背景更多，跨视角全图指标不能构成严格改善证据。",
+      "reference": "assets/sponza-exterior/A_reference.png",
+      "prediction": "assets/sponza-exterior/B_prediction.png",
+      "error": "assets/sponza-exterior/error.png",
+      "error_note": "与其他实验统一显示变换和[0,0.25]误差色标。此相机视图包含更多黑色背景，不直接按全图指标排名。",
+      "metadata": {
+        "metrics": {
+          "psnr_display_db": 13.375058818168393,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5626208186149597,
+          "mae_linear_hdr": 0.08094311505556107,
+          "rmse_linear_hdr": 0.2094126045703888,
+          "shape": [
+            512,
+            512,
+            3
+          ],
+          "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+          "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+          "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+          "error_saturated_pixel_fraction": 0.23979949951171875,
+          "negative_prediction_fraction": 0.0
+        },
+        "inference": {
+          "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+          "model_id": "microsoft/renderformer-v1-base",
+          "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+          "torch": "2.8.0+cu128",
+          "cuda": "12.8",
+          "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+          "precision": "fp16 autocast",
+          "attention": "sdpa",
+          "resolution": 512,
+          "triangles": 7328,
+          "load_to_gpu_seconds": 2.5660676999978023,
+          "inference_seconds": [
+            2.282940699995379,
+            1.6133410999900661,
+            1.5504524999996647
+          ],
+          "h5_read_seconds": 0.8417008999967948,
+          "input_to_gpu_seconds": 0.29648610000731423,
+          "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+          "steady_mean_seconds": 1.5818967999948654,
+          "peak_allocated_bytes": 2343034880,
+          "peak_reserved_bytes": 2631925760,
+          "linear_hdr_min": 0.0,
+          "linear_hdr_max": 1.5234375
+        },
+        "experiment_note": "补充外部视角诊断：只改相机，几何/法线/材质逐元素相同；预测仍明显失效。外部视角黑背景更多，跨视角全图指标不能构成严格改善证据。",
+        "source_credit": "Sponza: Frank Meinl/Crytek; earlier Marko Dabrovic; modifications Morgan McGuire and Kristijonas Jalnionis. Geometry/textures not redistributed.",
+        "timing_caveat": "Only two warm complete-pipeline forwards; not a stable benchmark.",
+        "reference_renderer": {
+          "blender_version": "4.5.1 LTS",
+          "samples": 4096,
+          "seed": 1,
+          "denoising": false,
+          "adaptive_sampling": false,
+          "seconds": 19.76776339999924,
+          "resolution": 512,
+          "linear_hdr": true,
+          "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+          "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+        }
+      }
+    }
+  ],
+  "curves": [
+    {
+      "image": "assets/parameter_curves.png",
+      "title": "固定ROI的线性HDR参数响应",
+      "note": "A为Cycles、B为RenderFormer。预先固定茶壶/地面ROI；P99是亮度上分位数，不是高光面积。线性值为相对辐射单位。"
+    },
+    {
+      "image": "assets/metric_curves.png",
+      "title": "参数档位与全图显示域PSNR",
+      "note": "同一EV=0/Reinhard/sRGB、data_range=1；这些点为真实测量，不作模型外推。"
+    }
+  ]
+}

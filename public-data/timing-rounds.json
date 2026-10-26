@@ -1,0 +1,59 @@
+{
+  "case": "official-cbox",
+  "rounds": [
+    {
+      "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+      "model_id": "microsoft/renderformer-v1-base",
+      "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+      "torch": "2.8.0+cu128",
+      "cuda": "12.8",
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "precision": "fp16 autocast",
+      "attention": "sdpa",
+      "resolution": 512,
+      "triangles": 5633,
+      "load_to_gpu_seconds": 3.952417399996193,
+      "inference_seconds": [
+        2.2548434999916935,
+        1.552989499992691,
+        1.572986300001503
+      ],
+      "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+      "steady_mean_seconds": 1.562987899997097,
+      "peak_allocated_bytes": 2158609920,
+      "peak_reserved_bytes": 2483027968,
+      "linear_hdr_min": 0.0,
+      "linear_hdr_max": 1.556640625,
+      "record_note": "First measurement values preserved from the recorded execution output; initial timing.json was superseded when adding IO timing fields.",
+      "round": 1
+    },
+    {
+      "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+      "model_id": "microsoft/renderformer-v1-base",
+      "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+      "torch": "2.8.0+cu128",
+      "cuda": "12.8",
+      "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "precision": "fp16 autocast",
+      "attention": "sdpa",
+      "resolution": 512,
+      "triangles": 5633,
+      "load_to_gpu_seconds": 2.96497059999092,
+      "inference_seconds": [
+        1.7240527999965707,
+        1.0594665000098757,
+        1.087305599998217
+      ],
+      "h5_read_seconds": 0.632134400002542,
+      "input_to_gpu_seconds": 0.2206196000042837,
+      "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+      "steady_mean_seconds": 1.0733860500040464,
+      "peak_allocated_bytes": 2158609920,
+      "peak_reserved_bytes": 2483027968,
+      "linear_hdr_min": 0.0,
+      "linear_hdr_max": 1.556640625,
+      "round": 2
+    }
+  ],
+  "interpretation": "Both completed rounds retained. Each contains only two warm forwards; laptop wall-clock variability prevents a stable benchmark or general speedup claim. Round 2 was run to add IO timing, not to select a faster result."
+}

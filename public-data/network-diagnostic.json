@@ -1,0 +1,514 @@
+{
+  "status": "measured",
+  "resolution": 512,
+  "model_id": "microsoft/renderformer-v1-base",
+  "revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+  "config": {
+    "activation": "swiglu",
+    "bias": false,
+    "dim_feedforward": 3072,
+    "dpt_features": 128,
+    "dpt_out_channels": [
+      96,
+      192,
+      384,
+      768
+    ],
+    "dpt_out_layers": null,
+    "dropout": 0.0,
+    "include_alpha": false,
+    "latent_dim": 768,
+    "norm_first": true,
+    "norm_type": "rms_norm",
+    "num_heads": 6,
+    "num_layers": 12,
+    "num_register_tokens": 16,
+    "patch_size": 8,
+    "pe_type": "rope",
+    "qk_norm": true,
+    "rope_double_max_freq": false,
+    "rope_type": "triangle",
+    "texture_channels": 13,
+    "texture_encode_patch_size": 32,
+    "texture_encoder_norm_type": "rms_norm",
+    "turn_to_cam_coord": true,
+    "use_dpt_decoder": true,
+    "use_ldr": false,
+    "use_vn_encoder": true,
+    "vdir_num_freqs": 0,
+    "vdir_pe_type": "nerf",
+    "vertex_pe_num_freqs": 12,
+    "view_indep_qk_norm": true,
+    "view_transformer_ffn_hidden_dim": 3072,
+    "view_transformer_include_self_attn": true,
+    "view_transformer_latent_dim": 768,
+    "view_transformer_n_heads": 6,
+    "view_transformer_n_layers": 6,
+    "view_transformer_use_swin_attn": false,
+    "vn_encoder_norm_type": "rms_norm",
+    "vn_pe_num_freqs": 6
+  },
+  "records": [
+    {
+      "module": "vn_encoding_proj",
+      "type": "Linear",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            5633,
+            117
+          ],
+          "dtype": "torch.float32",
+          "mean": 0.20079553127288818,
+          "std": 0.6684768199920654,
+          "min": -1.0,
+          "max": 1.0
+        }
+      ],
+      "keyword_inputs": {},
+      "outputs": {
+        "shape": [
+          1,
+          5633,
+          768
+        ],
+        "dtype": "torch.float16",
+        "mean": 0.06330814212560654,
+        "std": 0.8456683158874512,
+        "min": -4.07421875,
+        "max": 4.09375
+      }
+    },
+    {
+      "module": "texture_encoder",
+      "type": "Linear",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            5633,
+            13312
+          ],
+          "dtype": "torch.float32",
+          "mean": 0.21619786322116852,
+          "std": 0.2873995304107666,
+          "min": 0.0,
+          "max": 3.69905686378479
+        }
+      ],
+      "keyword_inputs": {},
+      "outputs": {
+        "shape": [
+          1,
+          5633,
+          768
+        ],
+        "dtype": "torch.float16",
+        "mean": -0.6552796959877014,
+        "std": 24.150089263916016,
+        "min": -136.375,
+        "max": 121.875
+      }
+    },
+    {
+      "module": "transformer",
+      "type": "TransformerEncoder",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            5649,
+            768
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.009320508688688278,
+          "std": 0.8153265714645386,
+          "min": -5.32549524307251,
+          "max": 6.4886956214904785
+        }
+      ],
+      "keyword_inputs": {
+        "src_key_padding_mask": {
+          "shape": [
+            1,
+            5649
+          ],
+          "dtype": "torch.bool",
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "triangle_pos": {
+          "shape": [
+            1,
+            5649,
+            9
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.09438647329807281,
+          "std": 0.2479628622531891,
+          "min": -0.5,
+          "max": 2.1624999046325684
+        }
+      },
+      "outputs": {
+        "shape": [
+          1,
+          5649,
+          768
+        ],
+        "dtype": "torch.float32",
+        "mean": -0.5696843862533569,
+        "std": 12.384761810302734,
+        "min": -2123.26513671875,
+        "max": 1878.751953125
+      }
+    },
+    {
+      "module": "view_transformer.ray_map_encoder",
+      "type": "Linear",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            4096,
+            192
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.32146549224853516,
+          "std": 0.4795764684677124,
+          "min": -0.9999995231628418,
+          "max": 0.3208763003349304
+        }
+      ],
+      "keyword_inputs": {},
+      "outputs": {
+        "shape": [
+          1,
+          4096,
+          768
+        ],
+        "dtype": "torch.float16",
+        "mean": -0.0003040861338376999,
+        "std": 0.4184938669204712,
+        "min": -3.5859375,
+        "max": 2.283203125
+      }
+    },
+    {
+      "module": "view_transformer.transformer",
+      "type": "TransformerDecoder",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            4096,
+            768
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.0023195839021354914,
+          "std": 0.5749589800834656,
+          "min": -5.055020332336426,
+          "max": 4.733477592468262
+        },
+        {
+          "shape": [
+            1,
+            5649,
+            768
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.5696843862533569,
+          "std": 12.384761810302734,
+          "min": -2123.26513671875,
+          "max": 1878.751953125
+        }
+      ],
+      "keyword_inputs": {
+        "src_key_padding_mask": {
+          "shape": [
+            1,
+            5649
+          ],
+          "dtype": "torch.bool",
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        },
+        "triangle_pos": {
+          "shape": [
+            1,
+            5649,
+            9
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.7414552569389343,
+          "std": 0.902657687664032,
+          "min": -2.5,
+          "max": 2.1624999046325684
+        },
+        "ray_pos": {
+          "shape": [
+            1,
+            4096,
+            9
+          ],
+          "dtype": "torch.float32",
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        "out_layers": [
+          "int",
+          "int",
+          "int",
+          "int"
+        ],
+        "tf32_mode": "bool",
+        "patch_h": "int",
+        "patch_w": "int"
+      },
+      "outputs": [
+        [
+          {
+            "shape": [
+              1,
+              4096,
+              768
+            ],
+            "dtype": "torch.float32",
+            "mean": -0.05693921074271202,
+            "std": 1.6697783470153809,
+            "min": -37.847900390625,
+            "max": 9.241789817810059
+          }
+        ],
+        [
+          {
+            "shape": [
+              1,
+              4096,
+              768
+            ],
+            "dtype": "torch.float32",
+            "mean": -0.06372366845607758,
+            "std": 1.9979475736618042,
+            "min": -45.00406265258789,
+            "max": 11.991973876953125
+          }
+        ],
+        [
+          {
+            "shape": [
+              1,
+              4096,
+              768
+            ],
+            "dtype": "torch.float32",
+            "mean": -0.07884491235017776,
+            "std": 2.5580551624298096,
+            "min": -79.59577941894531,
+            "max": 18.082107543945312
+          }
+        ],
+        [
+          {
+            "shape": [
+              1,
+              4096,
+              768
+            ],
+            "dtype": "torch.float32",
+            "mean": -0.05336397886276245,
+            "std": 2.2470035552978516,
+            "min": -63.29414749145508,
+            "max": 21.454378128051758
+          }
+        ]
+      ]
+    },
+    {
+      "module": "view_transformer.out_dpt",
+      "type": "DPTHead",
+      "inputs": [
+        [
+          [
+            {
+              "shape": [
+                1,
+                4096,
+                768
+              ],
+              "dtype": "torch.float32",
+              "mean": -0.05693921074271202,
+              "std": 1.6697783470153809,
+              "min": -37.847900390625,
+              "max": 9.241789817810059
+            }
+          ],
+          [
+            {
+              "shape": [
+                1,
+                4096,
+                768
+              ],
+              "dtype": "torch.float32",
+              "mean": -0.06372366845607758,
+              "std": 1.9979475736618042,
+              "min": -45.00406265258789,
+              "max": 11.991973876953125
+            }
+          ],
+          [
+            {
+              "shape": [
+                1,
+                4096,
+                768
+              ],
+              "dtype": "torch.float32",
+              "mean": -0.07884491235017776,
+              "std": 2.5580551624298096,
+              "min": -79.59577941894531,
+              "max": 18.082107543945312
+            }
+          ],
+          [
+            {
+              "shape": [
+                1,
+                4096,
+                768
+              ],
+              "dtype": "torch.float32",
+              "mean": -0.05336397886276245,
+              "std": 2.2470035552978516,
+              "min": -63.29414749145508,
+              "max": 21.454378128051758
+            }
+          ]
+        ],
+        "int",
+        "int"
+      ],
+      "keyword_inputs": {
+        "patch_size": "int"
+      },
+      "outputs": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "torch.float16",
+        "mean": 0.09897365421056747,
+        "std": 0.09940443187952042,
+        "min": -0.046417236328125,
+        "max": 0.40771484375
+      }
+    },
+    {
+      "module": "view_transformer",
+      "type": "ViewTransformer",
+      "inputs": [
+        {
+          "shape": [
+            1,
+            3
+          ],
+          "dtype": "torch.float32",
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0
+        },
+        {
+          "shape": [
+            1,
+            512,
+            512,
+            3
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.32146549224853516,
+          "std": 0.4795764684677124,
+          "min": -0.9999995231628418,
+          "max": 0.3208763003349304
+        },
+        {
+          "shape": [
+            1,
+            5649,
+            768
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.5696843862533569,
+          "std": 12.384761810302734,
+          "min": -2123.26513671875,
+          "max": 1878.751953125
+        },
+        {
+          "shape": [
+            1,
+            5649,
+            9
+          ],
+          "dtype": "torch.float32",
+          "mean": -0.7414552569389343,
+          "std": 0.902657687664032,
+          "min": -2.5,
+          "max": 2.1624999046325684
+        },
+        {
+          "shape": [
+            1,
+            5649
+          ],
+          "dtype": "torch.bool",
+          "mean": 1.0,
+          "std": 0.0,
+          "min": 1.0,
+          "max": 1.0
+        }
+      ],
+      "keyword_inputs": {
+        "tf32_mode": "bool"
+      },
+      "outputs": {
+        "shape": [
+          1,
+          3,
+          512,
+          512
+        ],
+        "dtype": "torch.float16",
+        "mean": 0.09962176531553268,
+        "std": 0.09871078282594681,
+        "min": -4.5359134674072266e-05,
+        "max": 0.40771484375
+      }
+    }
+  ],
+  "linear_hdr_output": {
+    "shape": [
+      1,
+      1,
+      512,
+      512,
+      3
+    ],
+    "dtype": "torch.float16",
+    "mean": 0.29172325134277344,
+    "std": 0.3071371614933014,
+    "min": 0.0,
+    "max": 1.556640625
+  },
+  "warning": "Separate hooked inference excluded from performance measurements. Activation statistics are not attention maps or physical irradiance.",
+  "source_scene": "official Cornell box; 5633 triangles"
+}

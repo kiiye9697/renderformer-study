@@ -1,0 +1,65 @@
+{
+  "metrics": {
+    "psnr_display_db": 7.780195303455482,
+    "psnr_exact_match": false,
+    "ssim_display": 0.3202838599681854,
+    "mae_linear_hdr": 0.35834553837776184,
+    "rmse_linear_hdr": 0.6127126216888428,
+    "shape": [
+      512,
+      512,
+      3
+    ],
+    "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+    "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+    "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+    "error_scale": [
+      0,
+      0.25
+    ],
+    "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+    "error_saturated_pixel_fraction": 0.58233642578125,
+    "negative_prediction_fraction": 0.0
+  },
+  "inference": {
+    "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+    "model_id": "microsoft/renderformer-v1-base",
+    "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "precision": "fp16 autocast",
+    "attention": "sdpa",
+    "resolution": 512,
+    "triangles": 7328,
+    "load_to_gpu_seconds": 2.825627300000633,
+    "inference_seconds": [
+      1.9979280999978073,
+      1.3968587999988813,
+      1.4318677999981446
+    ],
+    "h5_read_seconds": 0.8375950000045123,
+    "input_to_gpu_seconds": 0.30006110000249464,
+    "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+    "steady_mean_seconds": 1.414363299998513,
+    "peak_allocated_bytes": 2343034880,
+    "peak_reserved_bytes": 2631925760,
+    "linear_hdr_min": 0.0,
+    "linear_hdr_max": 0.1884765625
+  },
+  "reference_renderer": {
+    "blender_version": "4.5.1 LTS",
+    "samples": 4096,
+    "seed": 1,
+    "denoising": false,
+    "adaptive_sampling": false,
+    "seconds": 101.08607829999528,
+    "resolution": 512,
+    "linear_hdr": true,
+    "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+    "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+  },
+  "experiment_note": "边界/失败实例：模型明显偏暗并出现结构错误。建筑骨架与常量材质近似；内部近距离相机与7328三角形不同于论文训练设置，训练资产关系未核实；不宣称严格OOD，也不独断失败原因。",
+  "source_credit": "Sponza: Frank Meinl/Crytek; earlier Marko Dabrovic; modifications Morgan McGuire and Kristijonas Jalnionis. Geometry and textures not redistributed.",
+  "timing_caveat": "Mean of only two warm complete-pipeline forwards after a first forward; not a stable benchmark. Cornell-box runs varied from about 1.56 s to 1.07 s. Do not infer an absolute renderer speedup."
+}

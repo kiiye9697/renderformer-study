@@ -1,0 +1,23 @@
+{
+  "A_min": 0.0,
+  "A_max": 270.6168518066406,
+  "B_min": 0.0,
+  "B_max": 120.875,
+  "max_error_pixel_xy": [
+    248,
+    344
+  ],
+  "A_at_pixel": [
+    270.6168518066406,
+    270.6167297363281,
+    270.616455078125
+  ],
+  "B_at_pixel": [
+    40.96875,
+    41.65625,
+    38.96875
+  ],
+  "top_0_1_percent_pixels_squared_error_fraction": 0.9993005394935608,
+  "top_1_percent_pixels_squared_error_fraction": 0.9995702505111694,
+  "linear_rmse": 1.1801538467407227
+}

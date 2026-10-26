@@ -1,0 +1,11 @@
+{
+  "teapot.obj": {
+    "sha256": "b9f8dbc7c05d67431053b0801c667fa613369fcff5bb97c54b2a321c539ca1d6",
+    "bytes": 305272
+  },
+  "teapot_2048.obj": {
+    "sha256": "cf373f20e13e450023a4ee30e708bf73034cd3694d6e4c2f95cbdbe603804ba1",
+    "bytes": 65095
+  },
+  "method": "official scene_processor/remesh.py: isotropic targetlen .5%, featuredeg30, adaptiveFalse; quadric edge collapse target2048 qualitythr1; pymeshlab2025.7.post1"
+}

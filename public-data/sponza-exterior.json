@@ -1,0 +1,65 @@
+{
+  "metrics": {
+    "psnr_display_db": 13.375058818168393,
+    "psnr_exact_match": false,
+    "ssim_display": 0.5626208186149597,
+    "mae_linear_hdr": 0.08094311505556107,
+    "rmse_linear_hdr": 0.2094126045703888,
+    "shape": [
+      512,
+      512,
+      3
+    ],
+    "display_transform": "max(x,0), EV=0, channel-wise Reinhard x/(1+x), IEC sRGB transfer",
+    "psnr_ssim_domain": "float32 display-transformed RGB, data_range=1, full image, no crop",
+    "ssim_settings": "skimage defaults: 7x7 uniform window, sample covariance",
+    "error_scale": [
+      0,
+      0.25
+    ],
+    "error_color_saturation_note": "error >=0.25 uses the maximum colormap color",
+    "error_saturated_pixel_fraction": 0.23979949951171875,
+    "negative_prediction_fraction": 0.0
+  },
+  "inference": {
+    "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+    "model_id": "microsoft/renderformer-v1-base",
+    "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+    "torch": "2.8.0+cu128",
+    "cuda": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "precision": "fp16 autocast",
+    "attention": "sdpa",
+    "resolution": 512,
+    "triangles": 7328,
+    "load_to_gpu_seconds": 2.5660676999978023,
+    "inference_seconds": [
+      2.282940699995379,
+      1.6133410999900661,
+      1.5504524999996647
+    ],
+    "h5_read_seconds": 0.8417008999967948,
+    "input_to_gpu_seconds": 0.29648610000731423,
+    "timing_scope": "complete pipeline forward, both stages, fresh texture clone before timer; no concurrent Cycles task; no scene representation cache",
+    "steady_mean_seconds": 1.5818967999948654,
+    "peak_allocated_bytes": 2343034880,
+    "peak_reserved_bytes": 2631925760,
+    "linear_hdr_min": 0.0,
+    "linear_hdr_max": 1.5234375
+  },
+  "experiment_note": "补充外部视角诊断：只改相机，几何/法线/材质逐元素相同；预测仍明显失效。外部视角黑背景更多，跨视角全图指标不能构成严格改善证据。",
+  "source_credit": "Sponza: Frank Meinl/Crytek; earlier Marko Dabrovic; modifications Morgan McGuire and Kristijonas Jalnionis. Geometry/textures not redistributed.",
+  "timing_caveat": "Only two warm complete-pipeline forwards; not a stable benchmark.",
+  "reference_renderer": {
+    "blender_version": "4.5.1 LTS",
+    "samples": 4096,
+    "seed": 1,
+    "denoising": false,
+    "adaptive_sampling": false,
+    "seconds": 19.76776339999924,
+    "resolution": 512,
+    "linear_hdr": true,
+    "reference_implementation": "official bpy_helper==0.0.8 materials and camera; preserved converter split OBJ import",
+    "diffuse_alignment": "constant colors quantized by floor(255*diffuse)/255 to match official OBJ/H5 converter"
+  }
+}

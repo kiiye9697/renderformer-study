@@ -1,0 +1,12 @@
+{
+  "code_repository": "https://github.com/microsoft/renderformer",
+  "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+  "model_id": "microsoft/renderformer-v1-base",
+  "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+  "model_file": "model.safetensors",
+  "model_bytes": 820728676,
+  "model_sha256": "792bfdc27b3d1adf4f4b5803a6333d05aed940fbc7e659003e0de556cd5156a0",
+  "hash_verification": "matches official Hugging Face LFS metadata",
+  "checkpoint_caveat": "Released retrained checkpoint after shader bug fix; not original paper submission weights",
+  "attention": "torch SDPA; no FlashAttention or Liger kernel on Windows"
+}

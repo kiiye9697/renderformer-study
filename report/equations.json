@@ -1,0 +1,6 @@
+{
+  "projection": "Q=XW_Q,\\quad K=XW_K,\\quad V=XW_V\\qquad (1)",
+  "attention": "\\mathrm{Attention}(Q,K,V)=\\mathrm{softmax}\\!\\left(\\frac{QK^{\\mathsf{T}}}{\\sqrt{d_k}}\\right)V\\qquad (2)",
+  "gradient": "\\theta_{t+1}=\\theta_t-\\eta\\,\\nabla_{\\theta}\\mathcal{L}(\\theta_t)\\qquad (3)",
+  "psnr": "\\mathrm{PSNR}=10\\log_{10}\\!\\left(\\frac{\\mathrm{MAX}_{I}^{2}}{\\mathrm{MSE}}\\right)\\qquad (4)"
+}

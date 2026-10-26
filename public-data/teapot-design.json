@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "id": "roughness_015",
+      "roughness": 0.15,
+      "red_wall_strength": 1.0
+    },
+    {
+      "id": "baseline",
+      "roughness": 0.4,
+      "red_wall_strength": 1.0
+    },
+    {
+      "id": "roughness_075",
+      "roughness": 0.75,
+      "red_wall_strength": 1.0
+    },
+    {
+      "id": "wall_000",
+      "roughness": 0.4,
+      "red_wall_strength": 0.0
+    },
+    {
+      "id": "wall_050",
+      "roughness": 0.4,
+      "red_wall_strength": 0.5
+    }
+  ],
+  "material": "achromatic metal approximation: diffuse=[0,0,0], specular=[0.9,0.9,0.9]; official additive GGX shader, not Unity metallic workflow",
+  "geometry": "shared official remesh, target 2048 faces; no per-case remesh",
+  "roi_teapot": [
+    180,
+    330,
+    330,
+    400
+  ],
+  "roi_floor": [
+    100,
+    460,
+    180,
+    490
+  ],
+  "roi_format": "[x0,y0,x1,y1], selected before viewing model predictions",
+  "evaluation": "512x512, linear HDR preserved; fixed EV=0/Reinhard/sRGB; full-image metrics and fixed ROI means",
+  "status_note": "This file records planned controls, not execution status. Actual completed measurements are in teapot-parameter_responses.json."
+}

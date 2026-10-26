@@ -1,0 +1,46 @@
+{
+  "reference_4096_vs_8192": {
+    "psnr_display_db": 56.359301250705904,
+    "psnr_exact_match": false,
+    "ssim_display": 0.9988042712211609,
+    "mae_linear_hdr": 0.0014633204555138946,
+    "rmse_linear_hdr": 0.023428693413734436
+  },
+  "prediction_vs_frozen4096": {
+    "psnr_display_db": 31.6912834208534,
+    "psnr_exact_match": false,
+    "ssim_display": 0.9633522033691406,
+    "mae_linear_hdr": 0.034456297755241394,
+    "rmse_linear_hdr": 1.1801538467407227
+  },
+  "prediction_vs_check8192": {
+    "psnr_display_db": 31.693521256460386,
+    "psnr_exact_match": false,
+    "ssim_display": 0.9637293219566345,
+    "mae_linear_hdr": 0.03451798856258392,
+    "rmse_linear_hdr": 1.1898754835128784
+  },
+  "A4096_max": 270.6168518066406,
+  "A8192_max": 274.19134521484375,
+  "B_max": 120.875,
+  "max_error_pixel_xy": [
+    248,
+    344
+  ],
+  "A4096_at_pixel": [
+    270.6168518066406,
+    270.6167297363281,
+    270.616455078125
+  ],
+  "A8192_at_pixel": [
+    274.19134521484375,
+    274.191162109375,
+    274.190673828125
+  ],
+  "B_at_pixel": [
+    40.96875,
+    41.65625,
+    38.96875
+  ],
+  "note": "4096 spp seed1 remains the frozen primary reference. 8192 spp seed2 is an independent convergence diagnostic. No denoising or adaptive sampling."
+}

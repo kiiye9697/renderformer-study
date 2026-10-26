@@ -1,0 +1,196 @@
+{
+  "status": "passed",
+  "cases": [
+    {
+      "id": "cbox",
+      "triangles": 5633,
+      "psnr_display_db": 33.651102800516156,
+      "ssim_display": 0.9764258861541748,
+      "mae_linear_hdr": 0.017444854602217674,
+      "rmse_linear_hdr": 0.026344938203692436,
+      "steady_mean_seconds": 1.0733860500040464,
+      "geometry_validation": {
+        "triangles": 5633,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.3080577850341797e-06,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "a04b6f946bed8e002093368ba4582765c49a7da4c723fbf2cd1a795ae0d49118",
+        "prediction_exr": "1dea1284c2fedfe3d4bbdd36d7b108e5322fd2b3f36d7bc5faa55efe39aed0af",
+        "h5": "6a1a94e8c4cf828ab23b50b786a35df6ddb01fa17a41ca2d9a3f36e9f4792757",
+        "metrics_json": "727acccf4a877ea2c0d9ce7f49f4439d93fabdaf3c8163009a42b288f9242590",
+        "timing_json": "61f6e0a943f0c29ec651e3476dccfc86fe4b09f64d3c67ca9807296bef55ab69"
+      }
+    },
+    {
+      "id": "baseline",
+      "triangles": 2561,
+      "psnr_display_db": 33.974096596758244,
+      "ssim_display": 0.9767027497291565,
+      "mae_linear_hdr": 0.02284502051770687,
+      "rmse_linear_hdr": 0.1420808732509613,
+      "steady_mean_seconds": 0.6508154999974067,
+      "geometry_validation": {
+        "triangles": 2561,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.2782554626464844e-05,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "91469c0eecce360b6a391fbb22373c9b979ff0364ce6aaf0bd616b0d74e0e9bf",
+        "prediction_exr": "83e18f8894eea7d4049e5378e81660f9c655cd5980e160cb40412294d73ec15f",
+        "h5": "c8072a5f56a809be29c8d48f1ca755d80fa39da6f7cdde20b612be7d6c54dd09",
+        "metrics_json": "6c66163b747e06fc50670149b1b871da317d2235dbfd9dfc69c63c8880e4b75d",
+        "timing_json": "089e93e7af51c8655a5c578b51eee3261cd768c71b5298862115fb0a35be3c64"
+      }
+    },
+    {
+      "id": "roughness_015",
+      "triangles": 2561,
+      "psnr_display_db": 31.6912834208534,
+      "ssim_display": 0.9633522033691406,
+      "mae_linear_hdr": 0.034456297755241394,
+      "rmse_linear_hdr": 1.1801538467407227,
+      "steady_mean_seconds": 0.7038767999983975,
+      "geometry_validation": {
+        "triangles": 2561,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.2782554626464844e-05,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "deddc8accfdffb9c3b760b2ac9d9073bcd78f3ec68f1b7befd6035093ba47eab",
+        "prediction_exr": "e03afd26dbddee236f9e9e143a06d49542135748c51687897b0526b30fe656e7",
+        "h5": "4a3dae8a1daaa03da12fe6fba316b496d780727229cf50e1a5035689d6eb3135",
+        "metrics_json": "0b67baf670e5485c0c66031fa72870b0a6cf638ea8d5a85ea337735eaf46c75f",
+        "timing_json": "4b5e8d296b2658fcee802f45ca0b45ef27fca92b5fbaa4c50aeb1b4f5fdbbcd8"
+      }
+    },
+    {
+      "id": "roughness_075",
+      "triangles": 2561,
+      "psnr_display_db": 34.16857108360898,
+      "ssim_display": 0.9769428372383118,
+      "mae_linear_hdr": 0.020898839458823204,
+      "rmse_linear_hdr": 0.03674650564789772,
+      "steady_mean_seconds": 0.7180675999989035,
+      "geometry_validation": {
+        "triangles": 2561,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.2782554626464844e-05,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "1cb2fc70638a3c6eb914105492386bad5314145cbc5a1579c90ad6cf4bb089c8",
+        "prediction_exr": "c4f3dfd41afa45840d6ed34f673060f283baf612b24271d0c7fc873f148c9b82",
+        "h5": "9608682c4eae98fd67b7448012846de902ce966e48ffea51231eca6f7022f9c8",
+        "metrics_json": "dd9213694d80a08dee124164acd8c4c5435c3f41114be70a6d99120da50f5613",
+        "timing_json": "717cb4fb930c1328e21c3cea86bc6b287ed77b955b59b9e8d1362ec38c6b858f"
+      }
+    },
+    {
+      "id": "wall_000",
+      "triangles": 2561,
+      "psnr_display_db": 34.1094865202092,
+      "ssim_display": 0.9765899181365967,
+      "mae_linear_hdr": 0.021040955558419228,
+      "rmse_linear_hdr": 0.1422584354877472,
+      "steady_mean_seconds": 0.6983997499992256,
+      "geometry_validation": {
+        "triangles": 2561,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.2782554626464844e-05,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "f66b51e0e6084431619fd30526552f79309fcd2ab3ff18486cd9192c73a34899",
+        "prediction_exr": "21def74b7eb7bc0f0ac47699257d833b4b438a692ddfc2dc4c532f2d371ee52a",
+        "h5": "06feaad7ba46a372c67589ba81356eed00698091f9b45c569cd525da816c4ef2",
+        "metrics_json": "c24f67177fcfb253448a280f6e91aa2f0979d3b095b2adcc0e819f90ebb5857b",
+        "timing_json": "053cd01ff0860d64bbdd65de1c405c1bebf78fa90d1f2a870ef18e750f343408"
+      }
+    },
+    {
+      "id": "wall_050",
+      "triangles": 2561,
+      "psnr_display_db": 34.1224064867236,
+      "ssim_display": 0.977307140827179,
+      "mae_linear_hdr": 0.02078421227633953,
+      "rmse_linear_hdr": 0.1420164406299591,
+      "steady_mean_seconds": 0.702642600001127,
+      "geometry_validation": {
+        "triangles": 2561,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 3.2782554626464844e-05,
+        "max_camera_matrix_abs_error": 1.3435885648505064e-07,
+        "fov_degrees_abs_error": 6.640147205416724e-07
+      },
+      "sha256": {
+        "reference_exr": "3876bafacae3e221d13faac621d445d2664e7e7742bc3477958cdcef9e12935c",
+        "prediction_exr": "d7bc54dc36df7909866b592620a081f92e8502411e4580706bfc89e87ecdcb59",
+        "h5": "4d4e8b3146eef041ee38f2cfc6326d085bb5de5bd188593805761e39602eaca0",
+        "metrics_json": "ddef0deb153ec4ad4a3753c406e255d09edf675bca204f648fd0ca79941f3ea8",
+        "timing_json": "eca11d4b7b1a5a84ffc9e316390a5e92eafd306bb5bf5a19a99a9d29b6a1ee61"
+      }
+    },
+    {
+      "id": "sponza_interior",
+      "triangles": 7328,
+      "psnr_display_db": 7.780195303455482,
+      "ssim_display": 0.3202838599681854,
+      "mae_linear_hdr": 0.35834553837776184,
+      "rmse_linear_hdr": 0.6127126216888428,
+      "steady_mean_seconds": 1.414363299998513,
+      "geometry_validation": {
+        "triangles": 7328,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 0.0002822279930114746,
+        "max_camera_matrix_abs_error": 1.7881393432617188e-07,
+        "fov_degrees_abs_error": 1.6696521143444443e-06
+      },
+      "sha256": {
+        "reference_exr": "8806db41d8ca0fe5fbbef2a1800b1cbeec1ac6f14a289a5407304eedd1fad6a5",
+        "prediction_exr": "650d915cb8460ee14494f69a852e6d290866e1f6d267b1c7ef8a2dd777d06735",
+        "h5": "18970e98f1f340777a2914ee3223a0a6f841b05428757922cc1e768f1f79d34c",
+        "metrics_json": "ed9fed2216bab5b866c46dd15ca7121585e8ccd164d80321aae44361eddc140a",
+        "timing_json": "ca26c9b11737ab144c16ee32841eeaee0f2ed78cff6060598be06b28e59840de"
+      }
+    },
+    {
+      "id": "sponza_exterior",
+      "triangles": 7328,
+      "psnr_display_db": 13.375058818168393,
+      "ssim_display": 0.5626208186149597,
+      "mae_linear_hdr": 0.08094311505556107,
+      "rmse_linear_hdr": 0.2094126045703888,
+      "steady_mean_seconds": 1.5818967999948654,
+      "geometry_validation": {
+        "triangles": 7328,
+        "max_vertex_abs_error": 0.0,
+        "max_normal_abs_error": 0.0002822279930114746,
+        "max_camera_matrix_abs_error": 1.1920928955078125e-07,
+        "fov_degrees_abs_error": 4.2499206394097655e-06
+      },
+      "sha256": {
+        "reference_exr": "37d928985ebcf5ec3ca327c5bbe1b8682ccd57ad5a4a0c5808e4739f15950d10",
+        "prediction_exr": "e583f03c658158c01c7bccb0bbba91066d5ed5ec94bd0fbee1044724492062a7",
+        "h5": "9200b64b59daf947102cdff976137325290d809fe4b1c89c755f22eb32b87cf6",
+        "metrics_json": "2d78c21f9b408bea3c335eb578daf7024e294d52be8c91ef8ccbebb81f4e182c",
+        "timing_json": "37b92011555c8f8d00b0005052c5d40284dfb61b547c84888a1b1a937ba4582c"
+      }
+    }
+  ],
+  "checks": [
+    "finite 512x512 linear HDR A/B",
+    "finite metrics",
+    "independent Blender/H5 vertex, normal, camera and FOV agreement",
+    "SHA256 source measurements"
+  ],
+  "timing_note": "Two warm forwards per round only; cbox two-round variability is retained in timing-rounds.json. Not a stable hardware benchmark."
+}
