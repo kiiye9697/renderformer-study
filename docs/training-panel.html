@@ -1,0 +1,8 @@
+<section id="training" class="section"><div class="section-label">05B / 教学微调</div><div class="section-content">
+<h2>记录学习过程，再检验未见配置</h2><p>这一部分与上方预训练推理历史基线分开。受限数据集和部分参数微调用于理解学习过程，不等同于原论文的大规模训练复现。</p>
+<span id="training-status" class="status-pill" role="status">等待训练记录</span><p id="training-note" class="training-note">正在读取运行记录…</p><div id="training-config" class="training-config"></div>
+<p class="note">单 GPU 有效 batch = micro-batch × 梯度累积次数。一次 optimizer step 才更新参数；一个 epoch 表示完整遍历训练划分。具体帧数和实际步数以上述记录为准。</p>
+<h3>训练 / 验证曲线</h3><div id="training-curve"></div><div id="training-legend" class="training-legend" hidden><span>● 训练</span><span>● 验证</span></div><p id="training-curve-status" class="pending-copy">等待真实训练与验证记录；不会显示模拟曲线。</p>
+<h3>留出测试：预训练 → 微调 → 参考</h3><p id="training-test-status" class="pending-copy">等待最终 checkpoint 的一次留出评估。</p><div id="training-test-cases"></div>
+<details><summary>训练配置、checkpoint 与评估状态</summary><pre id="training-record">尚未加载</pre></details><p class="note">测试图不用于挑选训练轮次。相近相机和同配置组应整体划分，避免泄漏；最终指标需同时保留改善和退步。未运行不代表效果差，也不代表效果已得到验证。</p>
+</div></section>

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "pending",
+  "note": "该区域等待正式训练的运行记录。目前的数据集计划为 80 帧，按配置组划分为 48 训练 / 16 验证 / 16 测试；未用计划值冒充已经完成的运行。已有 8 组实验保持为预训练推理历史基线。",
+  "config": {
+    "micro_batch": null,
+    "gradient_accumulation": null,
+    "effective_batch": null,
+    "epochs": null,
+    "optimizer_steps": null,
+    "train_frames": null,
+    "val_frames": null,
+    "test_frames": null
+  },
+  "loss_definition": null,
+  "history": [],
+  "test_evaluated": false,
+  "test_cases": [],
+  "checkpoint": null,
+  "selection_rule": "依据训练与验证记录确定最终 checkpoint；留出测试集不参与模型选择。",
+  "provenance": null
+}

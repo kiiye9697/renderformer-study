@@ -1,0 +1,8 @@
+<section id="input-output" class="section"><div class="section-label">02B / 数据契约</div><div class="section-content">
+<h2>输入什么，网络输出什么</h2><p>这里展示本次发布权重的实际接口。它采用 13×32×32 材质块；论文原主方法的 10 维常量材质是另一种输入表示，不能混为同一张量。</p>
+<div class="io-flow" aria-label="场景输入到HDR输出数据流"><div><b>01 / 场景与相机</b><span>顶点、法线、材质块、mask<br>c2w 与 fov</span></div><span class="io-arrow" aria-hidden="true">→</span><div><b>02 / 场景表示</b><span>N 个三角形 + 16 registers<br>与视角无关的 self-attention</span></div><span class="io-arrow" aria-hidden="true">→</span><div><b>03 / 视角查询</b><span>相机空间 · 射线束查询<br>cross + self → DPT</span></div><span class="io-arrow" aria-hidden="true">→</span><div><b>04 / HDR 图像</b><span>z = log₁₀(1 + HDR)<br>HDR = 10ᶻ − 1</span></div></div>
+<p class="note">B 是场景 batch，N 是 padding 后的三角形数，V 是相机数。mask 区分真实三角形与 padding。显示曝光、色调映射和 sRGB 转换在输出之后进行，不等于网络的对数编码。</p><p id="io-load-status" role="status">正在读取已核验接口记录…</p>
+<div class="table-scroll"><table id="io-shapes" class="curve-table"><thead><tr><th>张量</th><th>Shape</th><th>含义</th></tr></thead><tbody></tbody></table></div>
+<details><summary>13 通道的顺序与接口注意事项</summary><p id="io-channel-order" class="channel-order"></p><p class="note">材质块通道包含 diffuse RGB、specular RGB、roughness、normal map RGB、emission RGB。推理 pipeline 使用 no_grad；训练应走可反传的模型路径。发光编码会原地修改输入，重复调用应从原始数据 clone；不要对已经 log 编码的值再次编码。</p><p id="io-record-version" class="note"></p></details>
+<p class="note"><a href="#pipeline">查看网络节点计算与实测 shape ↑</a> · <a href="https://github.com/kiiye9697/renderformer-study/blob/main/research/input-output-training.md">完整输入／输出／训练说明 ↗</a></p>
+</div></section>

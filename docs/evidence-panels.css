@@ -1,0 +1,24 @@
+.io-flow{display:grid;grid-template-columns:1fr 15px 1fr 15px 1fr 15px 1fr;align-items:stretch;gap:6px;margin:28px 0}
+.io-flow>div{padding:18px 12px;background:#edf3ef;border-top:2px solid #66988b;min-width:0}
+.io-flow b{font-size:12px;color:var(--blue);display:block;margin-bottom:10px}
+.io-flow span{font-size:11px;line-height:1.8;color:var(--muted)}
+.io-flow .io-arrow{align-self:center;font-size:17px}
+.table-scroll{overflow-x:auto;margin:20px 0}
+.shape-cell{font:11px ui-monospace,monospace;white-space:nowrap}
+.channel-order{font:12px/2 ui-monospace,monospace;overflow-wrap:anywhere;margin-top:15px}
+.training-note{margin:24px 0;color:var(--muted);font-size:14px}
+.training-config{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0}
+.training-config>div{background:#edf3ef;padding:16px;border-top:2px solid #66988b;min-width:0}
+.training-config span{font-size:11px;color:var(--muted);display:block}
+.training-config b{font:20px/1.6 ui-monospace,monospace;display:block;margin-top:8px;overflow-wrap:anywhere}
+#training h3{margin-top:34px}
+#training-curve svg{width:100%;height:auto;display:block;background:#f2f6f2;border-radius:5px}
+#training-curve text{font:11px ui-monospace,monospace;fill:#56706e}
+.training-legend{display:flex;gap:20px;font-size:12px;margin:14px 0}
+.training-legend span:first-child{color:#16758a}.training-legend span:last-child{color:#b65c39}
+.training-case{margin:30px 0}.training-case h4{font-size:16px}
+.training-triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.training-triptych figure{margin:0;min-width:0}.training-triptych img{display:block;width:100%;height:auto;background:#102029}
+.training-triptych figcaption{font-size:11px;margin-top:8px;text-align:center}.training-triptych p{font-size:12px}
+.training-config+.note{margin-bottom:30px}
+@media(max-width:700px){.io-flow{grid-template-columns:1fr 15px 1fr}.io-flow .io-arrow:nth-child(4){display:none}.training-config{grid-template-columns:repeat(2,1fr)}.training-config b{font-size:17px}.io-flow>div{padding:14px 10px}.training-triptych{gap:4px}.training-triptych figcaption{font-size:9px}}
