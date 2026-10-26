@@ -1,22 +1,1521 @@
 {
-  "schema_version": 1,
-  "status": "pending",
-  "note": "该区域等待正式训练的运行记录。目前的数据集计划为 80 帧，按配置组划分为 48 训练 / 16 验证 / 16 测试；未用计划值冒充已经完成的运行。已有 8 组实验保持为预训练推理历史基线。",
-  "config": {
-    "micro_batch": null,
-    "gradient_accumulation": null,
-    "effective_batch": null,
-    "epochs": null,
-    "optimizer_steps": null,
-    "train_frames": null,
-    "val_frames": null,
-    "test_frames": null
+  "loss_definition": "MSE(log10(1+linear HDR)), mean over pixels/channels/frames",
+  "history": [
+    {
+      "epoch": 0,
+      "step": 0,
+      "train_loss": 0.009763881498656701,
+      "val_loss": 0.008432972557784524,
+      "val_by_family": {
+        "metal": 0.0017130757187260315,
+        "sponza": 0.015152869396843016
+      }
+    },
+    {
+      "epoch": 1,
+      "step": 6,
+      "train_loss": 0.008731869952801693,
+      "online_train_loss": 0.009237119539951285,
+      "val_loss": 0.007948894730361644,
+      "val_by_family": {
+        "metal": 0.0013423782802419737,
+        "sponza": 0.014555411180481315
+      },
+      "best_epoch": 1,
+      "patience_used": 0,
+      "elapsed_seconds": 5.451832799997646
+    },
+    {
+      "epoch": 2,
+      "step": 12,
+      "train_loss": 0.00799248388527,
+      "online_train_loss": 0.008470299886539578,
+      "val_loss": 0.007692409766605124,
+      "val_by_family": {
+        "metal": 0.00112261000322178,
+        "sponza": 0.014262209529988468
+      },
+      "best_epoch": 2,
+      "patience_used": 0,
+      "elapsed_seconds": 8.801324300002307
+    },
+    {
+      "epoch": 3,
+      "step": 18,
+      "train_loss": 0.0071060022807311425,
+      "online_train_loss": 0.007639299379661679,
+      "val_loss": 0.0069466713757719845,
+      "val_by_family": {
+        "metal": 0.0009841900318861008,
+        "sponza": 0.012909152719657868
+      },
+      "best_epoch": 3,
+      "patience_used": 0,
+      "elapsed_seconds": 11.890461799994227
+    },
+    {
+      "epoch": 4,
+      "step": 24,
+      "train_loss": 0.0060850062339644255,
+      "online_train_loss": 0.006791180387760202,
+      "val_loss": 0.006240443570277421,
+      "val_by_family": {
+        "metal": 0.0008797141708782874,
+        "sponza": 0.011601172969676554
+      },
+      "best_epoch": 4,
+      "patience_used": 0,
+      "elapsed_seconds": 15.156571200001054
+    },
+    {
+      "epoch": 5,
+      "step": 30,
+      "train_loss": 0.004280683984688949,
+      "online_train_loss": 0.00545092299580574,
+      "val_loss": 0.005215446384681854,
+      "val_by_family": {
+        "metal": 0.000803009737865068,
+        "sponza": 0.00962788303149864
+      },
+      "best_epoch": 5,
+      "patience_used": 0,
+      "elapsed_seconds": 18.421674500001245
+    },
+    {
+      "epoch": 6,
+      "step": 36,
+      "train_loss": 0.003079054458188087,
+      "online_train_loss": 0.0035624007189956806,
+      "val_loss": 0.00405388406579732,
+      "val_by_family": {
+        "metal": 0.0007509441275033168,
+        "sponza": 0.007356824004091322
+      },
+      "best_epoch": 6,
+      "patience_used": 0,
+      "elapsed_seconds": 22.031334800005425
+    },
+    {
+      "epoch": 7,
+      "step": 42,
+      "train_loss": 0.0026863667432432217,
+      "online_train_loss": 0.0028913346274445453,
+      "val_loss": 0.0034872452306444757,
+      "val_by_family": {
+        "metal": 0.0007118352077668533,
+        "sponza": 0.006262655253522098
+      },
+      "best_epoch": 7,
+      "patience_used": 0,
+      "elapsed_seconds": 27.461052200000267
+    },
+    {
+      "epoch": 8,
+      "step": 48,
+      "train_loss": 0.0023568111458492544,
+      "online_train_loss": 0.0025718665371338525,
+      "val_loss": 0.0032076979168778053,
+      "val_by_family": {
+        "metal": 0.0006823003168392461,
+        "sponza": 0.005733095516916364
+      },
+      "best_epoch": 8,
+      "patience_used": 0,
+      "elapsed_seconds": 45.720099400001345
+    },
+    {
+      "epoch": 9,
+      "step": 54,
+      "train_loss": 0.0022162785335240187,
+      "online_train_loss": 0.002303017827216536,
+      "val_loss": 0.003194285021891119,
+      "val_by_family": {
+        "metal": 0.0006609600750380196,
+        "sponza": 0.005727609968744218
+      },
+      "best_epoch": 9,
+      "patience_used": 0,
+      "elapsed_seconds": 62.9046687999944
+    },
+    {
+      "epoch": 10,
+      "step": 60,
+      "train_loss": 0.002095429542957087,
+      "online_train_loss": 0.0022006455692462623,
+      "val_loss": 0.0030922199657652527,
+      "val_by_family": {
+        "metal": 0.0006420667632482946,
+        "sponza": 0.005542373168282211
+      },
+      "best_epoch": 10,
+      "patience_used": 0,
+      "elapsed_seconds": 84.45270439999877
+    },
+    {
+      "epoch": 11,
+      "step": 66,
+      "train_loss": 0.0019867202314950796,
+      "online_train_loss": 0.002089814244148632,
+      "val_loss": 0.003077639501498197,
+      "val_by_family": {
+        "metal": 0.0006255165244510863,
+        "sponza": 0.005529762478545308
+      },
+      "best_epoch": 11,
+      "patience_used": 0,
+      "elapsed_seconds": 102.4714801999944
+    },
+    {
+      "epoch": 12,
+      "step": 72,
+      "train_loss": 0.0019049248409525414,
+      "online_train_loss": 0.0019461195430873583,
+      "val_loss": 0.003182899316016119,
+      "val_by_family": {
+        "metal": 0.0006105790816945955,
+        "sponza": 0.005755219550337642
+      },
+      "best_epoch": 11,
+      "patience_used": 1,
+      "elapsed_seconds": 120.42011320000165
+    },
+    {
+      "epoch": 13,
+      "step": 78,
+      "train_loss": 0.0018032782163572847,
+      "online_train_loss": 0.0018678741374363501,
+      "val_loss": 0.0030544797045877203,
+      "val_by_family": {
+        "metal": 0.0005960094567853957,
+        "sponza": 0.005512949952390045
+      },
+      "best_epoch": 13,
+      "patience_used": 0,
+      "elapsed_seconds": 137.03883200000564
+    },
+    {
+      "epoch": 14,
+      "step": 84,
+      "train_loss": 0.001718282458568865,
+      "online_train_loss": 0.0018161400221288204,
+      "val_loss": 0.0031173901516012847,
+      "val_by_family": {
+        "metal": 0.0005792262381874025,
+        "sponza": 0.005655554065015167
+      },
+      "best_epoch": 13,
+      "patience_used": 1,
+      "elapsed_seconds": 148.50588309999148
+    },
+    {
+      "epoch": 15,
+      "step": 90,
+      "train_loss": 0.0016437419629558765,
+      "online_train_loss": 0.0016994239704217762,
+      "val_loss": 0.003080388076341478,
+      "val_by_family": {
+        "metal": 0.0005606439299299382,
+        "sponza": 0.005600132222753018
+      },
+      "best_epoch": 13,
+      "patience_used": 2,
+      "elapsed_seconds": 159.49260640000284
+    },
+    {
+      "epoch": 16,
+      "step": 96,
+      "train_loss": 0.0015921989588605356,
+      "online_train_loss": 0.001644486318885659,
+      "val_loss": 0.0031915876406856114,
+      "val_by_family": {
+        "metal": 0.0005479362625919748,
+        "sponza": 0.005835239018779248
+      },
+      "best_epoch": 13,
+      "patience_used": 3,
+      "elapsed_seconds": 170.51166760000342
+    },
+    {
+      "epoch": 17,
+      "step": 102,
+      "train_loss": 0.0015232457726597204,
+      "online_train_loss": 0.001565134870664527,
+      "val_loss": 0.003072258152315044,
+      "val_by_family": {
+        "metal": 0.0005355875655368436,
+        "sponza": 0.005608928739093244
+      },
+      "best_epoch": 13,
+      "patience_used": 4,
+      "elapsed_seconds": 179.3168144999945
+    },
+    {
+      "epoch": 18,
+      "step": 108,
+      "train_loss": 0.0014782879622240823,
+      "online_train_loss": 0.0015227717037002246,
+      "val_loss": 0.00312791220494546,
+      "val_by_family": {
+        "metal": 0.000525619019754231,
+        "sponza": 0.005730205390136689
+      },
+      "best_epoch": 13,
+      "patience_used": 5,
+      "elapsed_seconds": 186.35646139999153
+    },
+    {
+      "epoch": 19,
+      "step": 114,
+      "train_loss": 0.0014247838137938136,
+      "online_train_loss": 0.0014940552646294236,
+      "val_loss": 0.0032218077940342482,
+      "val_by_family": {
+        "metal": 0.0005127480762894265,
+        "sponza": 0.00593086751177907
+      },
+      "best_epoch": 13,
+      "patience_used": 6,
+      "elapsed_seconds": 195.81538899999578
+    },
+    {
+      "epoch": 20,
+      "step": 120,
+      "train_loss": 0.0013794743730007515,
+      "online_train_loss": 0.0014292384730651975,
+      "val_loss": 0.0031143060441536363,
+      "val_by_family": {
+        "metal": 0.0005024570491514169,
+        "sponza": 0.005726155039155856
+      },
+      "best_epoch": 13,
+      "patience_used": 7,
+      "elapsed_seconds": 206.01103979999607
+    },
+    {
+      "epoch": 21,
+      "step": 126,
+      "train_loss": 0.0013388275998901615,
+      "online_train_loss": 0.0013732488441746682,
+      "val_loss": 0.003290357704827329,
+      "val_by_family": {
+        "metal": 0.0004940184808219783,
+        "sponza": 0.00608669692883268
+      },
+      "best_epoch": 13,
+      "patience_used": 8,
+      "elapsed_seconds": 220.20400599999994
+    },
+    {
+      "epoch": 22,
+      "step": 132,
+      "train_loss": 0.001308997793027326,
+      "online_train_loss": 0.0013431647579030444,
+      "val_loss": 0.0031856704354140675,
+      "val_by_family": {
+        "metal": 0.0004855302795476746,
+        "sponza": 0.00588581059128046
+      },
+      "best_epoch": 13,
+      "patience_used": 9,
+      "elapsed_seconds": 233.56402619999426
+    },
+    {
+      "epoch": 23,
+      "step": 138,
+      "train_loss": 0.0012723228649823188,
+      "online_train_loss": 0.001306551033242916,
+      "val_loss": 0.0032556296446273336,
+      "val_by_family": {
+        "metal": 0.00047784152047825046,
+        "sponza": 0.006033417768776417
+      },
+      "best_epoch": 13,
+      "patience_used": 10,
+      "elapsed_seconds": 245.1009527999995
+    },
+    {
+      "epoch": 24,
+      "step": 144,
+      "train_loss": 0.001278323308573211,
+      "online_train_loss": 0.001284233604868253,
+      "val_loss": 0.00336776642507175,
+      "val_by_family": {
+        "metal": 0.00047071797598619014,
+        "sponza": 0.0062648148741573095
+      },
+      "best_epoch": 13,
+      "patience_used": 11,
+      "elapsed_seconds": 254.1545233999932
+    },
+    {
+      "epoch": 25,
+      "step": 150,
+      "train_loss": 0.0013492991643033747,
+      "online_train_loss": 0.001270937481118987,
+      "val_loss": 0.0031587432422384154,
+      "val_by_family": {
+        "metal": 0.00046259513328550383,
+        "sponza": 0.005854891351191327
+      },
+      "best_epoch": 13,
+      "patience_used": 12,
+      "elapsed_seconds": 262.1784981999954
+    }
+  ],
+  "test_cases": [
+    {
+      "id": "metal-g01-v0",
+      "title": "metal-g01-v0",
+      "family": "metal",
+      "group_id": "metal-g01",
+      "camera": {
+        "position": [
+          0.7051014711520234,
+          -1.8182831901551977,
+          -0.02837672521453509
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 19.055711218609652,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8187646865844727,
+          "mae_linear_hdr": 0.049433350563049316,
+          "rmse_linear_hdr": 0.416543573141098,
+          "log_hdr_mse": 0.0020010925363749266,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.043243408203125
+        },
+        "finetuned": {
+          "psnr_display_db": 22.370876141290186,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6999645829200745,
+          "mae_linear_hdr": 0.026190102100372314,
+          "rmse_linear_hdr": 0.2798825800418854,
+          "log_hdr_mse": 0.00045791774755343795,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.01251220703125
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g01-v0-reference.png",
+      "pretrained": "assets/training/metal-g01-v0-pretrained.png",
+      "finetuned": "assets/training/metal-g01-v0-finetuned.png",
+      "pretrained_error": "assets/training/metal-g01-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g01-v0-finetuned-error.png"
+    },
+    {
+      "id": "metal-g01-v1",
+      "title": "metal-g01-v1",
+      "family": "metal",
+      "group_id": "metal-g01",
+      "camera": {
+        "position": [
+          0.7468490848562818,
+          -1.7656401458565798,
+          -0.0645636053273059
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 19.390904699868884,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8233837485313416,
+          "mae_linear_hdr": 0.04880174994468689,
+          "rmse_linear_hdr": 0.43123865127563477,
+          "log_hdr_mse": 0.0019420848693698645,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0395965576171875
+        },
+        "finetuned": {
+          "psnr_display_db": 21.81271938090289,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6862309575080872,
+          "mae_linear_hdr": 0.026541443541646004,
+          "rmse_linear_hdr": 0.28535762429237366,
+          "log_hdr_mse": 0.0005002011894248426,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.011810302734375
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g01-v1-reference.png",
+      "pretrained": "assets/training/metal-g01-v1-pretrained.png",
+      "finetuned": "assets/training/metal-g01-v1-finetuned.png",
+      "pretrained_error": "assets/training/metal-g01-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g01-v1-finetuned-error.png"
+    },
+    {
+      "id": "metal-g04-v0",
+      "title": "metal-g04-v0",
+      "family": "metal",
+      "group_id": "metal-g04",
+      "camera": {
+        "position": [
+          0.7317603394711679,
+          -1.760600821224244,
+          -0.018746861224732195
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 19.720424221777513,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8300294876098633,
+          "mae_linear_hdr": 0.045756589621305466,
+          "rmse_linear_hdr": 0.1473412662744522,
+          "log_hdr_mse": 0.0016660637920722365,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.033905029296875
+        },
+        "finetuned": {
+          "psnr_display_db": 21.563921721919442,
+          "psnr_exact_match": false,
+          "ssim_display": 0.70458984375,
+          "mae_linear_hdr": 0.02364879846572876,
+          "rmse_linear_hdr": 0.05877707898616791,
+          "log_hdr_mse": 0.000320614839438349,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0110015869140625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g04-v0-reference.png",
+      "pretrained": "assets/training/metal-g04-v0-pretrained.png",
+      "finetuned": "assets/training/metal-g04-v0-finetuned.png",
+      "pretrained_error": "assets/training/metal-g04-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g04-v0-finetuned-error.png"
+    },
+    {
+      "id": "metal-g04-v1",
+      "title": "metal-g04-v1",
+      "family": "metal",
+      "group_id": "metal-g04",
+      "camera": {
+        "position": [
+          0.7874553854803764,
+          -1.8345640234381342,
+          0.030147720983138934
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 19.314874776362863,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8314949870109558,
+          "mae_linear_hdr": 0.0455424003303051,
+          "rmse_linear_hdr": 0.15003062784671783,
+          "log_hdr_mse": 0.0017619940917938948,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.036773681640625
+        },
+        "finetuned": {
+          "psnr_display_db": 21.673907175063857,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6813185214996338,
+          "mae_linear_hdr": 0.023019960150122643,
+          "rmse_linear_hdr": 0.06084161996841431,
+          "log_hdr_mse": 0.00031156791374087334,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0124969482421875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g04-v1-reference.png",
+      "pretrained": "assets/training/metal-g04-v1-pretrained.png",
+      "finetuned": "assets/training/metal-g04-v1-finetuned.png",
+      "pretrained_error": "assets/training/metal-g04-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g04-v1-finetuned-error.png"
+    },
+    {
+      "id": "metal-g06-v0",
+      "title": "metal-g06-v0",
+      "family": "metal",
+      "group_id": "metal-g06",
+      "camera": {
+        "position": [
+          0.8527717965359285,
+          -1.7283012039920225,
+          -0.033716145591078224
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 20.610051702478497,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8470702767372131,
+          "mae_linear_hdr": 0.03682606294751167,
+          "rmse_linear_hdr": 0.15140803158283234,
+          "log_hdr_mse": 0.001322354655712843,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.026611328125
+        },
+        "finetuned": {
+          "psnr_display_db": 20.755113588483457,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6532814502716064,
+          "mae_linear_hdr": 0.023692257702350616,
+          "rmse_linear_hdr": 0.061040110886096954,
+          "log_hdr_mse": 0.0002609144721645862,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0123443603515625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g06-v0-reference.png",
+      "pretrained": "assets/training/metal-g06-v0-pretrained.png",
+      "finetuned": "assets/training/metal-g06-v0-finetuned.png",
+      "pretrained_error": "assets/training/metal-g06-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g06-v0-finetuned-error.png"
+    },
+    {
+      "id": "metal-g06-v1",
+      "title": "metal-g06-v1",
+      "family": "metal",
+      "group_id": "metal-g06",
+      "camera": {
+        "position": [
+          0.8960240958610672,
+          -1.68518946962183,
+          0.07894516632101788
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 21.202984479325654,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8504580855369568,
+          "mae_linear_hdr": 0.03597097471356392,
+          "rmse_linear_hdr": 0.14356188476085663,
+          "log_hdr_mse": 0.0012015911052003503,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0236053466796875
+        },
+        "finetuned": {
+          "psnr_display_db": 20.06322183429694,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6333392262458801,
+          "mae_linear_hdr": 0.02473202347755432,
+          "rmse_linear_hdr": 0.06328625231981277,
+          "log_hdr_mse": 0.0002882507396861911,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.015777587890625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g06-v1-reference.png",
+      "pretrained": "assets/training/metal-g06-v1-pretrained.png",
+      "finetuned": "assets/training/metal-g06-v1-finetuned.png",
+      "pretrained_error": "assets/training/metal-g06-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g06-v1-finetuned-error.png"
+    },
+    {
+      "id": "metal-g19-v0",
+      "title": "metal-g19-v0",
+      "family": "metal",
+      "group_id": "metal-g19",
+      "camera": {
+        "position": [
+          0.6434806546191568,
+          -1.681449240350913,
+          0.03245079121045251
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 20.760642144143805,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8357179760932922,
+          "mae_linear_hdr": 0.04480425640940666,
+          "rmse_linear_hdr": 0.1695757657289505,
+          "log_hdr_mse": 0.0015161668416112661,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0303955078125
+        },
+        "finetuned": {
+          "psnr_display_db": 23.02581648173948,
+          "psnr_exact_match": false,
+          "ssim_display": 0.7435495257377625,
+          "mae_linear_hdr": 0.022012246772646904,
+          "rmse_linear_hdr": 0.07734766602516174,
+          "log_hdr_mse": 0.00030676525784656405,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0117645263671875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g19-v0-reference.png",
+      "pretrained": "assets/training/metal-g19-v0-pretrained.png",
+      "finetuned": "assets/training/metal-g19-v0-finetuned.png",
+      "pretrained_error": "assets/training/metal-g19-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g19-v0-finetuned-error.png"
+    },
+    {
+      "id": "metal-g19-v1",
+      "title": "metal-g19-v1",
+      "family": "metal",
+      "group_id": "metal-g19",
+      "camera": {
+        "position": [
+          0.8217452158298818,
+          -1.6910999275211163,
+          0.07874586843135846
+        ],
+        "look_at": [
+          0.0,
+          0.0,
+          -0.05
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 40.0
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 20.936779739928,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8422557711601257,
+          "mae_linear_hdr": 0.04179332032799721,
+          "rmse_linear_hdr": 0.1639375537633896,
+          "log_hdr_mse": 0.0014879166847094893,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0294647216796875
+        },
+        "finetuned": {
+          "psnr_display_db": 21.129494380299192,
+          "psnr_exact_match": false,
+          "ssim_display": 0.6530542373657227,
+          "mae_linear_hdr": 0.02298595942556858,
+          "rmse_linear_hdr": 0.07474115490913391,
+          "log_hdr_mse": 0.0002861639950424433,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0089569091796875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/metal-g19-v1-reference.png",
+      "pretrained": "assets/training/metal-g19-v1-pretrained.png",
+      "finetuned": "assets/training/metal-g19-v1-finetuned.png",
+      "pretrained_error": "assets/training/metal-g19-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/metal-g19-v1-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g01-v0",
+      "title": "sponza-g01-v0",
+      "family": "sponza",
+      "group_id": "sponza-g01",
+      "camera": {
+        "position": [
+          0.06726891261736109,
+          -0.3908463301947951,
+          -0.16191155153763154
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 61.569257292411805
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 8.684829879307781,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2231960892677307,
+          "mae_linear_hdr": 0.254170686006546,
+          "rmse_linear_hdr": 0.47081705927848816,
+          "log_hdr_mse": 0.018808959051966667,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.409423828125
+        },
+        "finetuned": {
+          "psnr_display_db": 14.887847800413736,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5722039937973022,
+          "mae_linear_hdr": 0.13520197570323944,
+          "rmse_linear_hdr": 0.2233305126428604,
+          "log_hdr_mse": 0.0041022710502147675,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.187408447265625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g01-v0-reference.png",
+      "pretrained": "assets/training/sponza-g01-v0-pretrained.png",
+      "finetuned": "assets/training/sponza-g01-v0-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g01-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g01-v0-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g01-v1",
+      "title": "sponza-g01-v1",
+      "family": "sponza",
+      "group_id": "sponza-g01",
+      "camera": {
+        "position": [
+          0.0680808624322859,
+          -0.2548227020092512,
+          -0.11062469494533897
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 59.89465229512965
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 10.02602927858629,
+          "psnr_exact_match": false,
+          "ssim_display": 0.31718432903289795,
+          "mae_linear_hdr": 0.19877739250659943,
+          "rmse_linear_hdr": 0.37168148159980774,
+          "log_hdr_mse": 0.012768512591719627,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.283966064453125
+        },
+        "finetuned": {
+          "psnr_display_db": 14.645917483527448,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5402126908302307,
+          "mae_linear_hdr": 0.11901924759149551,
+          "rmse_linear_hdr": 0.18908077478408813,
+          "log_hdr_mse": 0.0033240127377212048,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.19732666015625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g01-v1-reference.png",
+      "pretrained": "assets/training/sponza-g01-v1-pretrained.png",
+      "finetuned": "assets/training/sponza-g01-v1-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g01-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g01-v1-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g04-v0",
+      "title": "sponza-g04-v0",
+      "family": "sponza",
+      "group_id": "sponza-g04",
+      "camera": {
+        "position": [
+          0.06045464093697272,
+          -0.38837653720309073,
+          -0.12083047969009925
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 60.015703991183386
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 9.991919979999928,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2568395435810089,
+          "mae_linear_hdr": 0.18394456803798676,
+          "rmse_linear_hdr": 0.35118818283081055,
+          "log_hdr_mse": 0.011732119135558605,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.279022216796875
+        },
+        "finetuned": {
+          "psnr_display_db": 14.049395470578666,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5156288743019104,
+          "mae_linear_hdr": 0.11645897477865219,
+          "rmse_linear_hdr": 0.17400261759757996,
+          "log_hdr_mse": 0.003271857975050807,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2440185546875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g04-v0-reference.png",
+      "pretrained": "assets/training/sponza-g04-v0-pretrained.png",
+      "finetuned": "assets/training/sponza-g04-v0-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g04-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g04-v0-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g04-v1",
+      "title": "sponza-g04-v1",
+      "family": "sponza",
+      "group_id": "sponza-g04",
+      "camera": {
+        "position": [
+          0.08536791276300024,
+          -0.26604096415216777,
+          -0.11457202467448739
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 58.037731774449405
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 10.411601969660309,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2954239547252655,
+          "mae_linear_hdr": 0.15936855971813202,
+          "rmse_linear_hdr": 0.30202504992485046,
+          "log_hdr_mse": 0.00920705683529377,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2772216796875
+        },
+        "finetuned": {
+          "psnr_display_db": 14.010724423020571,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5317395925521851,
+          "mae_linear_hdr": 0.10859207063913345,
+          "rmse_linear_hdr": 0.16629000008106232,
+          "log_hdr_mse": 0.0029701516032218933,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2360382080078125
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g04-v1-reference.png",
+      "pretrained": "assets/training/sponza-g04-v1-pretrained.png",
+      "finetuned": "assets/training/sponza-g04-v1-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g04-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g04-v1-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g11-v0",
+      "title": "sponza-g11-v0",
+      "family": "sponza",
+      "group_id": "sponza-g11",
+      "camera": {
+        "position": [
+          0.06042171620039261,
+          -0.3821118298997018,
+          -0.1558414375151163
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 58.142046952902604
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 9.139627551305725,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2671525180339813,
+          "mae_linear_hdr": 0.2678569555282593,
+          "rmse_linear_hdr": 0.5121921896934509,
+          "log_hdr_mse": 0.01984451338648796,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.506134033203125
+        },
+        "finetuned": {
+          "psnr_display_db": 13.483028984610396,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5414189100265503,
+          "mae_linear_hdr": 0.20946896076202393,
+          "rmse_linear_hdr": 0.35479485988616943,
+          "log_hdr_mse": 0.008922301232814789,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2134246826171875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g11-v0-reference.png",
+      "pretrained": "assets/training/sponza-g11-v0-pretrained.png",
+      "finetuned": "assets/training/sponza-g11-v0-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g11-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g11-v0-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g11-v1",
+      "title": "sponza-g11-v1",
+      "family": "sponza",
+      "group_id": "sponza-g11",
+      "camera": {
+        "position": [
+          0.060114682265722835,
+          -0.2984729631121941,
+          -0.14458561391929112
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 60.839471819156
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 9.622672543226788,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2924101650714874,
+          "mae_linear_hdr": 0.2516844868659973,
+          "rmse_linear_hdr": 0.48960670828819275,
+          "log_hdr_mse": 0.01845131255686283,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.4131927490234375
+        },
+        "finetuned": {
+          "psnr_display_db": 13.49058938334718,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5039336085319519,
+          "mae_linear_hdr": 0.1863112449645996,
+          "rmse_linear_hdr": 0.295849472284317,
+          "log_hdr_mse": 0.006653387099504471,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2487945556640625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g11-v1-reference.png",
+      "pretrained": "assets/training/sponza-g11-v1-pretrained.png",
+      "finetuned": "assets/training/sponza-g11-v1-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g11-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g11-v1-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g19-v0",
+      "title": "sponza-g19-v0",
+      "family": "sponza",
+      "group_id": "sponza-g19",
+      "camera": {
+        "position": [
+          0.0736098052463336,
+          -0.3702758791841618,
+          -0.12689769715852162
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 60.44675381295878
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 10.09564265365899,
+          "psnr_exact_match": false,
+          "ssim_display": 0.2747586667537689,
+          "mae_linear_hdr": 0.20296330749988556,
+          "rmse_linear_hdr": 0.41100701689720154,
+          "log_hdr_mse": 0.014185200445353985,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.32861328125
+        },
+        "finetuned": {
+          "psnr_display_db": 12.81744385164285,
+          "psnr_exact_match": false,
+          "ssim_display": 0.48259785771369934,
+          "mae_linear_hdr": 0.18363763391971588,
+          "rmse_linear_hdr": 0.2869310975074768,
+          "log_hdr_mse": 0.006953114178031683,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2706451416015625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g19-v0-reference.png",
+      "pretrained": "assets/training/sponza-g19-v0-pretrained.png",
+      "finetuned": "assets/training/sponza-g19-v0-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g19-v0-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g19-v0-finetuned-error.png"
+    },
+    {
+      "id": "sponza-g19-v1",
+      "title": "sponza-g19-v1",
+      "family": "sponza",
+      "group_id": "sponza-g19",
+      "camera": {
+        "position": [
+          0.07280995122697549,
+          -0.2615734072545468,
+          -0.12126913438859363
+        ],
+        "look_at": [
+          0.0,
+          0.25,
+          -0.08
+        ],
+        "up": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "fov": 59.633936333098305
+      },
+      "shape": [
+        256,
+        256,
+        3
+      ],
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 10.815181165044923,
+          "psnr_exact_match": false,
+          "ssim_display": 0.36984607577323914,
+          "mae_linear_hdr": 0.18722116947174072,
+          "rmse_linear_hdr": 0.3835705518722534,
+          "log_hdr_mse": 0.012575758621096611,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2863616943359375
+        },
+        "finetuned": {
+          "psnr_display_db": 12.984848051357115,
+          "psnr_exact_match": false,
+          "ssim_display": 0.4796535074710846,
+          "mae_linear_hdr": 0.17037153244018555,
+          "rmse_linear_hdr": 0.2502562701702118,
+          "log_hdr_mse": 0.0056388406082987785,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.2755584716796875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "reference": "assets/training/sponza-g19-v1-reference.png",
+      "pretrained": "assets/training/sponza-g19-v1-pretrained.png",
+      "finetuned": "assets/training/sponza-g19-v1-finetuned.png",
+      "pretrained_error": "assets/training/sponza-g19-v1-pretrained-error.png",
+      "finetuned_error": "assets/training/sponza-g19-v1-finetuned-error.png"
+    }
+  ],
+  "aggregate": {
+    "all": {
+      "pretrained": {
+        "log_hdr_mse": 0.008154543575074058,
+        "psnr_display_db": 14.98624237520535,
+        "ssim_display": 0.5609991475939751,
+        "mae_linear_hdr": 0.12843223940581083,
+        "rmse_linear_hdr": 0.3166078496724367
+      },
+      "finetuned": {
+        "log_hdr_mse": 0.00278552078998473,
+        "psnr_display_db": 17.67280413453084,
+        "ssim_display": 0.6014198362827301,
+        "mae_linear_hdr": 0.08886777702718973,
+        "rmse_linear_hdr": 0.18136310577392578
+      }
+    },
+    "metal": {
+      "pretrained": {
+        "log_hdr_mse": 0.0016124080721056089,
+        "psnr_display_db": 20.124046622811857,
+        "ssim_display": 0.8348968774080276,
+        "mae_linear_hdr": 0.04361608810722828,
+        "rmse_linear_hdr": 0.22170466929674149
+      },
+      "finetuned": {
+        "log_hdr_mse": 0.00034154951936216094,
+        "psnr_display_db": 21.54938383799943,
+        "ssim_display": 0.6819160431623459,
+        "mae_linear_hdr": 0.024102848954498768,
+        "rmse_linear_hdr": 0.12015926092863083
+      }
+    },
+    "sponza": {
+      "pretrained": {
+        "log_hdr_mse": 0.014696679078042507,
+        "psnr_display_db": 9.848438127598842,
+        "ssim_display": 0.2871014177799225,
+        "mae_linear_hdr": 0.2132483907043934,
+        "rmse_linear_hdr": 0.41151103004813194
+      },
+      "finetuned": {
+        "log_hdr_mse": 0.005229492060607299,
+        "psnr_display_db": 13.796224431062246,
+        "ssim_display": 0.5209236294031143,
+        "mae_linear_hdr": 0.1536327050998807,
+        "rmse_linear_hdr": 0.24256695061922073
+      }
+    }
   },
-  "loss_definition": null,
-  "history": [],
-  "test_evaluated": false,
-  "test_cases": [],
-  "checkpoint": null,
-  "selection_rule": "依据训练与验证记录确定最终 checkpoint；留出测试集不参与模型选择。",
-  "provenance": null
+  "checkpoint": {
+    "sha256": "80a66e827b611771b28acf325a196276e7521d93bf54448bc9c736dbd6c8246e",
+    "best_epoch": 13,
+    "best_val_loss": 0.0030544797045877203
+  },
+  "selection_rule": "Minimum validation loss; independent 0.2% improvement anchor and patience12 stopping; test16 never selects model",
+  "provenance": {
+    "training_scope": "DPT output head only; frozen pretrained scene/view transformer; same two scene families",
+    "data": "40 configuration groups, 2 camera views each, split 12/4/4 groups per family; 48/16/16 frames",
+    "reference": "256x256 Cycles 2048spp seed11, same converted geometry/normals/materials/camera, no denoise",
+    "labels": "A=Cycles reference; B=pretrained; C=finetuned",
+    "display": "EV0; clamp nonnegative for display; channel-wise Reinhard; sRGB; all same 256px",
+    "test_policy": "Only one validation-selected checkpoint, all 16 locked test frames; no hyperparameter selection",
+    "timing_seconds": 262.2679715999984,
+    "timing_scope": "Epoch loop including CPU batch transfer, updates, epoch-end train/val evaluation and head saves; excludes dataset generation, feature cache, initial loading/evaluation and final optimizer-state serialization"
+  },
+  "stop_reason": "validation_plateau",
+  "convergence_interpretation": "Operational validation plateau only",
+  "batch_capacity": [
+    {
+      "microbatch": 4,
+      "status": "completed",
+      "seconds": [
+        3.608467900005053,
+        0.10742430000391323,
+        0.10764239999116398,
+        0.11495380000269506
+      ],
+      "warm_samples_per_second": 36.36137755103396,
+      "peak_allocated_bytes": 790955008,
+      "peak_reserved_bytes": 939524096,
+      "free_bytes": 6482296832,
+      "total_bytes": 8585216000,
+      "last_loss": 0.0017040055245161057,
+      "disposable_probe_weights": true,
+      "timing_scope": "CUDA-synchronized head forward, loss, backward, clipped optimizer step; features already resident on GPU; excludes CPU loading/transfer and model initialization"
+    },
+    {
+      "microbatch": 8,
+      "status": "completed",
+      "seconds": [
+        0.9608622999949148,
+        0.1583734000014374,
+        0.14577830000780523,
+        0.13704720001260284
+      ],
+      "warm_samples_per_second": 54.397234441907415,
+      "peak_allocated_bytes": 1424819200,
+      "peak_reserved_bytes": 1690304512,
+      "free_bytes": 5731516416,
+      "total_bytes": 8585216000,
+      "last_loss": 0.001866058213636279,
+      "disposable_probe_weights": true,
+      "timing_scope": "CUDA-synchronized head forward, loss, backward, clipped optimizer step; features already resident on GPU; excludes CPU loading/transfer and model initialization"
+    }
+  ],
+  "batch_choice": {
+    "choice": {
+      "microbatch": 8,
+      "status": "completed",
+      "seconds": [
+        0.9608622999949148,
+        0.1583734000014374,
+        0.14577830000780523,
+        0.13704720001260284
+      ],
+      "warm_samples_per_second": 54.397234441907415,
+      "peak_allocated_bytes": 1424819200,
+      "peak_reserved_bytes": 1690304512,
+      "free_bytes": 5731516416,
+      "total_bytes": 8585216000,
+      "last_loss": 0.001866058213636279,
+      "disposable_probe_weights": true,
+      "timing_scope": "CUDA-synchronized head forward, loss, backward, clipped optimizer step; features already resident on GPU; excludes CPU loading/transfer and model initialization"
+    },
+    "rule": "Highest measured warm throughput among 4/8 with >=1GiB free GPU memory; no quality/hyperparameter search"
+  },
+  "loss_curve": "assets/training/loss-curve.png",
+  "schema_version": 1,
+  "status": "complete",
+  "test_evaluated": true,
+  "config": {
+    "micro_batch": 8,
+    "gradient_accumulation": 1,
+    "effective_batch": 8,
+    "epochs": 25,
+    "optimizer_steps": 150,
+    "train_frames": 48,
+    "val_frames": 16,
+    "test_frames": 16,
+    "lr": 1e-05,
+    "trainable_parameters": 10595203,
+    "max_epochs": 100,
+    "patience": 12,
+    "relative_min_delta": 0.002,
+    "optimizer": "AdamW",
+    "weight_decay": 0.0001,
+    "clip_grad_norm": 1.0,
+    "seed": 20261028,
+    "frozen_backbone": "all parameters except DPT output head; features cached once with original dtype",
+    "cached_feature_dtypes": [
+      "torch.float32",
+      "torch.float32",
+      "torch.float32",
+      "torch.float32"
+    ],
+    "manifest_sha256": "3372b8781a6fe4e9890496c60f4f64918aa1d96f18efaacd45ae58a0c0981127",
+    "source_model_sha256": "792bfdc27b3d1adf4f4b5803a6333d05aed940fbc7e659003e0de556cd5156a0",
+    "official_code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+    "torch_version": "2.8.0+cu128",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "script_sha256": {
+      "train_head.py": "18a548215b3375b0a8a577a4fd0e03441a5550c1a583861f1f3706833eedd541",
+      "head_data.py": "6b9139f75ce8129df6bf1666453060f00813de89ba11e087235772d97e99bb3e",
+      "cache_features.py": "5626493405f0f630ce0f55150b037d3b4be46b05999fec65e8e235f249fcfe20"
+    },
+    "learning_rate": 1e-05,
+    "resolution": 256
+  },
+  "note": "仅微调 DPT 输出头，冻结预训练场景与视角 Transformer。实际停止于 25 epoch / 150 次参数更新，按验证损失选择 epoch 13；有效 batch 为 8。16 帧留出测试只评估这一最终选定模型。",
+  "findings": [
+    "受限适配有收益与代价，不能据此替代通用预训练模型。",
+    "金属茶壶：显示 PSNR 20.1240 → 21.5494 dB；SSIM 0.8349 → 0.6819。不同指标的改善不能相互替代。",
+    "Sponza：显示 PSNR 9.8484 → 13.7962 dB；SSIM 0.2871 → 0.5209。不同指标的改善不能相互替代。",
+    "金属茶壶 8/8 帧 SSIM 下降，需结合逐帧轮廓、背景与高光对照检查，不能写成全面改善。",
+    "本次图像目检：metal-g01-v0 的微调图出现背景竖带及轮廓模糊；Sponza 虽有亮度与大致布局改善，仍重度模糊，不能称为结构恢复。此条为该 checkpoint 的定性观察。"
+  ]
 }

@@ -13,6 +13,7 @@ def inline(text):
     text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
     text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
     text = re.sub(r'\[([^\]]+)\]\((https?://[^)]+)\)', r'<a href="\2">\1</a>', text)
+    text = re.sub(r'\[([^\]]+)\]\(([a-zA-Z0-9_./-]+\.md)\)', r'<a href="https://github.com/kiiye9697/renderformer-study/blob/main/research/\2">\1</a>', text)
     return text
 
 

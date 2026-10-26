@@ -1,0 +1,772 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "note": "12 个相机在训练前锁定，最终留出测试结束后才计算这组定性展示。全部视角保留，不用于选择模型，也不是独立泛化测试；播放仅逐张切换真实帧，不生成中间视角。微调结果仍存在模糊和伪影。",
+  "families": [
+    {
+      "id": "metal",
+      "title": "金属茶壶 · 六个方位",
+      "status": "complete",
+      "geometry_material_light_fixed": true,
+      "condition_note": "六帧仅改变预锁相机；几何、变换、材质和光源的联合 SHA256 完全相同。A/B/C 共用同一视角与显示处理。 −36° 极侧角的参考图已部分裁切茶壶，按预锁配置保留；默认导航为 0°，全部六帧均可查看。微调在侧视角墙沿仍有新增模糊伪影。",
+      "frames": [
+        {
+          "id": "metal-showcase-00",
+          "status": "complete",
+          "label": "方位 -36°",
+          "camera": {
+            "position": [
+              -1.1167919793556988,
+              -1.5371322893124,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "b77183ca62abcbf97ed123506de67f032cf2f9567a295218c96eba1b096e9968",
+          "angle_deg": -36,
+          "reference": "assets/showcase/metal-showcase-00-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-00-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-00-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-00-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-00-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 9.313225746154785e-08,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 17.97166591896625,
+              "psnr_exact_match": false,
+              "ssim_display": 0.797065794467926,
+              "mae_linear_hdr": 0.04794660210609436,
+              "rmse_linear_hdr": 0.25577589869499207,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.046905517578125
+            },
+            "finetuned": {
+              "psnr_display_db": 14.70959273959445,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5197266936302185,
+              "mae_linear_hdr": 0.056061748415231705,
+              "rmse_linear_hdr": 0.22154219448566437,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.1009063720703125
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "metal-showcase-01",
+          "status": "complete",
+          "label": "方位 -24°",
+          "camera": {
+            "position": [
+              -0.7727996218440204,
+              -1.7357363695209416,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "622ab60dd37a817cf1694bc4881fef4b0fd009441dcbd0c5582b9d72fe44efbc",
+          "angle_deg": -24,
+          "reference": "assets/showcase/metal-showcase-01-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-01-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-01-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-01-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-01-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 2.1606683731079102e-07,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 20.671145475326142,
+              "psnr_exact_match": false,
+              "ssim_display": 0.846351683139801,
+              "mae_linear_hdr": 0.04910007119178772,
+              "rmse_linear_hdr": 0.28820812702178955,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.026641845703125
+            },
+            "finetuned": {
+              "psnr_display_db": 21.43308625660528,
+              "psnr_exact_match": false,
+              "ssim_display": 0.7168970108032227,
+              "mae_linear_hdr": 0.02951955795288086,
+              "rmse_linear_hdr": 0.217952162027359,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.0132598876953125
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "metal-showcase-02",
+          "status": "complete",
+          "label": "方位 -12°",
+          "camera": {
+            "position": [
+              -0.3950322125537427,
+              -1.8584804413942306,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "69d90156406e64266dccb7792544b1ba5cebbbe5a05aa9a13a4016a152c6f2a4",
+          "angle_deg": -12,
+          "reference": "assets/showcase/metal-showcase-02-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-02-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-02-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-02-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-02-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 1.1920928955078125e-07,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 19.332726765849518,
+              "psnr_exact_match": false,
+              "ssim_display": 0.806348979473114,
+              "mae_linear_hdr": 0.05836353823542595,
+              "rmse_linear_hdr": 0.3023948073387146,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.04339599609375
+            },
+            "finetuned": {
+              "psnr_display_db": 23.77467969523321,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8198282122612,
+              "mae_linear_hdr": 0.02929951250553131,
+              "rmse_linear_hdr": 0.17986807227134705,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.01190185546875
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "metal-showcase-03",
+          "status": "complete",
+          "label": "方位 0°",
+          "camera": {
+            "position": [
+              0.0,
+              -1.9,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "9ca7e810ca5ccf7ffede177f1117392d35067c5012c357ed7dbbd7956ec49187",
+          "angle_deg": 0,
+          "reference": "assets/showcase/metal-showcase-03-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-03-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-03-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-03-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-03-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 5.960464477539063e-08,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 19.55866477197234,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8215427398681641,
+              "mae_linear_hdr": 0.06149734929203987,
+              "rmse_linear_hdr": 0.31885072588920593,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.0337982177734375
+            },
+            "finetuned": {
+              "psnr_display_db": 23.60477494588413,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8652610182762146,
+              "mae_linear_hdr": 0.02935747615993023,
+              "rmse_linear_hdr": 0.18096879124641418,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.0187835693359375
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "metal-showcase-04",
+          "status": "complete",
+          "label": "方位 12°",
+          "camera": {
+            "position": [
+              0.3950322125537427,
+              -1.8584804413942306,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "c5fcf1eb14b74efa7c0b5971962e7cf19746ff9c52f623267cba56cef9c8c6d7",
+          "angle_deg": 12,
+          "reference": "assets/showcase/metal-showcase-04-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-04-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-04-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-04-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-04-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 1.1920928955078125e-07,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 19.362209310020283,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8096928596496582,
+              "mae_linear_hdr": 0.06243331357836723,
+              "rmse_linear_hdr": 0.376621812582016,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.035308837890625
+            },
+            "finetuned": {
+              "psnr_display_db": 23.736192233224767,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8479182720184326,
+              "mae_linear_hdr": 0.029210159555077553,
+              "rmse_linear_hdr": 0.1557088941335678,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.012420654296875
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "metal-showcase-05",
+          "status": "complete",
+          "label": "方位 24°",
+          "camera": {
+            "position": [
+              0.7727996218440204,
+              -1.7357363695209416,
+              0.05
+            ],
+            "look_at": [
+              0,
+              0,
+              -0.05
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 40
+          },
+          "config_sha256": "04acb8e584a9aec2c60653a316adf492ed0f98cc7f82be9a427bc971cc8f301d",
+          "angle_deg": 24,
+          "reference": "assets/showcase/metal-showcase-05-reference.png",
+          "pretrained": "assets/showcase/metal-showcase-05-pretrained.png",
+          "finetuned": "assets/showcase/metal-showcase-05-finetuned.png",
+          "pretrained_error": "assets/showcase/metal-showcase-05-pretrained-error.png",
+          "finetuned_error": "assets/showcase/metal-showcase-05-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 3.2782554626464844e-05,
+            "camera_matrix_max_abs": 2.1606683731079102e-07,
+            "fov_degrees_abs": 1.16362831903416e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 20.16466349896355,
+              "psnr_exact_match": false,
+              "ssim_display": 0.8500618934631348,
+              "mae_linear_hdr": 0.05395111069083214,
+              "rmse_linear_hdr": 0.3603169620037079,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.02960205078125
+            },
+            "finetuned": {
+              "psnr_display_db": 21.33448783568765,
+              "psnr_exact_match": false,
+              "ssim_display": 0.6991303563117981,
+              "mae_linear_hdr": 0.029264027252793312,
+              "rmse_linear_hdr": 0.13786141574382782,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.01092529296875
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        }
+      ],
+      "reference_settings": {
+        "resolution": 256,
+        "cycles_spp": 2048,
+        "cycles_seed": 11
+      },
+      "geometry_material_light_sha256": "d3dcdc8ecc2d140ad8c5df5837c494b9747383566c3e17fcc3a6086849b46dbd",
+      "display_transform": "EV0; clamp nonnegative for display; channel-wise Reinhard; sRGB",
+      "default_frame_id": "metal-showcase-03"
+    },
+    {
+      "id": "sponza",
+      "title": "Sponza 建筑骨架 · 前后六个观察位",
+      "status": "complete",
+      "geometry_material_light_fixed": true,
+      "condition_note": "六帧仅改变预锁相机；几何、变换、材质和光源的联合 SHA256 完全相同。A/B/C 共用同一视角与显示处理。 前后观察位是离散位置，不构成连续 360° 环绕。 微调六个视角仍呈块状模糊，不能视作恢复清晰建筑。",
+      "frames": [
+        {
+          "id": "sponza-showcase-00",
+          "status": "complete",
+          "label": "前方 · 中",
+          "camera": {
+            "position": [
+              0,
+              -0.4,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "3433b53fca3735c3e0f60872d02788bc148e0c3f29143c235c1304419908283d",
+          "reference": "assets/showcase/sponza-showcase-00-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-00-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-00-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-00-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-00-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 1.1920928955078125e-07,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 8.04513351059153,
+              "psnr_exact_match": false,
+              "ssim_display": 0.2141602784395218,
+              "mae_linear_hdr": 0.31309691071510315,
+              "rmse_linear_hdr": 0.5464389324188232,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.6120452880859375
+            },
+            "finetuned": {
+              "psnr_display_db": 15.876114197627944,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5908483266830444,
+              "mae_linear_hdr": 0.13817475736141205,
+              "rmse_linear_hdr": 0.21366924047470093,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.1267852783203125
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "sponza-showcase-01",
+          "status": "complete",
+          "label": "前方 · 左",
+          "camera": {
+            "position": [
+              -0.1,
+              -0.38,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "14734f780684729dbad611a63a1f417c71a45fb26e76f178571a3734f98d5c86",
+          "reference": "assets/showcase/sponza-showcase-01-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-01-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-01-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-01-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-01-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 9.685754776000977e-08,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 8.744595928090103,
+              "psnr_exact_match": false,
+              "ssim_display": 0.2549452781677246,
+              "mae_linear_hdr": 0.2735632658004761,
+              "rmse_linear_hdr": 0.5212389826774597,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.4758453369140625
+            },
+            "finetuned": {
+              "psnr_display_db": 14.127314264517326,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5829113125801086,
+              "mae_linear_hdr": 0.1958099603652954,
+              "rmse_linear_hdr": 0.34888753294944763,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.2218017578125
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "sponza-showcase-02",
+          "status": "complete",
+          "label": "前方 · 右",
+          "camera": {
+            "position": [
+              0.1,
+              -0.38,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "00ed56a2c8c103ad5fb05597a34a85beec967b117252b0c5ca7184a7a63c6af9",
+          "reference": "assets/showcase/sponza-showcase-02-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-02-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-02-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-02-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-02-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 9.685754776000977e-08,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 8.57246151954358,
+              "psnr_exact_match": false,
+              "ssim_display": 0.20923370122909546,
+              "mae_linear_hdr": 0.2745370864868164,
+              "rmse_linear_hdr": 0.5170608758926392,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.5428619384765625
+            },
+            "finetuned": {
+              "psnr_display_db": 14.347905064406735,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5776867866516113,
+              "mae_linear_hdr": 0.16964112222194672,
+              "rmse_linear_hdr": 0.29974234104156494,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.1994171142578125
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "sponza-showcase-03",
+          "status": "complete",
+          "label": "后方 · 中",
+          "camera": {
+            "position": [
+              0,
+              0.4,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              -0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "ebdebbd6404131294f0e498204d5f606f4929be4cd1e762176345c7274aa205d",
+          "reference": "assets/showcase/sponza-showcase-03-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-03-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-03-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-03-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-03-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 2.384185791015625e-07,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 8.752572389045678,
+              "psnr_exact_match": false,
+              "ssim_display": 0.28611502051353455,
+              "mae_linear_hdr": 0.2943909168243408,
+              "rmse_linear_hdr": 0.5104444622993469,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.491851806640625
+            },
+            "finetuned": {
+              "psnr_display_db": 14.014332758442219,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5586847066879272,
+              "mae_linear_hdr": 0.20790626108646393,
+              "rmse_linear_hdr": 0.3092099130153656,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.2368621826171875
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "sponza-showcase-04",
+          "status": "complete",
+          "label": "后方 · 左",
+          "camera": {
+            "position": [
+              -0.1,
+              0.38,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              -0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "7552964b147094d834aca2714ed91025d1d30df8b592dcccc582743ceaa88155",
+          "reference": "assets/showcase/sponza-showcase-04-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-04-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-04-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-04-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-04-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 9.685754776000977e-08,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 9.09636149432217,
+              "psnr_exact_match": false,
+              "ssim_display": 0.2799520194530487,
+              "mae_linear_hdr": 0.26395925879478455,
+              "rmse_linear_hdr": 0.49052077531814575,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.460540771484375
+            },
+            "finetuned": {
+              "psnr_display_db": 13.36801625291585,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5583741068840027,
+              "mae_linear_hdr": 0.23133814334869385,
+              "rmse_linear_hdr": 0.3586370646953583,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.26568603515625
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        },
+        {
+          "id": "sponza-showcase-05",
+          "status": "complete",
+          "label": "后方 · 右",
+          "camera": {
+            "position": [
+              0.1,
+              0.38,
+              -0.15
+            ],
+            "look_at": [
+              0,
+              -0.25,
+              -0.08
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "fov": 62
+          },
+          "config_sha256": "1bde754e95f9a3830b8926085ba624dc5fc23da336b0692a6016f13f7ea85065",
+          "reference": "assets/showcase/sponza-showcase-05-reference.png",
+          "pretrained": "assets/showcase/sponza-showcase-05-pretrained.png",
+          "finetuned": "assets/showcase/sponza-showcase-05-finetuned.png",
+          "pretrained_error": "assets/showcase/sponza-showcase-05-pretrained-error.png",
+          "finetuned_error": "assets/showcase/sponza-showcase-05-finetuned-error.png",
+          "alignment": {
+            "vertex_max_abs": 0.0,
+            "normal_max_abs": 0.0002822279930114746,
+            "camera_matrix_max_abs": 9.685754776000977e-08,
+            "fov_degrees_abs": 2.8281522617135124e-06
+          },
+          "metrics": {
+            "pretrained": {
+              "psnr_display_db": 9.438235522587595,
+              "psnr_exact_match": false,
+              "ssim_display": 0.3133217990398407,
+              "mae_linear_hdr": 0.2575550973415375,
+              "rmse_linear_hdr": 0.4843604862689972,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.422943115234375
+            },
+            "finetuned": {
+              "psnr_display_db": 13.395327821870742,
+              "psnr_exact_match": false,
+              "ssim_display": 0.5672025680541992,
+              "mae_linear_hdr": 0.23054826259613037,
+              "rmse_linear_hdr": 0.3921961784362793,
+              "negative_prediction_fraction": 0.0,
+              "error_saturated_pixel_fraction": 0.260406494140625
+            }
+          },
+          "error_scale": [
+            0,
+            0.25
+          ],
+          "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color"
+        }
+      ],
+      "reference_settings": {
+        "resolution": 256,
+        "cycles_spp": 2048,
+        "cycles_seed": 11
+      },
+      "geometry_material_light_sha256": "4537a064f034ac78a1eff210fdb04fca2177bda48fcb384f6bf3f5c229ec2eef",
+      "display_transform": "EV0; clamp nonnegative for display; channel-wise Reinhard; sRGB",
+      "default_frame_id": "sponza-showcase-00"
+    }
+  ],
+  "provenance": {
+    "locked_before_training": true,
+    "purpose": "Fixed-scene camera-only qualitative showcase, never used for checkpoint or hyperparameter selection; not independent generalization test"
+  },
+  "checkpoint_sha256": "80a66e827b611771b28acf325a196276e7521d93bf54448bc9c736dbd6c8246e"
+}

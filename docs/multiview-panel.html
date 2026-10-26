@@ -1,0 +1,9 @@
+<section id="multiview" class="section"><div class="section-label">03B / 真实多视角</div><div class="section-content">
+<h2>换一个观察位，同时检查三个结果</h2><p>这里按预先固定的相机逐帧切换。每一帧都应来自独立渲染的真实图像；播放只切换已完成帧，不生成中间视角。它与上方可自由旋转的 WebGPU 教学预览不同。</p>
+<div id="mv-families" class="mv-families" role="group" aria-label="选择多视角场景"></div><p id="mv-note" class="note">正在读取多视角运行清单…</p>
+<div class="mv-viewer"><div class="mv-heading"><div><span class="status-pill" id="mv-status">待运行</span><h3 id="mv-title">真实视角记录</h3></div><div class="mv-controls"><button type="button" id="mv-prev" aria-label="上一个固定视角">←</button><button type="button" id="mv-play" disabled>播放已完成帧</button><button type="button" id="mv-next" aria-label="下一个固定视角">→</button></div></div>
+<label for="mv-frame">离散相机位置 <output id="mv-frame-value">—</output></label><input id="mv-frame" type="range" min="0" max="0" step="1" value="0" aria-describedby="mv-camera-label"><p id="mv-camera-label" class="mv-camera-label"></p>
+<div id="mv-pending" class="mv-pending"><span>WAITING FOR MEASURED FRAMES</span><h4>这一视角尚未完成真实对照</h4><p>需要同一相机的 A 参考、B 预训练与 C 微调三张图完成并核验；不借用其他视角或材质图填充。</p></div><div id="mv-images" class="mv-images" hidden></div>
+<p id="mv-condition" class="note"></p><details><summary>当前相机与场景一致性记录</summary><pre id="mv-metadata">尚无运行记录</pre></details><p class="note">键盘方向键或下方滑块选择离散视角，播放间隔为 1.6 秒。视角数量有限，不是完整 360° 覆盖。点击已完成图像可放大；A 始终是 Cycles 参考，B 是预训练模型，C 是微调模型。</p></div>
+<dialog id="mv-dialog"><button type="button" id="mv-close">关闭 ×</button><img id="mv-large" alt=""><p id="mv-large-caption"></p></dialog>
+</div></section>

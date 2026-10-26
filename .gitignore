@@ -70,6 +70,7 @@
 !/report/figures/
 !/report/result-table.json
 !/research/input-output-training.md
+!/research/training-results.md
 !/scripts/training/
 /scripts/training/*
 !/scripts/training/*.py

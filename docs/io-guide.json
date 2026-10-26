@@ -2,7 +2,7 @@
   "schema_version": 1,
   "guide": "research/input-output-training.md",
   "evidence": ["CODE_AUDITED", "CHECKPOINT_RUN_INFERENCE"],
-  "training_status": "128px_three_step_smoke_passed_no_checkpoint; formal_training_not_yet_evaluated",
+  "training_status": "restricted_DPT_finetuning_and_16_frame_test_complete; validation_early_stopping_not_mathematical_convergence",
   "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
   "model": "microsoft/renderformer-v1-base",
   "revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
@@ -18,6 +18,8 @@
   "texture_channels": ["diffuse_r", "diffuse_g", "diffuse_b", "specular_r", "specular_g", "specular_b", "roughness", "normal_map_r", "normal_map_g", "normal_map_b", "emissive_r", "emissive_g", "emissive_b"],
   "model_output": {"shape": ["B", "V", 3, "H", "W"], "space": "log10(1+linear_HDR)"},
   "pipeline_output": {"shape": ["B", "V", "H", "W", 3], "space": "linear_HDR", "inverse": "10^z-1"},
+  "training_cache": {"status": "complete", "layers": 4, "stored_element": "layer_container[0]", "restore_layout": "[[feature_0], [feature_1], [feature_2], [feature_3]]", "preserve_dtype": true, "resolution": 256, "first_train_frame_parity_max_abs": 0.0, "parity_scope": "metal-g00-v0 only; other cache entries hash-verified, not full-forward parity-tested"},
+  "training_run": {"microbatch": 8, "gradient_accumulation": 1, "effective_batch": 8, "epochs": 25, "optimizer_steps": 150, "best_epoch": 13, "split": [48, 16, 16], "stop_reason": "validation_plateau", "loss": "log10(1+max(HDR,0)) MSE", "limitations": "Metal SSIM worsened; historical 512px fidelity may regress; not a universal replacement checkpoint"},
   "cautions": ["Pipeline is inference-only with no_grad", "Emission encoding mutates texture in-place; clone original per call", "Display tone mapping is separate from model log encoding", "Existing eight configurations are inference evidence, not a training split", "Smoke test is not convergence evidence"],
   "batch_definition": {"microbatch": "samples per forward/backward", "effective_batch_single_gpu": "microbatch * accumulation_steps", "optimizer_step": "one parameter update", "epoch": "one traversal of training split"}
 }

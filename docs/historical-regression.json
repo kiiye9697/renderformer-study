@@ -1,0 +1,338 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "resolution": 512,
+  "note": "原 8 例的 512px 历史回归保留全部配置，7/8 例显示 PSNR 下降。受限适配有收益与代价，不能据此替代通用预训练模型。本区不属于新 256px 留出测试，不合并平均指标，也不作为新的独立泛化证据。",
+  "checkpoint_sha256": "80a66e827b611771b28acf325a196276e7521d93bf54448bc9c736dbd6c8246e",
+  "cases": [
+    {
+      "id": "cbox",
+      "family": "cbox",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 33.651102800516156,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9764258861541748,
+          "mae_linear_hdr": 0.017444854602217674,
+          "rmse_linear_hdr": 0.026344938203692436,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 3.814697265625e-06
+        },
+        "finetuned": {
+          "psnr_display_db": 23.805936593522294,
+          "psnr_exact_match": false,
+          "ssim_display": 0.895986020565033,
+          "mae_linear_hdr": 0.0237515140324831,
+          "rmse_linear_hdr": 0.0717533528804779,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.012531280517578125
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "官方康奈尔盒",
+      "groups": [
+        "other"
+      ],
+      "status": "complete",
+      "reference": "assets/regression/cbox-reference.png",
+      "pretrained": "assets/regression/cbox-pretrained.png",
+      "finetuned": "assets/regression/cbox-finetuned.png",
+      "pretrained_error": "assets/regression/cbox-pretrained-error.png",
+      "finetuned_error": "assets/regression/cbox-finetuned-error.png"
+    },
+    {
+      "id": "metal_baseline",
+      "family": "metal",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 33.974096596758244,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9767027497291565,
+          "mae_linear_hdr": 0.02284502051770687,
+          "rmse_linear_hdr": 0.1420808732509613,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 3.0517578125e-05
+        },
+        "finetuned": {
+          "psnr_display_db": 23.975461051534005,
+          "psnr_exact_match": false,
+          "ssim_display": 0.891309916973114,
+          "mae_linear_hdr": 0.03902824595570564,
+          "rmse_linear_hdr": 0.3810350000858307,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0123291015625
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "金属茶壶 · 粗糙度 0.40 / 墙色强度 1.0",
+      "groups": [
+        "roughness",
+        "wall"
+      ],
+      "status": "complete",
+      "roughness": 0.4,
+      "wall_strength": 1,
+      "reference": "assets/regression/metal_baseline-reference.png",
+      "pretrained": "assets/regression/metal_baseline-pretrained.png",
+      "finetuned": "assets/regression/metal_baseline-finetuned.png",
+      "pretrained_error": "assets/regression/metal_baseline-pretrained-error.png",
+      "finetuned_error": "assets/regression/metal_baseline-finetuned-error.png"
+    },
+    {
+      "id": "metal_roughness_015",
+      "family": "metal",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 31.6912834208534,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9633522033691406,
+          "mae_linear_hdr": 0.034456297755241394,
+          "rmse_linear_hdr": 1.1801538467407227,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.0005645751953125
+        },
+        "finetuned": {
+          "psnr_display_db": 23.041563392138045,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8685656189918518,
+          "mae_linear_hdr": 0.047429438680410385,
+          "rmse_linear_hdr": 1.481129765510559,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.015705108642578125
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "金属茶壶 · 粗糙度 0.15",
+      "groups": [
+        "roughness"
+      ],
+      "status": "complete",
+      "roughness": 0.15,
+      "reference": "assets/regression/metal_roughness_015-reference.png",
+      "pretrained": "assets/regression/metal_roughness_015-pretrained.png",
+      "finetuned": "assets/regression/metal_roughness_015-finetuned.png",
+      "pretrained_error": "assets/regression/metal_roughness_015-pretrained-error.png",
+      "finetuned_error": "assets/regression/metal_roughness_015-finetuned-error.png"
+    },
+    {
+      "id": "metal_roughness_075",
+      "family": "metal",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 34.16857108360898,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9769428372383118,
+          "mae_linear_hdr": 0.020898839458823204,
+          "rmse_linear_hdr": 0.03674650564789772,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 1.1444091796875e-05
+        },
+        "finetuned": {
+          "psnr_display_db": 24.061083239037615,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8917991518974304,
+          "mae_linear_hdr": 0.02774173952639103,
+          "rmse_linear_hdr": 0.10553304851055145,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.012081146240234375
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "金属茶壶 · 粗糙度 0.75",
+      "groups": [
+        "roughness"
+      ],
+      "status": "complete",
+      "roughness": 0.75,
+      "reference": "assets/regression/metal_roughness_075-reference.png",
+      "pretrained": "assets/regression/metal_roughness_075-pretrained.png",
+      "finetuned": "assets/regression/metal_roughness_075-finetuned.png",
+      "pretrained_error": "assets/regression/metal_roughness_075-pretrained-error.png",
+      "finetuned_error": "assets/regression/metal_roughness_075-finetuned-error.png"
+    },
+    {
+      "id": "metal_wall_000",
+      "family": "metal",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 34.1094865202092,
+          "psnr_exact_match": false,
+          "ssim_display": 0.9765899181365967,
+          "mae_linear_hdr": 0.021040955558419228,
+          "rmse_linear_hdr": 0.1422584354877472,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 5.7220458984375e-05
+        },
+        "finetuned": {
+          "psnr_display_db": 23.44964722183284,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8778291344642639,
+          "mae_linear_hdr": 0.03843241184949875,
+          "rmse_linear_hdr": 0.378248929977417,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.011653900146484375
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "侧墙颜色强度 0.0",
+      "groups": [
+        "wall"
+      ],
+      "status": "complete",
+      "roughness": 0.4,
+      "wall_strength": 0,
+      "reference": "assets/regression/metal_wall_000-reference.png",
+      "pretrained": "assets/regression/metal_wall_000-pretrained.png",
+      "finetuned": "assets/regression/metal_wall_000-finetuned.png",
+      "pretrained_error": "assets/regression/metal_wall_000-pretrained-error.png",
+      "finetuned_error": "assets/regression/metal_wall_000-finetuned-error.png"
+    },
+    {
+      "id": "metal_wall_050",
+      "family": "metal",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 34.1224064867236,
+          "psnr_exact_match": false,
+          "ssim_display": 0.977307140827179,
+          "mae_linear_hdr": 0.02078421227633953,
+          "rmse_linear_hdr": 0.1420164406299591,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 3.0517578125e-05
+        },
+        "finetuned": {
+          "psnr_display_db": 24.01843876300759,
+          "psnr_exact_match": false,
+          "ssim_display": 0.8917841911315918,
+          "mae_linear_hdr": 0.03916960954666138,
+          "rmse_linear_hdr": 0.3794534504413605,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.012176513671875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "侧墙颜色强度 0.5",
+      "groups": [
+        "wall"
+      ],
+      "status": "complete",
+      "roughness": 0.4,
+      "wall_strength": 0.5,
+      "reference": "assets/regression/metal_wall_050-reference.png",
+      "pretrained": "assets/regression/metal_wall_050-pretrained.png",
+      "finetuned": "assets/regression/metal_wall_050-finetuned.png",
+      "pretrained_error": "assets/regression/metal_wall_050-pretrained-error.png",
+      "finetuned_error": "assets/regression/metal_wall_050-finetuned-error.png"
+    },
+    {
+      "id": "sponza_interior",
+      "family": "sponza",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 7.780195303455482,
+          "psnr_exact_match": false,
+          "ssim_display": 0.3202838599681854,
+          "mae_linear_hdr": 0.35834553837776184,
+          "rmse_linear_hdr": 0.6127126216888428,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.58233642578125
+        },
+        "finetuned": {
+          "psnr_display_db": 15.177327886829078,
+          "psnr_exact_match": false,
+          "ssim_display": 0.7051064372062683,
+          "mae_linear_hdr": 0.21489496529102325,
+          "rmse_linear_hdr": 0.3672923147678375,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.138153076171875
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "Sponza 建筑骨架 · 内部相机",
+      "groups": [
+        "other"
+      ],
+      "status": "complete",
+      "reference": "assets/regression/sponza_interior-reference.png",
+      "pretrained": "assets/regression/sponza_interior-pretrained.png",
+      "finetuned": "assets/regression/sponza_interior-finetuned.png",
+      "pretrained_error": "assets/regression/sponza_interior-pretrained-error.png",
+      "finetuned_error": "assets/regression/sponza_interior-finetuned-error.png"
+    },
+    {
+      "id": "sponza_exterior",
+      "family": "sponza",
+      "resolution": 512,
+      "metrics": {
+        "pretrained": {
+          "psnr_display_db": 13.375058818168393,
+          "psnr_exact_match": false,
+          "ssim_display": 0.5626208186149597,
+          "mae_linear_hdr": 0.08094311505556107,
+          "rmse_linear_hdr": 0.2094126045703888,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.23979949951171875
+        },
+        "finetuned": {
+          "psnr_display_db": 9.378907110108205,
+          "psnr_exact_match": false,
+          "ssim_display": 0.26202788949012756,
+          "mae_linear_hdr": 0.18887825310230255,
+          "rmse_linear_hdr": 0.33894267678260803,
+          "negative_prediction_fraction": 0.0,
+          "error_saturated_pixel_fraction": 0.43866729736328125
+        }
+      },
+      "error_scale": [
+        0,
+        0.25
+      ],
+      "error_note": "Display RGB MAE; values >=0.25 saturate at maximum magma color",
+      "title": "Sponza 建筑骨架 · 外部相机诊断",
+      "groups": [
+        "other"
+      ],
+      "status": "complete",
+      "reference": "assets/regression/sponza_exterior-reference.png",
+      "pretrained": "assets/regression/sponza_exterior-pretrained.png",
+      "finetuned": "assets/regression/sponza_exterior-finetuned.png",
+      "pretrained_error": "assets/regression/sponza_exterior-pretrained-error.png",
+      "finetuned_error": "assets/regression/sponza_exterior-finetuned-error.png"
+    }
+  ]
+}

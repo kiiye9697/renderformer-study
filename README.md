@@ -1,12 +1,13 @@
 # Transformer 与 RenderFormer：数据科学期末学习项目
 
-以 Transformer 为学习方法，以 SIGGRAPH 2025 RenderFormer 为图形学应用实例，解释输入表示、注意力、监督学习和神经渲染，并记录当前机器上的真实推理实验。**优先完成课程报告；不把运行预训练模型称为复现完整训练。**
+以 Transformer 为学习方法，以 SIGGRAPH 2025 RenderFormer 为图形学应用实例，解释输入表示、注意力、监督学习和神经渲染，并记录真实推理与受限 DPT 微调。**优先完成课程报告；不把预训练推理或小规模微调称为复现完整训练。**
 
 ## 阅读入口
 
 - [期末报告 PDF](report/RenderFormer-期末报告.pdf) / [DOCX](report/RenderFormer-期末报告.docx)：公开版封面不含个人信息。
 - [报告源文稿](report/report-draft.md)与构建脚本、公式源位于report/。
 - [中文论文精读](research/RenderFormer-精读记录.md)：含方法与训练细节、页码、原论文/发布版本差异、局限和证据级别。
+- [输入输出与训练计数](research/input-output-training.md)、[正式微调结果](research/training-results.md)：实际发布接口、batch/epoch、验证早停与留出评估。
 - [学习网页](docs/index.html)：静态展示，不提供在线GPU推理。实验状态以网页数据中的实际记录为准。
 - [Unity导出器](unity-exporter/README.md)：独立UPM工具，严格限定静态网格/常量URP材质/方形透视相机。
 - [第三方与公开边界](THIRD_PARTY.md)、[公开清单](PUBLIC_FILES.md)。
@@ -37,4 +38,14 @@ git -C vendor/renderformer checkout eec6a9b8d592303def45e458dd4ebd09d6572abc
 
 [在线学习页](https://kiiye9697.github.io/renderformer-study/) · [公开测量记录](public-data/) · [源代码仓库](https://github.com/kiiye9697/renderformer-study)
 
-论文表格数字属于作者结果，本地测量只从本次运行记录填入；训练未执行。教学动画、结构图与真实测量分别标注。
+论文表格数字属于作者结果，本地测量只从运行记录填入。原九页报告记录 512 像素预训练推理阶段；后续 256 像素微调单独记录，不跨分辨率混比。教学动画、结构图与真实测量分别标注。
+
+## 受限微调扩展
+
+已冻结 RenderFormer 主干，仅微调 10,595,203 个 DPT 输出头参数。两个固定场景族共 80 帧，按完整配置组与相机扇区划分为 48/16/16。microbatch=8、累积=1，每轮 6 次更新；25 轮、150 步后按验证规则早停，选择第 13 轮最佳 checkpoint。这是操作性的验证平台期，不是数学收敛或完整论文训练复现。
+
+同一 256 像素留出集全部 16 帧的平均 log HDR MSE 从 0.00815454 降为 0.00278552（下降 65.84%），显示 PSNR 从 14.9862 升为 17.6728 dB。但金属 8 帧 SSIM 全部下降，平均 0.8349→0.6819，且其中一帧 PSNR 下降；不能称画质全面提升。Sponza 的平均 SSIM 为 0.2871→0.5209。完整分组指标、曲线与限制见[训练记录](research/training-results.md)和[在线 A/B/C](https://www.kiiye9697.cn/renderformer-study/#training)，A=Cycles 参考、B=预训练、C=微调。
+
+固定最佳权重的历史 512 像素回归还显示适配代价：Cornell box、金属五档和 Sponza 外部视角退步，Sponza 内部视角改善。因此微调权重不能作为预训练权重的全面默认替代；这些回归结果不再用于本轮调参。
+
+原创训练脚本见 [scripts/training/README.md](scripts/training/README.md)，当前使用固定 F 盘工作目录，异机需修改路径并自行准备获许可资产。模型、特征缓存和原始数据不随仓库发布。原打印报告保留历史版本，扩展不插入九页主体。

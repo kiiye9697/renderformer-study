@@ -2,7 +2,11 @@
 <h2>记录学习过程，再检验未见配置</h2><p>这一部分与上方预训练推理历史基线分开。受限数据集和部分参数微调用于理解学习过程，不等同于原论文的大规模训练复现。</p>
 <span id="training-status" class="status-pill" role="status">等待训练记录</span><p id="training-note" class="training-note">正在读取运行记录…</p><div id="training-config" class="training-config"></div>
 <p class="note">单 GPU 有效 batch = micro-batch × 梯度累积次数。一次 optimizer step 才更新参数；一个 epoch 表示完整遍历训练划分。具体帧数和实际步数以上述记录为准。</p>
+<p id="training-stop" class="note">早停记录等待正式运行。</p><details><summary>为什么选择这个 batch：实际容量探测</summary><div class="table-scroll"><table id="training-batch-table" class="curve-table"><thead><tr><th>Micro-batch</th><th>状态</th><th>热身后 samples/s</th><th>峰值分配显存 / MiB</th></tr></thead><tbody></tbody></table></div><p class="note">口径：特征已缓存在 GPU 上的 DPT 输出头正反向、损失和优化器更新；不含 CPU 读取／传输与初始化，不代表完整渲染管线速度。候选 batch 使用可丢弃的探测权重，正式训练另外开始。</p></details>
 <h3>训练 / 验证曲线</h3><div id="training-curve"></div><div id="training-legend" class="training-legend" hidden><span>● 训练</span><span>● 验证</span></div><p id="training-curve-status" class="pending-copy">等待真实训练与验证记录；不会显示模拟曲线。</p>
+<details><summary>按场景家族查看验证损失</summary><div id="training-family-curve"></div><div id="training-family-legend" class="training-legend" hidden><span>● 金属茶壶</span><span>● Sponza</span></div><p id="training-family-curve-status" class="pending-copy">等待真实分组验证记录。</p></details>
+<h3>留出测试汇总：整体与两个场景家族</h3><p id="training-aggregate-status" class="pending-copy">尚未最终评估，不填写汇总数值。分别保留整体、金属茶壶与 Sponza，避免平均值掩盖退步。</p><div class="table-scroll"><table id="training-aggregate" class="curve-table" hidden><thead><tr><th>场景组</th><th>显示 PSNR / dB</th><th>显示 SSIM</th><th>线性 HDR RMSE</th></tr></thead><tbody></tbody></table></div>
+<div id="training-findings" class="result-insights" aria-label="真实收益与局限"></div>
 <h3>留出测试：A 参考 / B 预训练 / C 微调</h3><p id="training-test-status" class="pending-copy">等待最终 checkpoint 的一次留出评估。</p><div id="training-test-cases"></div>
 <details><summary>训练配置、checkpoint 与评估状态</summary><pre id="training-record">尚未加载</pre></details><p class="note">测试图不用于挑选训练轮次。相近相机和同配置组应整体划分，避免泄漏；最终指标需同时保留改善和退步。未运行不代表效果差，也不代表效果已得到验证。</p>
 </div></section>
