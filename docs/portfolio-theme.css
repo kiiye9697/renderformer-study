@@ -1,0 +1,7 @@
+@font-face{font-family:Barlow;font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/barlow-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Barlow;font-style:normal;font-weight:500;font-display:swap;src:url(assets/fonts/barlow-latin-500-normal.woff2) format('woff2')}
+:root{color-scheme:dark;--ink:#eaf0ed;--muted:#a5b3b0;--line:#33413f;--accent:#9cc9bd;font-synthesis:none}
+body{background:#111819;color:var(--ink);font-family:Barlow,"Noto Sans SC","Microsoft YaHei",sans-serif}
+nav,section,footer,details,th,td{border-color:var(--line)}nav{align-items:center}nav a{color:#cad5d1}nav a:hover,a{color:var(--accent)}
+thead{background:#1b2a29}.meta,figcaption,footer,.kicker{color:var(--muted)}button{border-color:#52716a;color:var(--ink)}button[aria-pressed=true]{background:#9cc9bd;color:#111819}button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+a.download{color:var(--ink);border-color:#52716a}a.download:hover{background:#243b35}h1,h2,h3{font-weight:500}img{border-radius:3px}.triptych img{background:#192526}.portfolio-return{font-size:13px;letter-spacing:.04em;margin-right:auto}summary:hover{color:var(--accent)}

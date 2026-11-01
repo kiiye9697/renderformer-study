@@ -1,0 +1,494 @@
+{
+  "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+  "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+  "method": "Frozen scene Transformer; view Transformer and DPT adaptation; normalized spatial-gradient loss",
+  "resolution": 256,
+  "train_frames": 18,
+  "validation_frames": 6,
+  "test_frames": 6,
+  "split": "roughness 0.15/0.5/0.9 train, 0.3 validation, 0.65 test; 3 views per configuration; shared geometry and overlapping views",
+  "scope": "material interpolation in two fixed scene families; not unseen-scene generalization",
+  "sponza_faces": 19235,
+  "sponza_limitations": "Simplified geometry; texture mean colors; no alpha, normal maps or original PBR materials. Both reference and prediction use this representation.",
+  "checkpoint_sha256": "c031d177895917b377f13a834f0e319a5d8a3003a8ffb07acd9664a19825ee9e",
+  "view_checkpoint_sha256": "73e87b1a1c9d9822635d5ba88167f930ba7fbf3a60bbac952f2c01fa0864efac",
+  "history": [
+    {
+      "epoch": 1,
+      "train_objective": 0.20518336538225412,
+      "validation_objective": 0.20964042004197836
+    },
+    {
+      "epoch": 2,
+      "train_objective": 0.21367451439922056,
+      "validation_objective": 0.18214295618236065
+    },
+    {
+      "epoch": 3,
+      "train_objective": 0.17705372348427773,
+      "validation_objective": 0.17098123207688332
+    },
+    {
+      "epoch": 4,
+      "train_objective": 0.17020527459681034,
+      "validation_objective": 0.1626334534958005
+    },
+    {
+      "epoch": 5,
+      "train_objective": 0.16160876583307981,
+      "validation_objective": 0.1597140794619918
+    },
+    {
+      "epoch": 6,
+      "train_objective": 0.15796100782851377,
+      "validation_objective": 0.15193738881498575
+    },
+    {
+      "epoch": 7,
+      "train_objective": 0.14696740731596947,
+      "validation_objective": 0.14969115890562534
+    },
+    {
+      "epoch": 8,
+      "train_objective": 0.15988683607429266,
+      "validation_objective": 0.14995227102190256
+    },
+    {
+      "epoch": 9,
+      "train_objective": 0.1511210681249698,
+      "validation_objective": 0.14338724594563246
+    },
+    {
+      "epoch": 10,
+      "train_objective": 0.14150345946351686,
+      "validation_objective": 0.14050691481679678
+    },
+    {
+      "epoch": 11,
+      "train_objective": 0.13957225314031044,
+      "validation_objective": 0.13501323759555817
+    },
+    {
+      "epoch": 12,
+      "train_objective": 0.13571911149968705,
+      "validation_objective": 0.13160219648852944
+    },
+    {
+      "epoch": 13,
+      "train_objective": 0.1334880511276424,
+      "validation_objective": 0.13158911000937223
+    },
+    {
+      "epoch": 14,
+      "train_objective": 0.13534101642047366,
+      "validation_objective": 0.13038780819624662
+    },
+    {
+      "epoch": 15,
+      "train_objective": 0.1276583947862188,
+      "validation_objective": 0.13208361389115453
+    },
+    {
+      "epoch": 16,
+      "train_objective": 0.1326783411204815,
+      "validation_objective": 0.1279815537855029
+    },
+    {
+      "epoch": 17,
+      "train_objective": 0.12908098753541708,
+      "validation_objective": 0.12689037155359983
+    },
+    {
+      "epoch": 18,
+      "train_objective": 0.1264498665307959,
+      "validation_objective": 0.12343310099095106
+    },
+    {
+      "epoch": 19,
+      "train_objective": 0.12024594269072016,
+      "validation_objective": 0.12675800267606974
+    },
+    {
+      "epoch": 20,
+      "train_objective": 0.1229847416592141,
+      "validation_objective": 0.12031265813857317
+    },
+    {
+      "epoch": 21,
+      "train_objective": 0.12651044021671018,
+      "validation_objective": 0.12570936232805252
+    },
+    {
+      "epoch": 22,
+      "train_objective": 0.12258158220599095,
+      "validation_objective": 0.1224147118628025
+    },
+    {
+      "epoch": 23,
+      "train_objective": 0.12197575718164444,
+      "validation_objective": 0.12547166645526886
+    },
+    {
+      "epoch": 24,
+      "train_objective": 0.1224178906219701,
+      "validation_objective": 0.12142632622271776
+    },
+    {
+      "epoch": 25,
+      "train_objective": 0.11896893599381049,
+      "validation_objective": 0.12597515247762203
+    },
+    {
+      "epoch": 26,
+      "train_objective": 0.12026910142352183,
+      "validation_objective": 0.11678774189203978
+    },
+    {
+      "epoch": 27,
+      "train_objective": 0.11777433892711997,
+      "validation_objective": 0.12383823050186038
+    },
+    {
+      "epoch": 28,
+      "train_objective": 0.12116106723745663,
+      "validation_objective": 0.11885341303423047
+    },
+    {
+      "epoch": 29,
+      "train_objective": 0.12446634316196044,
+      "validation_objective": 0.1213481379672885
+    },
+    {
+      "epoch": 30,
+      "train_objective": 0.11433291186889012,
+      "validation_objective": 0.11340221017599106
+    },
+    {
+      "epoch": 31,
+      "train_objective": 0.11275740806013346,
+      "validation_objective": 0.12092194426804781
+    },
+    {
+      "epoch": 32,
+      "train_objective": 0.1261345624613265,
+      "validation_objective": 0.12939023226499557
+    },
+    {
+      "epoch": 33,
+      "train_objective": 0.1383776261160771,
+      "validation_objective": 0.12008163286373019
+    },
+    {
+      "epoch": 34,
+      "train_objective": 0.11732339393347502,
+      "validation_objective": 0.11883957870304585
+    },
+    {
+      "epoch": 35,
+      "train_objective": 0.128119141018639,
+      "validation_objective": 0.12059610150754452
+    },
+    {
+      "epoch": 36,
+      "train_objective": 0.1133873388171196,
+      "validation_objective": 0.11503410898149014
+    },
+    {
+      "epoch": 37,
+      "train_objective": 0.11416865885257721,
+      "validation_objective": 0.11393684521317482
+    },
+    {
+      "epoch": 38,
+      "train_objective": 0.11424648265043895,
+      "validation_objective": 0.1196554759517312
+    },
+    {
+      "epoch": 39,
+      "train_objective": 0.11516543151810765,
+      "validation_objective": 0.12208200478926301
+    },
+    {
+      "epoch": 40,
+      "train_objective": 0.13062092242762446,
+      "validation_objective": 0.11906459089368582
+    },
+    {
+      "epoch": 41,
+      "train_objective": 0.12377986932794253,
+      "validation_objective": 0.12341787572950125
+    },
+    {
+      "epoch": 42,
+      "train_objective": 0.11221986620997389,
+      "validation_objective": 0.11490957485511899
+    },
+    {
+      "epoch": 43,
+      "train_objective": 0.1164742944141229,
+      "validation_objective": 0.11373504810035229
+    },
+    {
+      "epoch": 44,
+      "train_objective": 0.11188986959556739,
+      "validation_objective": 0.11224925983697176
+    },
+    {
+      "epoch": 45,
+      "train_objective": 0.10903913574293256,
+      "validation_objective": 0.11164145357906818
+    },
+    {
+      "epoch": 46,
+      "train_objective": 0.11336917686276138,
+      "validation_objective": 0.11659679934382439
+    },
+    {
+      "epoch": 47,
+      "train_objective": 0.11415507194275658,
+      "validation_objective": 0.11419014725834131
+    },
+    {
+      "epoch": 48,
+      "train_objective": 0.11463506023089091,
+      "validation_objective": 0.10749322967603803
+    },
+    {
+      "epoch": 49,
+      "train_objective": 0.10683839007591207,
+      "validation_objective": 0.10533423256129026
+    },
+    {
+      "epoch": 50,
+      "train_objective": 0.10565383018304904,
+      "validation_objective": 0.1063453583046794
+    },
+    {
+      "epoch": 51,
+      "train_objective": 0.10480268330623706,
+      "validation_objective": 0.10833903169259429
+    },
+    {
+      "epoch": 52,
+      "train_objective": 0.10456612799316645,
+      "validation_objective": 0.11333069577813148
+    },
+    {
+      "epoch": 53,
+      "train_objective": 0.1353815576682488,
+      "validation_objective": 0.12800659658387303
+    },
+    {
+      "epoch": 54,
+      "train_objective": 0.11516071297228336,
+      "validation_objective": 0.10842363396659493
+    },
+    {
+      "epoch": 55,
+      "train_objective": 0.10738406299302976,
+      "validation_objective": 0.11481545632705092
+    },
+    {
+      "epoch": 56,
+      "train_objective": 0.11384010035544634,
+      "validation_objective": 0.10918299574404955
+    },
+    {
+      "epoch": 57,
+      "train_objective": 0.10655396928389867,
+      "validation_objective": 0.10612714942544699
+    },
+    {
+      "epoch": 58,
+      "train_objective": 0.10513700870797038,
+      "validation_objective": 0.10354074416682124
+    },
+    {
+      "epoch": 59,
+      "train_objective": 0.10191944815839331,
+      "validation_objective": 0.10227200388908386
+    },
+    {
+      "epoch": 60,
+      "train_objective": 0.10536961412678163,
+      "validation_objective": 0.10928132571280003
+    }
+  ],
+  "best_epoch": {
+    "epoch": 59,
+    "train_objective": 0.10191944815839331,
+    "validation_objective": 0.10227200388908386
+  },
+  "display": "EV0; clamp negative; channel-wise Reinhard; IEC sRGB",
+  "metric_domain": "same float display RGB as images, data_range=1; log MSE on linear HDR",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "error_colormap": "black-red-yellow, threshold 0.25",
+  "cases": [
+    {
+      "id": "bunny-0",
+      "family": "bunny",
+      "view": 0,
+      "baseline": {
+        "structure_edge_l1": 0.09037364274263382,
+        "psnr_db": 19.76051999836923,
+        "ssim": 0.8385055661201477,
+        "edge_l1": 0.024575788527727127,
+        "log_mse": 0.0025159979704767466
+      },
+      "adapted": {
+        "structure_edge_l1": 0.03319879621267319,
+        "psnr_db": 35.32059180136981,
+        "ssim": 0.9779424667358398,
+        "edge_l1": 0.009138649329543114,
+        "log_mse": 7.771807577228174e-05
+      },
+      "reference_image": "training/bunny-0-reference.png",
+      "baseline_image": "training/bunny-0-baseline.png",
+      "adapted_image": "training/bunny-0-adapted.png",
+      "baseline_error_image": "training/bunny-0-baseline_error.png",
+      "adapted_error_image": "training/bunny-0-adapted_error.png"
+    },
+    {
+      "id": "bunny-1",
+      "family": "bunny",
+      "view": 1,
+      "baseline": {
+        "structure_edge_l1": 0.09102651476860046,
+        "psnr_db": 19.299403591572386,
+        "ssim": 0.8334465622901917,
+        "edge_l1": 0.024723118171095848,
+        "log_mse": 0.002618602477014065
+      },
+      "adapted": {
+        "structure_edge_l1": 0.03317517787218094,
+        "psnr_db": 35.55531813067806,
+        "ssim": 0.9774219393730164,
+        "edge_l1": 0.009131859987974167,
+        "log_mse": 6.937763828318566e-05
+      },
+      "reference_image": "training/bunny-1-reference.png",
+      "baseline_image": "training/bunny-1-baseline.png",
+      "adapted_image": "training/bunny-1-adapted.png",
+      "baseline_error_image": "training/bunny-1-baseline_error.png",
+      "adapted_error_image": "training/bunny-1-adapted_error.png"
+    },
+    {
+      "id": "bunny-2",
+      "family": "bunny",
+      "view": 2,
+      "baseline": {
+        "structure_edge_l1": 0.09101377427577972,
+        "psnr_db": 19.767328663985545,
+        "ssim": 0.8337686061859131,
+        "edge_l1": 0.024712368845939636,
+        "log_mse": 0.00248547806404531
+      },
+      "adapted": {
+        "structure_edge_l1": 0.03219538927078247,
+        "psnr_db": 35.78456495216914,
+        "ssim": 0.9774543642997742,
+        "edge_l1": 0.008855549618601799,
+        "log_mse": 7.986833225004375e-05
+      },
+      "reference_image": "training/bunny-2-reference.png",
+      "baseline_image": "training/bunny-2-baseline.png",
+      "adapted_image": "training/bunny-2-adapted.png",
+      "baseline_error_image": "training/bunny-2-baseline_error.png",
+      "adapted_error_image": "training/bunny-2-adapted_error.png"
+    },
+    {
+      "id": "sponza-0",
+      "family": "sponza",
+      "view": 0,
+      "baseline": {
+        "structure_edge_l1": 0.30288639664649963,
+        "psnr_db": 2.792318615430542,
+        "ssim": 0.10701761394739151,
+        "edge_l1": 0.0458550751209259,
+        "log_mse": 0.6941555142402649
+      },
+      "adapted": {
+        "structure_edge_l1": 0.2243882119655609,
+        "psnr_db": 16.63056768631072,
+        "ssim": 0.5664038062095642,
+        "edge_l1": 0.04643477872014046,
+        "log_mse": 0.09636607021093369
+      },
+      "reference_image": "training/sponza-0-reference.png",
+      "baseline_image": "training/sponza-0-baseline.png",
+      "adapted_image": "training/sponza-0-adapted.png",
+      "baseline_error_image": "training/sponza-0-baseline_error.png",
+      "adapted_error_image": "training/sponza-0-adapted_error.png"
+    },
+    {
+      "id": "sponza-1",
+      "family": "sponza",
+      "view": 1,
+      "baseline": {
+        "structure_edge_l1": 0.28157055377960205,
+        "psnr_db": 3.131442868123097,
+        "ssim": 0.13216964900493622,
+        "edge_l1": 0.04476211220026016,
+        "log_mse": 0.681581437587738
+      },
+      "adapted": {
+        "structure_edge_l1": 0.21123960614204407,
+        "psnr_db": 16.335158011694865,
+        "ssim": 0.5879012942314148,
+        "edge_l1": 0.04564995691180229,
+        "log_mse": 0.07775533944368362
+      },
+      "reference_image": "training/sponza-1-reference.png",
+      "baseline_image": "training/sponza-1-baseline.png",
+      "adapted_image": "training/sponza-1-adapted.png",
+      "baseline_error_image": "training/sponza-1-baseline_error.png",
+      "adapted_error_image": "training/sponza-1-adapted_error.png"
+    },
+    {
+      "id": "sponza-2",
+      "family": "sponza",
+      "view": 2,
+      "baseline": {
+        "structure_edge_l1": 0.2848398685455322,
+        "psnr_db": 3.3158579053493638,
+        "ssim": 0.1362210363149643,
+        "edge_l1": 0.04472087323665619,
+        "log_mse": 0.6487881541252136
+      },
+      "adapted": {
+        "structure_edge_l1": 0.2136046290397644,
+        "psnr_db": 16.447725054740904,
+        "ssim": 0.5772467255592346,
+        "edge_l1": 0.04600173979997635,
+        "log_mse": 0.08254129439592361
+      },
+      "reference_image": "training/sponza-2-reference.png",
+      "baseline_image": "training/sponza-2-baseline.png",
+      "adapted_image": "training/sponza-2-adapted.png",
+      "baseline_error_image": "training/sponza-2-baseline_error.png",
+      "adapted_error_image": "training/sponza-2-adapted_error.png"
+    }
+  ],
+  "trainable_parameters": 81560713,
+  "stages": [
+    {
+      "scope": "DPT",
+      "epochs": 100,
+      "learning_rate": 5e-06
+    },
+    {
+      "scope": "view Transformer + DPT",
+      "epochs": 60,
+      "view_learning_rate": 1e-05,
+      "dpt_learning_rate": 2e-06,
+      "optimizer_steps": 360,
+      "full_view_passes": 20,
+      "views_per_config_per_iteration": 1
+    }
+  ],
+  "structure_metric": "Per-channel display RGB standardized with std floor 0.05; horizontal plus vertical gradient L1",
+  "evaluation_role": "material holdout configurations used in iterative development; shared geometry and nearby cameras"
+}

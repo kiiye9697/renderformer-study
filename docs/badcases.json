@@ -11,9 +11,11 @@
     {
       "id": "control",
       "metrics": {
-        "psnr_db": 33.2114848646261,
-        "ssim": 0.9749578833580017,
-        "log_mse": 6.739516538800672e-05
+        "structure_edge_l1": 0.02184988185763359,
+        "psnr_db": 32.169279171622705,
+        "ssim": 0.9712117314338684,
+        "edge_l1": 0.005878531374037266,
+        "log_mse": 7.441225170623511e-05
       },
       "status": "measured",
       "reference": "badcases/control-reference.png",
@@ -23,8 +25,10 @@
     {
       "id": "camera_inside",
       "metrics": {
+        "structure_edge_l1": 0.03583206981420517,
         "psnr_db": 12.599437872904847,
         "ssim": 0.8095633387565613,
+        "edge_l1": 0.0063168625347316265,
         "log_mse": 0.020110996440052986
       },
       "status": "measured",
@@ -35,8 +39,10 @@
     {
       "id": "light_inside",
       "metrics": {
+        "structure_edge_l1": 0.037484701722860336,
         "psnr_db": 13.359132559844456,
         "ssim": 0.8190364837646484,
+        "edge_l1": 0.012221477925777435,
         "log_mse": 0.26305752992630005
       },
       "status": "measured",
@@ -47,8 +53,10 @@
     {
       "id": "large_light",
       "metrics": {
+        "structure_edge_l1": 0.031444743275642395,
         "psnr_db": 2.747464237092068,
         "ssim": 0.15284456312656403,
+        "edge_l1": 0.010437585413455963,
         "log_mse": 0.47581246495246887
       },
       "status": "measured",
@@ -59,9 +67,11 @@
     {
       "id": "nine_lights_direct",
       "metrics": {
-        "psnr_db": 15.321602521799676,
-        "ssim": 0.7285705208778381,
-        "log_mse": 0.002060276223346591
+        "structure_edge_l1": 0.05099695175886154,
+        "psnr_db": 15.321425948964633,
+        "ssim": 0.7285469174385071,
+        "edge_l1": 0.010481860488653183,
+        "log_mse": 0.0020602678414434195
       },
       "status": "measured",
       "reference": "badcases/nine_lights_direct-reference.png",
@@ -71,9 +81,11 @@
     {
       "id": "nine_lights_sum",
       "metrics": {
-        "psnr_db": 10.293166809379068,
-        "ssim": 0.7267786860466003,
-        "log_mse": 0.1127677857875824
+        "structure_edge_l1": 0.027090206742286682,
+        "psnr_db": 10.293197272563837,
+        "ssim": 0.72685307264328,
+        "edge_l1": 0.009485257789492607,
+        "log_mse": 0.11276780813932419
       },
       "status": "measured",
       "reference": "badcases/nine_lights_sum-reference.png",

@@ -9,6 +9,8 @@ from matplotlib.patches import FancyBboxPatch
 from PIL import Image
 
 R=Path(__file__).resolve().parents[1];D=R/'docs';A=D/'assets/server';F=R/'report/figures'
+if (D/'assets/server256/server-training.json').exists():A=D/'assets/server256'
+if (D/'assets/server256full/server-training.json').exists():A=D/'assets/server256full'
 T=json.loads((A/'server-training.json').read_text());B=json.loads((A/'server-badcases.json').read_text())
 plt.rcParams.update({'font.family':'DejaVu Sans','font.size':9})
 fig,ax=plt.subplots(figsize=(11,3),layout='constrained');ax.set(xlim=(0,11),ylim=(0,3));ax.axis('off')
@@ -16,7 +18,7 @@ nodes=[(.05,1.7,2.1,.75,'Triangle attributes\nN × (13 × 32 × 32)'),(2.65,1.7,
 for x,y,w,h,label in nodes:
  ax.add_patch(FancyBboxPatch((x,y),w,h,boxstyle='round,pad=0.05',facecolor='#edf2ef' if x<8 else '#f4e8dd',edgecolor='#53665c'));ax.text(x+w/2,y+h/2,label,ha='center',va='center',fontsize=9)
 for start,end in [((2.2,2.07),(2.6,2.07)),((4.8,2.07),(5.2,2.07)),((7.4,2.07),(7.95,2.07)),((6.3,1),(6.3,1.65)),((9.05,1),(9.05,1.65))]:ax.annotate('',end,start,arrowprops={'arrowstyle':'->','color':'#53665c'})
-ax.text(.1,.65,'Coordinates → spatial RoPE; normals → normal encoder\nFrozen Transformer features: 4 × [3, 256, 768]\nAdaptation: 10,595,203 DPT parameters; 128 × 128 output',fontsize=8.5,va='center')
+ax.text(.1,.65,f'Coordinates → spatial RoPE; normals → normal encoder\nRay bundles: {(T["resolution"]//8)**2} per view; scene Transformer frozen\nAdaptation: view Transformer + DPT; {T["resolution"]} × {T["resolution"]} output' if A.name=='server256full' else f'Coordinates → spatial RoPE; normals → normal encoder\nFrozen features: 4 × [3, {(T["resolution"]//8)**2}, 768]\nDPT adaptation; {T["resolution"]} × {T["resolution"]} output',fontsize=8.5,va='center')
 fig.savefig(F/'server-architecture.png',dpi=300);plt.close(fig)
 fig,ax=plt.subplots(figsize=(11,2.1),layout='constrained');ax.set(xlim=(0,11),ylim=(0,2.1));ax.axis('off')
 for x,y,label in [(0,0.7,'Scene JSON'),(2.1,.7,'Shared mesh\nvertices / normals'),(4.4,1.25,'H5 → RenderFormer'),(4.4,.15,'Cycles reference'),(7.,.7,'Linear HDR\nEXR'),(9.,.7,'Metrics\nReport / web')]:
@@ -24,9 +26,9 @@ for x,y,label in [(0,0.7,'Scene JSON'),(2.1,.7,'Shared mesh\nvertices / normals'
 for start,end in [((1.9,1),(2.1,1)),((4,1),(4.4,1.55)),((4,1),(4.4,.45)),((6.3,1.55),(7,1)),((6.3,.45),(7,1)),((8.85,1),(9,1))]:ax.annotate('',end,start,arrowprops={'arrowstyle':'->','color':'#53665c'})
 fig.savefig(F/'server-dataflow.png',dpi=300);plt.close(fig)
 fig,ax=plt.subplots(figsize=(7.2,2.1),layout='constrained');h=T['history']
-ax.plot([x['epoch'] for x in h],[x['train_log_mse'] for x in h],label='Online training MSE')
-ax.plot([x['epoch'] for x in h],[x['validation_log_mse'] for x in h],label='Validation MSE')
-ax.set(xlabel='Epoch',ylabel='Log-HDR MSE');ax.grid(alpha=.2);ax.legend(fontsize=8)
+ax.plot([x['epoch'] for x in h],[x.get('train_objective',x.get('train_log_mse')) for x in h],label='Online training objective')
+ax.plot([x['epoch'] for x in h],[x.get('validation_objective',x.get('validation_log_mse')) for x in h],label='Validation objective')
+ax.set(xlabel='Epoch',ylabel='Log L1 + normalized edge loss' if T['resolution']==256 else 'Log-HDR MSE');ax.grid(alpha=.2);ax.legend(fontsize=8)
 fig.savefig(F/'server-learning.png',dpi=300);plt.close(fig)
 fig,axes=plt.subplots(2,3,figsize=(7.2,4.3),layout='constrained')
 for row,family in enumerate(['bunny','sponza']):
@@ -34,6 +36,15 @@ for row,family in enumerate(['bunny','sponza']):
  for ax,key,label in zip(axes[row],['reference','baseline','adapted'],['Cycles','Pretrained','Adapted']):
   ax.imshow(Image.open(A/c[key+'_image']));ax.axis('off');ax.set_title(f'{family.capitalize()} · {label}',fontsize=9)
 fig.savefig(F/'server-test-comparison.png',dpi=300);plt.close(fig)
+fig,axes=plt.subplots(2,3,figsize=(9,4.3),layout='constrained')
+for row,family in enumerate(['bunny','sponza']):
+ c=next(x for x in T['cases'] if x['family']==family and x['view']==1)
+ box=(.25,.10,.72,.55) if family=='bunny' else (.10,.05,.85,.65)
+ for ax,key,label in zip(axes[row],['reference','baseline','adapted'],['Cycles','Pretrained','Adapted']):
+  im=Image.open(A/c[key+'_image']);w,h=im.size
+  ax.imshow(im.crop(tuple(int(v*s) for v,s in zip(box,[w,h,w,h]))));ax.axis('off');ax.set_title(f'{family.capitalize()} · {label}',fontsize=9)
+fig.savefig(F/'server-detail-crops.png',dpi=300);plt.close(fig)
+(A/'server-detail-crops.png').write_bytes((F/'server-detail-crops.png').read_bytes())
 selected=[x for x in B['cases'] if x['id'] in ['control','camera_inside','light_inside','large_light','nine_lights_direct','nine_lights_sum']]
 fig,axes=plt.subplots(len(selected),3,figsize=(7.2,2.05*len(selected)),layout='constrained',squeeze=False)
 for row,c in enumerate(selected):
@@ -69,10 +80,29 @@ page=f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta nam
 <section id="limits"><h2>论文边界条件实验</h2><p>以同一康奈尔盒为基准，分别移动相机、移动光源、增大光源面积，并比较9光源直接预测与逐光源预测相加。参考与模型使用相同网格、材质及相机；对应论文图10、11、13。</p><div class="scroll"><table><thead><tr><th>条件</th><th>PSNR / dB</th><th>SSIM</th></tr></thead><tbody>{badrows}</tbody></table></div>{badfigs}<p class="meta">512×512 · Cycles 2048 spp · 预训练权重 · 相同EV0、Reinhard与sRGB处理；误差色标[0,0.25]，黑→红→黄。大光源保持辐亮度不变，总功率随面积变化；此项复现的是尺寸压力条件，不是等功率实验。</p><p>光源分解只在线性HDR中相加，随后统一色调映射。神经模型未被强制满足光传输线性，分解后的改善或退步均按实测保留。</p></section>
 <section id="report"><h2>报告与复现资料</h2><a class="download" href="https://github.com/kiiye9697/renderformer-study/raw/main/report/RenderFormer-期末报告.pdf">报告 PDF</a><a class="download" href="https://github.com/kiiye9697/renderformer-study/raw/main/report/RenderFormer-期末报告.docx">报告 Word</a><a class="download" href="assets/server/report-figures.zip">报告图与图注</a><p><a href="assets/server/server-training.json">微调逐视图指标与训练曲线</a> · <a href="assets/server/server-badcases.json">边界实验指标</a> · <a href="https://github.com/kiiye9697/renderformer-study/tree/main/scripts">复现脚本</a></p><details><summary>版本与测量说明</summary><p class="meta">微调和边界实验均使用固定官方代码与预训练版本。PSNR、SSIM在浮点显示RGB上计算，data_range=1；log MSE在log10(1+线性HDR)上计算。历史参数实验与本轮微调的分辨率、数据配置不同，分别报告。模型、原始EXR/H5与源资产保留在实验目录。</p></details></section><footer>数据科学期末报告配套实验 · <a href="https://github.com/kiiye9697/renderformer-study">代码仓库</a></footer></main><script>document.querySelectorAll('[data-family]').forEach(b=>b.addEventListener('click',()=>{{const f=b.dataset.family,v=b.dataset.view;document.querySelectorAll('[data-family="'+f+'"]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.view===v));document.querySelectorAll('[data-family-panel="'+f+'"]').forEach(x=>x.hidden=x.dataset.viewPanel!==v)}}));</script></body></html>'''
 page=page.replace('<p><a href="https://renderformer.github.io/pdfs/renderformer-paper.pdf">论文</a>', '<figure><img class="wide" src="assets/server/server-dataflow.png" alt="共享网格经过模型与Cycles两条路径得到HDR并计算指标"><figcaption>实验数据流程：两条渲染路径使用同一份变换后的三角形网格，在线性HDR中保留结果，再生成指标与展示图。</figcaption></figure><p><a href="https://renderformer.github.io/pdfs/renderformer-paper.pdf">论文</a>')
+page=page.replace('</head>','<link rel="stylesheet" href="portfolio-theme.css"></head>',1)
+page=page.replace('<main><nav>','<main><nav><a class="portfolio-return" href="https://www.kiiye9697.cn/projects/">KIIYE9697 / 作品集</a>',1)
+if T['resolution']==256:
+ page=page.replace('assets/server/',f'assets/{A.name}/').replace('128×128','256×256').replace('128像素','256像素').replace('30轮','100轮').replace('512 spp','2048 spp').replace('0.7留作测试','0.65留作测试').replace('学习率10⁻⁵','学习率5×10⁻⁶')
+ page=page.replace('<p class="meta">256×256','<p>本轮使用对数HDR的L1误差与归一化空间梯度误差共同训练，先按每张图、每通道去均值并归一化，再比较边缘变化。归一化减少整体亮度和对比度差异对结构项的影响。</p><p class="meta">256×256',1)
+if A.name=='server256full':
+ page=page.replace('<figure><img class="wide" src="assets/server256full/server-learning.png"','<figure><img class="wide" src="assets/server256full/server-detail-crops.png" alt="相同像素区域的局部结构对照"><figcaption>固定像素区域裁剪：Bunny耳部和Sponza梁架。各列采用相同裁剪范围。</figcaption></figure><figure><img class="wide" src="assets/server256full/server-learning.png"',1)
+ page=page.replace('冻结预训练 Transformer，使用18帧训练、6帧验证、6帧测试，微调10,595,203个DPT参数。','冻结场景Transformer，先训练DPT，再联合适配视角Transformer与DPT，共81,560,713个可训练参数。使用18帧训练、6帧验证和6帧材质留出对照。')
+ page=page.replace('本次仅更新DPT解码器。','本轮适配视角Transformer与DPT，场景Transformer保持冻结。').replace('100轮 · 验证最低','DPT100轮＋联合适配60轮 · 联合阶段验证最低')
+ page=page.replace('100轮预算结束时验证仍在下降，不能据此判定已达到稳定平台。','图为联合适配阶段，按验证目标选第59轮；轮末损失存在波动。')
+ page=page.replace('联合适配60轮 · 联合阶段验证最低','联合适配60轮（360次逐视图更新） · 联合阶段验证最低')
+ page=page.replace('学习率5×10⁻⁶','DPT预适配5×10⁻⁶；联合阶段视角网络10⁻⁵、DPT 2×10⁻⁶')
+ edges=[]
+ for family,label in [('bunny','Bunny'),('sponza','Sponza')]:
+  cs=[c for c in T['cases'] if c['family']==family]
+  before=np.mean([c['baseline']['structure_edge_l1'] for c in cs]);after=np.mean([c['adapted']['structure_edge_l1'] for c in cs])
+  edges.append(f'{label}：{before:.4f} → {after:.4f}（下降{(1-after/before)*100:.1f}%）')
+ page=page.replace('<h3>Bunny</h3>','<p>去均值、归一化后的显示RGB梯度误差，'+ '；'.join(edges)+'。该项单独检查边缘变化，数值越低越好。</p><h3>Bunny</h3>',1)
 (D/'index.html').write_text(page,encoding='utf-8')
 (D/'badcases.html').write_text('<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=./#limits"><title>边界实验</title><a href="./#limits">查看边界实验</a></html>',encoding='utf-8')
 (D/'badcases.json').write_bytes((A/'server-badcases.json').read_bytes())
 with zipfile.ZipFile(A/'report-figures.zip','w',zipfile.ZIP_DEFLATED) as z:
  for name in ['server-architecture.png','server-dataflow.png','server-learning.png','server-test-comparison.png','server-badcases.png']:z.write(F/name,name)
- z.writestr('captions.txt','图1 RenderFormer base 网络结构与DPT微调位置。\n图2 128像素留出配置，Bunny与简化Sponza的参考、预训练和微调结果。\n图3 30轮训练和验证损失，二者统计时点不同。\n图4 512像素论文边界条件实验，误差色标[0,0.25]。\n')
+ z.write(F/'server-detail-crops.png','server-detail-crops.png')
+ z.writestr('captions.txt',f'网络结构：RenderFormer base，两阶段Transformer与DPT。\n场景对照：{T["resolution"]}像素，同相机、同曝光；参考、原始预训练与适配模型。\n训练曲线：验证目标选择模型；训练为轮内更新均值，验证为轮末测量。\n边界实验：512像素，固定误差色标[0,0.25]。\n局部对照：同一像素区域裁剪，不改变显示变换。\n')
 print('Built course site and report figures;',len(B['cases']),'measured boundary conditions.')

@@ -1,18 +1,16 @@
-# Bunny与简化Sponza实验
+# Bunny与简化Sponza的256像素适配
 
-本轮使用RTX 2080 Ti、PyTorch 2.5.1、官方代码eec6a9b8与base权重revision 8aa00095。18/6/6帧分别用于训练、验证和测试。128像素、30轮，仅更新FP32 DPT解码器。
+固定官方代码eec6a9b8、base权重revision 8aa00095。训练、验证与材质留出对照分别为18/6/6帧，训练/验证粗糙度为0.15、0.5、0.9 / 0.3；本轮对照为0.65。几何与相近视角共享，这些配置用于迭代检查，不用于声称未知场景泛化。
 
-设置环境变量`RENDERFORMER_WORKSPACE`为独立实验目录。该目录包含`repos/`、`datasets/`、`models/`、`runs/`、`results/`与`archives/`。官方代码放在`repos/renderformer-eec6a9b8d592303def45e458dd4ebd09d6572abc`，固定权重放在`models/renderformer-v1-base-8aa00095`。
+设置`RENDERFORMER_WORKSPACE`，该目录包含`repos/`、`datasets/`、`models/`、`runs/`、`results/`与`archives/`。官方代码放在`repos/renderformer-eec6a9b8d592303def45e458dd4ebd09d6572abc`，固定权重放在`models/renderformer-v1-base-8aa00095`。将官方代码加入`PYTHONPATH`，设置`ATTN_IMPL=sdpa`与FreeImage库路径。
 
-运行顺序：
+依次执行：
 
-1. 按官方依赖安装PyTorch、场景转换和Blender 4.0组件，准备FreeImage HDR读写库。
-2. 自行取得Khronos glTF Sample Assets的Sponza模型与配套资源，保留其许可说明，打包为`archives/sponza-gltf.zip`。源资产不随仓库发布。
-3. 执行`prepare_training.py`。该脚本产生固定的材质划分和简化后的共享几何。
-4. 按生成的`datasets/training/manifest.json`逐配置运行官方`scene_processor/convert_scene.py`和`scene_processor/to_blend.py`，参考设置为128像素、512 spp、`--save_img`，输出到manifest指定位置。
-5. 将官方代码加入`PYTHONPATH`，设置`ATTN_IMPL=sdpa`，执行`train_decoder_fp32.py`。首次运行缓存冻结主干特征；随后在FP32中更新DPT，按验证损失选择权重。
-6. 使用`prepare_paper_badcases.py`生成相机与光源对照。参考设置为512像素、2048 spp；模型使用原始预训练权重。9次单光源预测在线性HDR中相加，再统一显示变换。
+1. `prepare_training.py`：准备Bunny与经许可取得的Sponza源资产，构造原始场景配置。Sponza资产打包位置为`archives/sponza-gltf.zip`，不随仓库分发。
+2. `prepare_detail256.py`：生成256像素、2048 spp参考。
+3. `fix_detail_inputs.py`：转换0.65对照配置的独立H5，确保输入材质与新参考完全一致。
+4. `train_detail256.py`：冻结Transformer，训练DPT100轮，目标为对数HDR L1加0.15倍归一化空间梯度L1。
+5. `train_viewfull256.py`：从上述最佳DPT出发，冻结场景Transformer，适配视角Transformer与DPT60个迭代轮；每轮每配置轮换1个视图，共360次更新，等于20次完整视图覆盖。使用激活检查点和逐视图更新，可训练参数81,560,713。验证最低目标出现在第59轮。
+6. `export_viewfull256.py`：导出原始预训练与最终模型的同条件PNG和指标，不导出权重、缓存、资产或原始HDR。
 
-`export_server_results.py`用于现有结果目录的最小展示导出。它只生成PNG与JSON，不上传模型、资产、训练缓存或原始HDR。
-
-报告中的微调结果限定为共享几何、相近视角的材质插值。30轮训练仍未出现稳定验证平台。论文边界实验的9光源分解结果未改善直接预测，原样保留。
+执行场景转换与参考脚本时，工作目录应为固定官方仓库。预适配学习率5e-6，联合阶段视角网络1e-5、DPT 2e-6。原128像素结果与本轮不同，不合并分数。Sponza归一化边缘误差下降25.3%，细柱和梁架仍有明显模糊。

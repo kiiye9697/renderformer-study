@@ -1,0 +1,96 @@
+{
+  "resolution": 512,
+  "reference_spp": 2048,
+  "display": "EV0; clamp negative; channel-wise Reinhard; IEC sRGB",
+  "metric_domain": "same float display RGB as images, data_range=1; log MSE on linear HDR",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "cases": [
+    {
+      "id": "control",
+      "metrics": {
+        "structure_edge_l1": 0.02184988185763359,
+        "psnr_db": 32.169279171622705,
+        "ssim": 0.9712117314338684,
+        "edge_l1": 0.005878531374037266,
+        "log_mse": 7.441225170623511e-05
+      },
+      "status": "measured",
+      "reference": "badcases/control-reference.png",
+      "prediction": "badcases/control-prediction.png",
+      "error": "badcases/control-error.png"
+    },
+    {
+      "id": "camera_inside",
+      "metrics": {
+        "structure_edge_l1": 0.03583206981420517,
+        "psnr_db": 12.599437872904847,
+        "ssim": 0.8095633387565613,
+        "edge_l1": 0.0063168625347316265,
+        "log_mse": 0.020110996440052986
+      },
+      "status": "measured",
+      "reference": "badcases/camera_inside-reference.png",
+      "prediction": "badcases/camera_inside-prediction.png",
+      "error": "badcases/camera_inside-error.png"
+    },
+    {
+      "id": "light_inside",
+      "metrics": {
+        "structure_edge_l1": 0.037484701722860336,
+        "psnr_db": 13.359132559844456,
+        "ssim": 0.8190364837646484,
+        "edge_l1": 0.012221477925777435,
+        "log_mse": 0.26305752992630005
+      },
+      "status": "measured",
+      "reference": "badcases/light_inside-reference.png",
+      "prediction": "badcases/light_inside-prediction.png",
+      "error": "badcases/light_inside-error.png"
+    },
+    {
+      "id": "large_light",
+      "metrics": {
+        "structure_edge_l1": 0.031444743275642395,
+        "psnr_db": 2.747464237092068,
+        "ssim": 0.15284456312656403,
+        "edge_l1": 0.010437585413455963,
+        "log_mse": 0.47581246495246887
+      },
+      "status": "measured",
+      "reference": "badcases/large_light-reference.png",
+      "prediction": "badcases/large_light-prediction.png",
+      "error": "badcases/large_light-error.png"
+    },
+    {
+      "id": "nine_lights_direct",
+      "metrics": {
+        "structure_edge_l1": 0.05099695175886154,
+        "psnr_db": 15.321425948964633,
+        "ssim": 0.7285469174385071,
+        "edge_l1": 0.010481860488653183,
+        "log_mse": 0.0020602678414434195
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_direct-reference.png",
+      "prediction": "badcases/nine_lights_direct-prediction.png",
+      "error": "badcases/nine_lights_direct-error.png"
+    },
+    {
+      "id": "nine_lights_sum",
+      "metrics": {
+        "structure_edge_l1": 0.027090206742286682,
+        "psnr_db": 10.293197272563837,
+        "ssim": 0.72685307264328,
+        "edge_l1": 0.009485257789492607,
+        "log_mse": 0.11276780813932419
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_sum-reference.png",
+      "prediction": "badcases/nine_lights_sum-prediction.png",
+      "error": "badcases/nine_lights_sum-error.png"
+    }
+  ]
+}
