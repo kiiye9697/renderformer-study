@@ -1,0 +1,5 @@
+﻿file,caption
+01-sponza-failure.png,"历史 Sponza 失败实例。512×512；A 为 Cycles，B 为预训练模型。显示域误差固定色标 [0,0.25]，超过上限的像素饱和。相机、三角形数和场景族同时变化，仅为论文局限的相关实测，不能单独归因于场景内相机。"
+02-metal-regression.png,256×256 留出配置 metal-g06-v1，A/B/C 同一参考、相机和显示处理。按既有记录选取的退步个例，并非随机代表样本；统计图包含全部 16 帧。
+03-cornell-regression.png,512×512 历史 Cornell 回归：冻结主干、仅适配 DPT 仍可能损害其他配置。该组不与 256 像素留出指标合并。
+04-learning-and-tradeoffs.png,真实逐轮训练与验证损失，以及全部 16 帧的微调前后 PSNR 和 SSIM 差值。训练继续下降不能代替验证模型选择；金属 8 帧 SSIM 全部下降。

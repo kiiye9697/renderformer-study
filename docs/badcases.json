@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "paper_limitations_and_measured_diagnostics",
+  "source_run": "Published historical RTX 4060 Laptop run-v1; independent of current server run",
+  "paper": "https://renderformer.github.io/pdfs/renderformer-paper.pdf",
+  "coverage": [
+    {
+      "topic": "场景内相机",
+      "paper_location": "图13 / 第9页",
+      "status": "已有相关实测",
+      "interpretation": "Sponza 内外视角已有 A/B；场景复杂度等也变化，不能将全部误差归因于相机。"
+    },
+    {
+      "topic": "场景内光源与超大光源",
+      "paper_location": "图11 / 第8页",
+      "status": "配置已准备，未运行",
+      "interpretation": "提供独立改变光源位置或面积的配置；尚无对应新测量。"
+    },
+    {
+      "topic": "超过8个光源",
+      "paper_location": "图10 / 第8页",
+      "status": "配置已准备，未运行",
+      "interpretation": "9光源直接预测，与9次单光源线性HDR相加对比；不能相加PNG。"
+    },
+    {
+      "topic": "三角形数量与大三角形",
+      "paper_location": "图9、12 / 第7—8页",
+      "status": "已有相关实测",
+      "interpretation": "已测 Sponza 建筑骨架；没有把三角形数与相机等变量独立控制。"
+    },
+    {
+      "topic": "分辨率依赖、复杂阴影",
+      "paper_location": "图13、14 / 第9页",
+      "status": "待独立实验",
+      "interpretation": "已有跨分辨率历史数据不构成同场景分辨率消融；需要固定场景重新测量。"
+    },
+    {
+      "topic": "高阶镜面反射",
+      "paper_location": "图15 / 第9—10页",
+      "status": "待独立实验",
+      "interpretation": "原论文观察到更高阶反射丢失；现有茶壶不能替代多次反射的受控测试。"
+    },
+    {
+      "topic": "微调后的结构与泛化退步",
+      "paper_location": "本项目扩展",
+      "status": "已有实测",
+      "interpretation": "金属8/8帧SSIM下降；历史512像素回归7/8例PSNR下降。"
+    }
+  ],
+  "selected_case_ids": [
+    "sponza-architecture",
+    "metal-g06-v1",
+    "cbox"
+  ],
+  "selection": "post-hoc diagnostic cases; not a new independent test set",
+  "server_training_status": "not_synced_or_verified; no new server convergence claim"
+}

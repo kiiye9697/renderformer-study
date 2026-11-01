@@ -1,0 +1,66 @@
+{
+  "source_run": "historical published RTX 4060 Laptop run-v1; not the new RTX 2080 Ti server run",
+  "selection": "Diagnostic examples selected after results; all-frame scatter includes all 16 test frames",
+  "display_transform": "EV0, negative clamp, channel-wise Reinhard, IEC sRGB; metrics data_range=1",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "paper": "https://renderformer.github.io/pdfs/renderformer-paper.pdf",
+  "source_images": [
+    {
+      "path": "assets/sponza-architecture/A_reference.png",
+      "sha256": "ddea7f7f0c4ef680a5d282fbc825b223dbd42a59d3da8424cca78a946b3ae44c"
+    },
+    {
+      "path": "assets/sponza-architecture/B_prediction.png",
+      "sha256": "3aaba61a708e6bdce3a8137a3b709b45cc7767e16cb9cf5ef685efc43a01ba92"
+    },
+    {
+      "path": "assets/sponza-architecture/error.png",
+      "sha256": "df167cf63c48c5b3d7eaf68eb47307ded2e2ca54f9856cfee783fa1dabd1c6d5"
+    },
+    {
+      "path": "assets/training/metal-g06-v1-reference.png",
+      "sha256": "b89dee86a5901a83b451f540c8a829336c6642056d38087bde478c8a622db4a2"
+    },
+    {
+      "path": "assets/training/metal-g06-v1-pretrained.png",
+      "sha256": "331974b926e190276fddb68f39d1ac36c7092184a30dfaa6965b820de7ae103a"
+    },
+    {
+      "path": "assets/training/metal-g06-v1-finetuned.png",
+      "sha256": "f13d00c2533024349e030983cd6417f5468735c5d268be8821db122592067b03"
+    },
+    {
+      "path": "assets/regression/cbox-reference.png",
+      "sha256": "1c7008ee39b028b4ab5e61bf8a03d0836645febe70a0f9a37294804b82ea26e9"
+    },
+    {
+      "path": "assets/regression/cbox-pretrained.png",
+      "sha256": "0cbae2dc39da9df7294950ef3e17b8bda311a0ecee031754b06c573026722bda"
+    },
+    {
+      "path": "assets/regression/cbox-finetuned.png",
+      "sha256": "e45e4d5416014e67130d5f77f47ac7489359f635b215e56f04a6c38d9e87b430"
+    }
+  ],
+  "figures": [
+    {
+      "file": "01-sponza-failure.png",
+      "caption": "历史 Sponza 失败实例。512×512；A 为 Cycles，B 为预训练模型。显示域误差固定色标 [0,0.25]，超过上限的像素饱和。相机、三角形数和场景族同时变化，仅为论文局限的相关实测，不能单独归因于场景内相机。"
+    },
+    {
+      "file": "02-metal-regression.png",
+      "caption": "256×256 留出配置 metal-g06-v1，A/B/C 同一参考、相机和显示处理。按既有记录选取的退步个例，并非随机代表样本；统计图包含全部 16 帧。"
+    },
+    {
+      "file": "03-cornell-regression.png",
+      "caption": "512×512 历史 Cornell 回归：冻结主干、仅适配 DPT 仍可能损害其他配置。该组不与 256 像素留出指标合并。"
+    },
+    {
+      "file": "04-learning-and-tradeoffs.png",
+      "caption": "真实逐轮训练与验证损失，以及全部 16 帧的微调前后 PSNR 和 SSIM 差值。训练继续下降不能代替验证模型选择；金属 8 帧 SSIM 全部下降。"
+    }
+  ]
+}
