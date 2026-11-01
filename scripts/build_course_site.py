@@ -86,6 +86,7 @@ if T['resolution']==256:
  page=page.replace('assets/server/',f'assets/{A.name}/').replace('128×128','256×256').replace('128像素','256像素').replace('30轮','100轮').replace('512 spp','2048 spp').replace('0.7留作测试','0.65留作测试').replace('学习率10⁻⁵','学习率5×10⁻⁶')
  page=page.replace('<p class="meta">256×256','<p>本轮使用对数HDR的L1误差与归一化空间梯度误差共同训练，先按每张图、每通道去均值并归一化，再比较边缘变化。归一化减少整体亮度和对比度差异对结构项的影响。</p><p class="meta">256×256',1)
 if A.name=='server256full':
+ page=page.replace('alt="100轮训练和验证损失"','alt="联合阶段60轮训练与验证目标"').replace('0.65留作测试','0.65用于迭代留出对照').replace('测试场景</th>','留出配置</th>')
  page=page.replace('<figure><img class="wide" src="assets/server256full/server-learning.png"','<figure><img class="wide" src="assets/server256full/server-detail-crops.png" alt="相同像素区域的局部结构对照"><figcaption>固定像素区域裁剪：Bunny耳部和Sponza梁架。各列采用相同裁剪范围。</figcaption></figure><figure><img class="wide" src="assets/server256full/server-learning.png"',1)
  page=page.replace('冻结预训练 Transformer，使用18帧训练、6帧验证、6帧测试，微调10,595,203个DPT参数。','冻结场景Transformer，先训练DPT，再联合适配视角Transformer与DPT，共81,560,713个可训练参数。使用18帧训练、6帧验证和6帧材质留出对照。')
  page=page.replace('本次仅更新DPT解码器。','本轮适配视角Transformer与DPT，场景Transformer保持冻结。').replace('100轮 · 验证最低','DPT100轮＋联合适配60轮 · 联合阶段验证最低')
