@@ -1,0 +1,300 @@
+{
+  "code_commit": "eec6a9b8d592303def45e458dd4ebd09d6572abc",
+  "model_revision": "8aa0009563789dbb6c7785a26aac5da2c9b6d117",
+  "method": "Frozen Transformer; FP32 DPT decoder adaptation",
+  "resolution": 128,
+  "train_frames": 18,
+  "validation_frames": 6,
+  "test_frames": 6,
+  "split": "roughness 0.15/0.5/0.9 train, 0.3 validation, 0.7 test; 3 views per configuration; shared geometry and overlapping views",
+  "scope": "material interpolation in two fixed scene families; not unseen-scene generalization",
+  "sponza_faces": 19235,
+  "sponza_limitations": "Simplified geometry; texture mean colors; no alpha, normal maps or original PBR materials. Both reference and prediction use this representation.",
+  "checkpoint_sha256": "7fa0ccc47ca17f0f06aeaad2347db0d370f0fc19c2d074bd7e0809e77b178ab4",
+  "history": [
+    {
+      "epoch": 1,
+      "train_log_mse": 0.35140900197438896,
+      "validation_log_mse": 0.34943048981949687
+    },
+    {
+      "epoch": 2,
+      "train_log_mse": 0.33882864215411246,
+      "validation_log_mse": 0.33498406037688255
+    },
+    {
+      "epoch": 3,
+      "train_log_mse": 0.3178397258743644,
+      "validation_log_mse": 0.3020445299334824
+    },
+    {
+      "epoch": 4,
+      "train_log_mse": 0.2657277876666437,
+      "validation_log_mse": 0.22976067243143916
+    },
+    {
+      "epoch": 5,
+      "train_log_mse": 0.2030539319384843,
+      "validation_log_mse": 0.17587382602505386
+    },
+    {
+      "epoch": 6,
+      "train_log_mse": 0.16634934189884612,
+      "validation_log_mse": 0.1535398019477725
+    },
+    {
+      "epoch": 7,
+      "train_log_mse": 0.14706108738513043,
+      "validation_log_mse": 0.14108414691872895
+    },
+    {
+      "epoch": 8,
+      "train_log_mse": 0.1329866365607207,
+      "validation_log_mse": 0.12971792207099497
+    },
+    {
+      "epoch": 9,
+      "train_log_mse": 0.12280639765473704,
+      "validation_log_mse": 0.11575720924884081
+    },
+    {
+      "epoch": 10,
+      "train_log_mse": 0.10974518896546215,
+      "validation_log_mse": 0.11012991238385439
+    },
+    {
+      "epoch": 11,
+      "train_log_mse": 0.10181214776821434,
+      "validation_log_mse": 0.09962605824694037
+    },
+    {
+      "epoch": 12,
+      "train_log_mse": 0.09339364086433004,
+      "validation_log_mse": 0.0923822708427906
+    },
+    {
+      "epoch": 13,
+      "train_log_mse": 0.08686684172910948,
+      "validation_log_mse": 0.0870134960860014
+    },
+    {
+      "epoch": 14,
+      "train_log_mse": 0.08393660211004317,
+      "validation_log_mse": 0.08365368726663291
+    },
+    {
+      "epoch": 15,
+      "train_log_mse": 0.07818679860793054,
+      "validation_log_mse": 0.0783687038347125
+    },
+    {
+      "epoch": 16,
+      "train_log_mse": 0.07350875782625128,
+      "validation_log_mse": 0.07462838175706565
+    },
+    {
+      "epoch": 17,
+      "train_log_mse": 0.0706730845073859,
+      "validation_log_mse": 0.07050411403179169
+    },
+    {
+      "epoch": 18,
+      "train_log_mse": 0.0657311631560636,
+      "validation_log_mse": 0.06598805217072368
+    },
+    {
+      "epoch": 19,
+      "train_log_mse": 0.06186390540096909,
+      "validation_log_mse": 0.06352064036764205
+    },
+    {
+      "epoch": 20,
+      "train_log_mse": 0.059056258643977344,
+      "validation_log_mse": 0.06105123786255717
+    },
+    {
+      "epoch": 21,
+      "train_log_mse": 0.0584977728043062,
+      "validation_log_mse": 0.06016135402023792
+    },
+    {
+      "epoch": 22,
+      "train_log_mse": 0.05461221415316686,
+      "validation_log_mse": 0.0573360986309126
+    },
+    {
+      "epoch": 23,
+      "train_log_mse": 0.053668860190858446,
+      "validation_log_mse": 0.05499286996200681
+    },
+    {
+      "epoch": 24,
+      "train_log_mse": 0.053346883466777704,
+      "validation_log_mse": 0.0597869292832911
+    },
+    {
+      "epoch": 25,
+      "train_log_mse": 0.05182734946720302,
+      "validation_log_mse": 0.054403799469582736
+    },
+    {
+      "epoch": 26,
+      "train_log_mse": 0.049681522825267166,
+      "validation_log_mse": 0.051373093854635954
+    },
+    {
+      "epoch": 27,
+      "train_log_mse": 0.04749440234930565,
+      "validation_log_mse": 0.052819034550338984
+    },
+    {
+      "epoch": 28,
+      "train_log_mse": 0.04810727005436396,
+      "validation_log_mse": 0.04845853883307427
+    },
+    {
+      "epoch": 29,
+      "train_log_mse": 0.046871778749239944,
+      "validation_log_mse": 0.04807530448306352
+    },
+    {
+      "epoch": 30,
+      "train_log_mse": 0.04429131472716108,
+      "validation_log_mse": 0.047228998388163745
+    }
+  ],
+  "best_epoch": {
+    "epoch": 30,
+    "train_log_mse": 0.04429131472716108,
+    "validation_log_mse": 0.047228998388163745
+  },
+  "display": "EV0; clamp negative; channel-wise Reinhard; IEC sRGB",
+  "metric_domain": "same float display RGB as images, data_range=1; log MSE on linear HDR",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "error_colormap": "black-red-yellow, threshold 0.25",
+  "cases": [
+    {
+      "id": "bunny-0",
+      "family": "bunny",
+      "view": 0,
+      "baseline": {
+        "psnr_db": 15.468371488837043,
+        "ssim": 0.6055602431297302,
+        "log_mse": 0.008276947773993015
+      },
+      "adapted": {
+        "psnr_db": 20.413441613857444,
+        "ssim": 0.6944101452827454,
+        "log_mse": 0.0016698072431609035
+      },
+      "reference_image": "training/bunny-0-reference.png",
+      "baseline_image": "training/bunny-0-baseline.png",
+      "adapted_image": "training/bunny-0-adapted.png",
+      "baseline_error_image": "training/bunny-0-baseline_error.png",
+      "adapted_error_image": "training/bunny-0-adapted_error.png"
+    },
+    {
+      "id": "bunny-1",
+      "family": "bunny",
+      "view": 1,
+      "baseline": {
+        "psnr_db": 15.49850376975915,
+        "ssim": 0.6043264865875244,
+        "log_mse": 0.008327326737344265
+      },
+      "adapted": {
+        "psnr_db": 20.67711215621456,
+        "ssim": 0.6940670013427734,
+        "log_mse": 0.0016022725030779839
+      },
+      "reference_image": "training/bunny-1-reference.png",
+      "baseline_image": "training/bunny-1-baseline.png",
+      "adapted_image": "training/bunny-1-adapted.png",
+      "baseline_error_image": "training/bunny-1-baseline_error.png",
+      "adapted_error_image": "training/bunny-1-adapted_error.png"
+    },
+    {
+      "id": "bunny-2",
+      "family": "bunny",
+      "view": 2,
+      "baseline": {
+        "psnr_db": 15.410221008713572,
+        "ssim": 0.6017236709594727,
+        "log_mse": 0.008347840048372746
+      },
+      "adapted": {
+        "psnr_db": 20.503464524493626,
+        "ssim": 0.6914505958557129,
+        "log_mse": 0.0015973243862390518
+      },
+      "reference_image": "training/bunny-2-reference.png",
+      "baseline_image": "training/bunny-2-baseline.png",
+      "adapted_image": "training/bunny-2-adapted.png",
+      "baseline_error_image": "training/bunny-2-baseline_error.png",
+      "adapted_error_image": "training/bunny-2-adapted_error.png"
+    },
+    {
+      "id": "sponza-0",
+      "family": "sponza",
+      "view": 0,
+      "baseline": {
+        "psnr_db": 2.796212587528066,
+        "ssim": 0.08123779296875,
+        "log_mse": 0.7222227454185486
+      },
+      "adapted": {
+        "psnr_db": 16.37881200780558,
+        "ssim": 0.44858598709106445,
+        "log_mse": 0.08498146384954453
+      },
+      "reference_image": "training/sponza-0-reference.png",
+      "baseline_image": "training/sponza-0-baseline.png",
+      "adapted_image": "training/sponza-0-adapted.png",
+      "baseline_error_image": "training/sponza-0-baseline_error.png",
+      "adapted_error_image": "training/sponza-0-adapted_error.png"
+    },
+    {
+      "id": "sponza-1",
+      "family": "sponza",
+      "view": 1,
+      "baseline": {
+        "psnr_db": 3.0970185883717773,
+        "ssim": 0.09818541258573532,
+        "log_mse": 0.7080067992210388
+      },
+      "adapted": {
+        "psnr_db": 15.638743018200838,
+        "ssim": 0.46517226099967957,
+        "log_mse": 0.0805211290717125
+      },
+      "reference_image": "training/sponza-1-reference.png",
+      "baseline_image": "training/sponza-1-baseline.png",
+      "adapted_image": "training/sponza-1-adapted.png",
+      "baseline_error_image": "training/sponza-1-baseline_error.png",
+      "adapted_error_image": "training/sponza-1-adapted_error.png"
+    },
+    {
+      "id": "sponza-2",
+      "family": "sponza",
+      "view": 2,
+      "baseline": {
+        "psnr_db": 3.401834871888732,
+        "ssim": 0.11360614746809006,
+        "log_mse": 0.6739692687988281
+      },
+      "adapted": {
+        "psnr_db": 15.479489487784935,
+        "ssim": 0.44333329796791077,
+        "log_mse": 0.08465773612260818
+      },
+      "reference_image": "training/sponza-2-reference.png",
+      "baseline_image": "training/sponza-2-baseline.png",
+      "adapted_image": "training/sponza-2-adapted.png",
+      "baseline_error_image": "training/sponza-2-baseline_error.png",
+      "adapted_error_image": "training/sponza-2-adapted_error.png"
+    }
+  ]
+}

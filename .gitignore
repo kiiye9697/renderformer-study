@@ -68,6 +68,8 @@
 !/report/equations.json
 !/report/equations/
 !/report/figures/
+!/report/build_course_report.py
+!/scripts/server_study/
 !/report/result-table.json
 !/research/input-output-training.md
 !/research/training-results.md

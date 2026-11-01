@@ -1,0 +1,84 @@
+{
+  "resolution": 512,
+  "reference_spp": 2048,
+  "display": "EV0; clamp negative; channel-wise Reinhard; IEC sRGB",
+  "metric_domain": "same float display RGB as images, data_range=1; log MSE on linear HDR",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "cases": [
+    {
+      "id": "control",
+      "metrics": {
+        "psnr_db": 33.2114848646261,
+        "ssim": 0.9749578833580017,
+        "log_mse": 6.739516538800672e-05
+      },
+      "status": "measured",
+      "reference": "badcases/control-reference.png",
+      "prediction": "badcases/control-prediction.png",
+      "error": "badcases/control-error.png"
+    },
+    {
+      "id": "camera_inside",
+      "metrics": {
+        "psnr_db": 12.599437872904847,
+        "ssim": 0.8095633387565613,
+        "log_mse": 0.020110996440052986
+      },
+      "status": "measured",
+      "reference": "badcases/camera_inside-reference.png",
+      "prediction": "badcases/camera_inside-prediction.png",
+      "error": "badcases/camera_inside-error.png"
+    },
+    {
+      "id": "light_inside",
+      "metrics": {
+        "psnr_db": 13.359132559844456,
+        "ssim": 0.8190364837646484,
+        "log_mse": 0.26305752992630005
+      },
+      "status": "measured",
+      "reference": "badcases/light_inside-reference.png",
+      "prediction": "badcases/light_inside-prediction.png",
+      "error": "badcases/light_inside-error.png"
+    },
+    {
+      "id": "large_light",
+      "metrics": {
+        "psnr_db": 2.747464237092068,
+        "ssim": 0.15284456312656403,
+        "log_mse": 0.47581246495246887
+      },
+      "status": "measured",
+      "reference": "badcases/large_light-reference.png",
+      "prediction": "badcases/large_light-prediction.png",
+      "error": "badcases/large_light-error.png"
+    },
+    {
+      "id": "nine_lights_direct",
+      "metrics": {
+        "psnr_db": 15.321602521799676,
+        "ssim": 0.7285705208778381,
+        "log_mse": 0.002060276223346591
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_direct-reference.png",
+      "prediction": "badcases/nine_lights_direct-prediction.png",
+      "error": "badcases/nine_lights_direct-error.png"
+    },
+    {
+      "id": "nine_lights_sum",
+      "metrics": {
+        "psnr_db": 10.293166809379068,
+        "ssim": 0.7267786860466003,
+        "log_mse": 0.1127677857875824
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_sum-reference.png",
+      "prediction": "badcases/nine_lights_sum-prediction.png",
+      "error": "badcases/nine_lights_sum-error.png"
+    }
+  ]
+}

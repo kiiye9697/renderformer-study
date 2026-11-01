@@ -1,57 +1,84 @@
 {
-  "schema_version": 1,
-  "kind": "paper_limitations_and_measured_diagnostics",
-  "source_run": "Published historical RTX 4060 Laptop run-v1; independent of current server run",
-  "paper": "https://renderformer.github.io/pdfs/renderformer-paper.pdf",
-  "coverage": [
+  "resolution": 512,
+  "reference_spp": 2048,
+  "display": "EV0; clamp negative; channel-wise Reinhard; IEC sRGB",
+  "metric_domain": "same float display RGB as images, data_range=1; log MSE on linear HDR",
+  "error_scale": [
+    0,
+    0.25
+  ],
+  "cases": [
     {
-      "topic": "场景内相机",
-      "paper_location": "图13 / 第9页",
-      "status": "已有相关实测",
-      "interpretation": "Sponza 内外视角已有 A/B；场景复杂度等也变化，不能将全部误差归因于相机。"
+      "id": "control",
+      "metrics": {
+        "psnr_db": 33.2114848646261,
+        "ssim": 0.9749578833580017,
+        "log_mse": 6.739516538800672e-05
+      },
+      "status": "measured",
+      "reference": "badcases/control-reference.png",
+      "prediction": "badcases/control-prediction.png",
+      "error": "badcases/control-error.png"
     },
     {
-      "topic": "场景内光源与超大光源",
-      "paper_location": "图11 / 第8页",
-      "status": "配置已准备，未运行",
-      "interpretation": "提供独立改变光源位置或面积的配置；尚无对应新测量。"
+      "id": "camera_inside",
+      "metrics": {
+        "psnr_db": 12.599437872904847,
+        "ssim": 0.8095633387565613,
+        "log_mse": 0.020110996440052986
+      },
+      "status": "measured",
+      "reference": "badcases/camera_inside-reference.png",
+      "prediction": "badcases/camera_inside-prediction.png",
+      "error": "badcases/camera_inside-error.png"
     },
     {
-      "topic": "超过8个光源",
-      "paper_location": "图10 / 第8页",
-      "status": "配置已准备，未运行",
-      "interpretation": "9光源直接预测，与9次单光源线性HDR相加对比；不能相加PNG。"
+      "id": "light_inside",
+      "metrics": {
+        "psnr_db": 13.359132559844456,
+        "ssim": 0.8190364837646484,
+        "log_mse": 0.26305752992630005
+      },
+      "status": "measured",
+      "reference": "badcases/light_inside-reference.png",
+      "prediction": "badcases/light_inside-prediction.png",
+      "error": "badcases/light_inside-error.png"
     },
     {
-      "topic": "三角形数量与大三角形",
-      "paper_location": "图9、12 / 第7—8页",
-      "status": "已有相关实测",
-      "interpretation": "已测 Sponza 建筑骨架；没有把三角形数与相机等变量独立控制。"
+      "id": "large_light",
+      "metrics": {
+        "psnr_db": 2.747464237092068,
+        "ssim": 0.15284456312656403,
+        "log_mse": 0.47581246495246887
+      },
+      "status": "measured",
+      "reference": "badcases/large_light-reference.png",
+      "prediction": "badcases/large_light-prediction.png",
+      "error": "badcases/large_light-error.png"
     },
     {
-      "topic": "分辨率依赖、复杂阴影",
-      "paper_location": "图13、14 / 第9页",
-      "status": "待独立实验",
-      "interpretation": "已有跨分辨率历史数据不构成同场景分辨率消融；需要固定场景重新测量。"
+      "id": "nine_lights_direct",
+      "metrics": {
+        "psnr_db": 15.321602521799676,
+        "ssim": 0.7285705208778381,
+        "log_mse": 0.002060276223346591
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_direct-reference.png",
+      "prediction": "badcases/nine_lights_direct-prediction.png",
+      "error": "badcases/nine_lights_direct-error.png"
     },
     {
-      "topic": "高阶镜面反射",
-      "paper_location": "图15 / 第9—10页",
-      "status": "待独立实验",
-      "interpretation": "原论文观察到更高阶反射丢失；现有茶壶不能替代多次反射的受控测试。"
-    },
-    {
-      "topic": "微调后的结构与泛化退步",
-      "paper_location": "本项目扩展",
-      "status": "已有实测",
-      "interpretation": "金属8/8帧SSIM下降；历史512像素回归7/8例PSNR下降。"
+      "id": "nine_lights_sum",
+      "metrics": {
+        "psnr_db": 10.293166809379068,
+        "ssim": 0.7267786860466003,
+        "log_mse": 0.1127677857875824
+      },
+      "status": "measured",
+      "reference": "badcases/nine_lights_sum-reference.png",
+      "prediction": "badcases/nine_lights_sum-prediction.png",
+      "error": "badcases/nine_lights_sum-error.png"
     }
-  ],
-  "selected_case_ids": [
-    "sponza-architecture",
-    "metal-g06-v1",
-    "cbox"
-  ],
-  "selection": "post-hoc diagnostic cases; not a new independent test set",
-  "server_training_status": "not_synced_or_verified; no new server convergence claim"
+  ]
 }
