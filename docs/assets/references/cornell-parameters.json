@@ -1,0 +1,48 @@
+{
+  "official_commit": "b128481a48a8e77b8dbbd1d4fe68e72615f68ae9",
+  "initialization": "scratch, official custom_init",
+  "model": "200M full attention; 13x32x32 material patches",
+  "train_configs": 128,
+  "validation_configs": 32,
+  "test_configs": 32,
+  "views_per_config": 4,
+  "triangles": 1153,
+  "resolution": 256,
+  "gpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "precision": "FP32",
+  "attention": "PyTorch SDPA",
+  "physical_batch_per_rank": 1,
+  "global_scenes_per_update": 4,
+  "views_per_scene": 2,
+  "global_images_per_update": 8,
+  "gradient_accumulation_steps": 1,
+  "optimizer": "AdamW",
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_steps": 8000,
+  "cosine_steps": 92000,
+  "budget_steps": 30000,
+  "seed": 3407,
+  "loss": "official log-HDR L1 + 0.05 VGG LPIPS",
+  "adaptations": [
+    "CPU H5 loader",
+    "FP32 native PyTorch kernels",
+    "finite gradient audit and run logging"
+  ],
+  "scope": "Restricted Cornell configuration family; hardware-scaled truncated schedule, not full paper reproduction",
+  "reference": {
+    "spp_max": 4096,
+    "adaptive_threshold": 0.01,
+    "denoise": true,
+    "seed": 11,
+    "raw": "float32 linear EXR"
+  },
+  "checkpoint_interval": 500,
+  "validation": "Select by held-out complete configurations; test after selection",
+  "dataset_plan_sha256": "9ec7ccd1074265bdeb6be485cfe4f2311d43c933221cafa5e6bebbf0425f2e41"
+}

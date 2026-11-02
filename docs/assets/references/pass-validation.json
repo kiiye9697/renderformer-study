@@ -1,0 +1,7 @@
+{
+  "reconstruction_mean_absolute_error": 1.9693654562439912e-08,
+  "relative_reconstruction_l1": 6.138963185036819e-07,
+  "indirect_fraction_of_summed_image_rgb": 0.12009589653629112,
+  "reference_approved": true,
+  "definition": "RGB radiance contribution in the image; not scene-wide physical energy efficiency"
+}

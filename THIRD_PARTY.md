@@ -19,3 +19,5 @@
 ## 本项目代码
 
 LICENSE仅覆盖本仓库原创scripts与unity-exporter代码，不覆盖第三方依赖、模型、论文、场景资产、学校模板或报告所引用材料。学习报告与笔记保留作者权利，第三方引文依其来源归属。
+
+本轮原生 Sponza 使用 [Khronos glTF Sample Assets](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/Sponza) 的 glTF 版本，保留网格与材质。来源包含 Frank Meinl / Crytek、Marko Dabrovic、Morgan McGuire 与 Alexandre Pestana；上游标明 Cryengine Limited License Agreement。本站仅发布实验渲染 PNG 和数值参数，不重新分发模型、贴图、Blend 或 H5。天光和日光为实验设置，不属于源模型自带照明。

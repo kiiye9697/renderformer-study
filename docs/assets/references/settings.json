@@ -1,0 +1,46 @@
+{
+  "status": "accepted",
+  "role": "Cycles native Sponza reference",
+  "geometry": "Original glTF; no simplification",
+  "triangles": 262267,
+  "material_graphs": "Original glTF importer, including basecolor, metallic/roughness, normal and alpha",
+  "new_bounce_limits": {
+    "max_bounces": 12,
+    "diffuse_bounces": 8,
+    "glossy_bounces": 8,
+    "transmission_bounces": 8,
+    "transparent_max_bounces": 16
+  },
+  "max_spp": 4096,
+  "seed": 11,
+  "adaptive_threshold": 0.005,
+  "denoise": false,
+  "lighting": {
+    "sky": "Nishita, sun disc disabled",
+    "sky_strength": 0.5,
+    "sun_elevation": 75,
+    "sun_azimuth": 30,
+    "sun_energy": 3.0,
+    "sun_angle_degrees": 0.5
+  },
+  "display": "AgX Medium High Contrast, EV+1 for all component previews",
+  "reconstruction": "beauty = direct + indirect + emission + environment; direct/indirect each sum color-weighted diffuse, glossy and transmission passes",
+  "resolution": [
+    768,
+    512
+  ],
+  "camera": {
+    "position": [
+      8,
+      0,
+      1.6
+    ],
+    "look_at": [
+      -6,
+      0,
+      2
+    ],
+    "lens_mm": 28,
+    "depth_of_field": false
+  }
+}

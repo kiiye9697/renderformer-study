@@ -4,13 +4,14 @@
     "native Sponza reference audit"
   ],
   "formal_training_started": false,
-  "reference_approval": "pending",
+  "reference_approval": "approved",
+  "training_stage": "generating_references_then_training",
   "public_result_sets": [
     "official-cornell-pretrained-control"
   ],
   "excluded_from_current_results": [
     "simplified Sponza adaptation",
     "Bistro",
-    "unapproved native Sponza references"
+    "unrun model predictions"
   ]
 }
