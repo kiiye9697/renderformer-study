@@ -14,5 +14,6 @@
     "simplified Sponza adaptation",
     "Bistro",
     "unrun model predictions"
-  ]
+  ],
+  "recoverable_checkpoint_step": 10000
 }
