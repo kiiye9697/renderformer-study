@@ -3,9 +3,9 @@
     "Cornell Box course training",
     "native Sponza reference audit"
   ],
-  "formal_training_started": false,
+  "formal_training_started": true,
   "reference_approval": "approved",
-  "training_stage": "generating_references_then_training",
+  "training_stage": "training",
   "public_result_sets": [
     "official-cornell-pretrained-control"
   ],
@@ -13,5 +13,6 @@
     "simplified Sponza adaptation",
     "Bistro",
     "unrun model predictions"
-  ]
+  ],
+  "validation_report": "course-training.html"
 }
