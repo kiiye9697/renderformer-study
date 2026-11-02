@@ -1,0 +1,13 @@
+{
+  "scene": "Cornell Box",
+  "resolution": 512,
+  "training": "none; official fixed pretrained V1 base",
+  "code_commit": "b128481a48a8e77b8dbbd1d4fe68e72615f68ae9",
+  "reference_spp": 4096,
+  "reference_seed": 11,
+  "reference_renderer": "Blender4.0 Cycles; bpy-helper0.0.13 specular/roughness material",
+  "metric_transform": "Reinhard linear RGB, data_range1, before sRGB",
+  "display": "EV0 Reinhard then sRGB; fixed error range0..0.25",
+  "psnr": 38.30236473484139,
+  "ssim": 0.9770545268564549
+}

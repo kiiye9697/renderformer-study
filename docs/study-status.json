@@ -1,0 +1,16 @@
+{
+  "scope": [
+    "Cornell Box course training",
+    "native Sponza reference audit"
+  ],
+  "formal_training_started": false,
+  "reference_approval": "pending",
+  "public_result_sets": [
+    "official-cornell-pretrained-control"
+  ],
+  "excluded_from_current_results": [
+    "simplified Sponza adaptation",
+    "Bistro",
+    "unapproved native Sponza references"
+  ]
+}

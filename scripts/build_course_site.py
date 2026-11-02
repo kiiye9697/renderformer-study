@@ -107,3 +107,7 @@ with zipfile.ZipFile(A/'report-figures.zip','w',zipfile.ZIP_DEFLATED) as z:
  z.write(F/'server-detail-crops.png','server-detail-crops.png')
  z.writestr('captions.txt',f'网络结构：RenderFormer base，两阶段Transformer与DPT。\n场景对照：{T["resolution"]}像素，同相机、同曝光；参考、原始预训练与适配模型。\n训练曲线：验证目标选择模型；训练为轮内更新均值，验证为轮末测量。\n边界实验：512像素，固定误差色标[0,0.25]。\n局部对照：同一像素区域裁剪，不改变显示变换。\n')
 print('Built course site and report figures;',len(B['cases']),'measured boundary conditions.')
+
+# Current entry and result-eligibility policy supersede the retired adaptation page.
+import runpy
+runpy.run_path(str(R/'scripts/build_learning_entry.py'),run_name='__main__')
