@@ -6,6 +6,7 @@
   "formal_training_started": true,
   "reference_approval": "approved",
   "training_stage": "training",
+  "validation_report": "course-training.html",
   "public_result_sets": [
     "official-cornell-pretrained-control"
   ],
@@ -13,6 +14,5 @@
     "simplified Sponza adaptation",
     "Bistro",
     "unrun model predictions"
-  ],
-  "validation_report": "course-training.html"
+  ]
 }
