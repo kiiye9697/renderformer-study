@@ -5,7 +5,7 @@
   ],
   "formal_training_started": true,
   "reference_approval": "approved",
-  "training_stage": "training",
+  "training_stage": "failed",
   "validation_report": "course-training.html",
   "public_result_sets": [
     "official-cornell-pretrained-control"
