@@ -69,6 +69,9 @@
 !/report/equations/
 !/report/figures/
 !/report/build_course_report.py
+!/report/build_cornell_report.py
+!/report/report-content.md
+!/report/README.md
 !/scripts/server_study/
 !/report/result-table.json
 !/research/input-output-training.md

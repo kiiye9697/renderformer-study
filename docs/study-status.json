@@ -1,19 +1,11 @@
 {
   "scope": [
-    "Cornell Box course training",
-    "native Sponza reference audit"
+    "official pretrained inference",
+    "Cornell-family training",
+    "native Sponza reference"
   ],
   "formal_training_started": true,
-  "reference_approval": "approved",
-  "training_stage": "failed",
+  "training_stage": "paused_hardware_failure",
   "validation_report": "course-training.html",
-  "public_result_sets": [
-    "official-cornell-pretrained-control"
-  ],
-  "excluded_from_current_results": [
-    "simplified Sponza adaptation",
-    "Bistro",
-    "unrun model predictions"
-  ],
-  "recoverable_checkpoint_step": 10000
+  "final_test_evaluated": false
 }
