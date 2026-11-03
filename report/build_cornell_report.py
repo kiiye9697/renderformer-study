@@ -136,6 +136,7 @@ def build(text):
         st._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),font)
         f=st.paragraph_format;f.line_spacing=1;f.space_after=Pt(5);f.space_before=Pt(0)
         f.first_line_indent=Cm(.8467) if name=='CourseBody' else Cm(0);f.widow_control=True
+        if name=='CourseBody':f.alignment=3
         if name in ['CourseHeading','CourseSubheading']:
             f.keep_with_next=True;f.page_break_before=name=='CourseHeading'
             st._element.get_or_add_pPr().find(qn('w:spacing')).set(qn('w:beforeLines'),'50')
@@ -148,11 +149,13 @@ def build(text):
         rows=[row for row in rows if not all(re.fullmatch(r':?-+:?',v) for v in row)]
         t=d.add_table(rows=0,cols=len(rows[0]));t.autofit=False
         width=d.sections[0].page_width-d.sections[0].left_margin-d.sections[0].right_margin
-        for col in t.columns:col.width=int(width/len(rows[0]))
+        ratios=([.22,.78] if len(rows[0])==2 else [.50,.25,.25] if rows[0][1]=='PSNR / dB' else [.25,.43,.32])
+        for col,ratio in zip(t.columns,ratios):col.width=int(width*ratio)
         for ri,values in enumerate(rows):
             cells=t.add_row().cells;trpr=cells[0]._tc.getparent().get_or_add_trPr();trpr.append(OxmlElement('w:cantSplit'))
             if ri==0:trpr.append(OxmlElement('w:tblHeader'))
-            for c,value in zip(cells,values):
+            for ci,(c,value) in enumerate(zip(cells,values)):
+                c.width=int(width*ratios[ci])
                 c.text=value;c.vertical_alignment=1;pr=c._tc.get_or_add_tcPr();b=OxmlElement('w:tcBorders')
                 for edge in ['top','left','bottom','right']:
                     e=OxmlElement('w:'+edge)
@@ -163,9 +166,10 @@ def build(text):
                     fill=OxmlElement('w:shd');fill.set(qn('w:fill'),'EEEEEE');pr.append(fill)
                 for p in c.paragraphs:
                     p.style=d.styles['CourseBody'];p.paragraph_format.first_line_indent=Cm(0)
+                    p.paragraph_format.alignment=1 if rows[0][1]=='PSNR / dB' and ci>0 else 0
                     p.paragraph_format.space_before=Pt(3);p.paragraph_format.space_after=Pt(3);disable_grid(p)
                     for run in p.runs:run.font.size=Pt(10)
-        para('').paragraph_format.space_after=Pt(0)
+        spacer=para('');spacer.paragraph_format.space_after=Pt(0);spacer.paragraph_format.line_spacing=Pt(5)
     figures=[];lines=text.splitlines();idx=0;refs=False
     while idx<len(lines):
         line=lines[idx].strip();idx+=1
