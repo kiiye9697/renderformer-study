@@ -80,7 +80,7 @@ PSNR与SSIM在映射后的线性RGB上计算，data_range=1，计算前不做sRG
 
 官方预训练模型在Cornell示例上的实测PSNR为38.30 dB、SSIM为0.9771。该示例的主要颜色、物体轮廓和阴影与参考较接近。图1展示相同输入、相机和颜色处理下的结果。
 
-![图1 官方Cornell示例，512×512。从左至右为Cycles参考、官方模型预测和绝对误差。](../docs/assets/course-control/cornell-control.png)
+![图1 官方Cornell示例，512×512。从左至右为Cycles参考、官方模型预测和绝对误差。](../docs/assets/showcase/official-comparison.png)
 
 表3　课程场景族完整验证集，32配置、128图像
 
@@ -96,7 +96,7 @@ PSNR与SSIM在映射后的线性RGB上计算，data_range=1，计算前不做sRG
 
 从头训练10000步后，平均PSNR达到21.45837 dB、SSIM达到0.816269，按平均MSE 0.00796101选为当前最佳已评估检查点。固定视角中，500步主要形成房间色块，6000步开始辨认两个物体，10000步轮廓更明确，但左墙偏色、锐利边缘与接触阴影仍有偏差。
 
-![图2 固定验证视角，从左至右为参考、500步、6000步和10000步。](../../experiments/cornell/report/learning-stages-detail.png)
+![图2 固定验证视角，从左至右为参考、500步、6000步和10000步。](../docs/assets/showcase/training-stages.png)
 
 ## 五 讨论与结论
 

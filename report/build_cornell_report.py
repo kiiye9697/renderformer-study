@@ -2,7 +2,7 @@
 from pathlib import Path
 from io import BytesIO
 from zipfile import ZipFile, ZIP_DEFLATED
-import hashlib, json, math, re, statistics
+import argparse,hashlib, json, math, re, statistics
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.style import WD_STYLE_TYPE
@@ -113,12 +113,16 @@ def equation(text):
     else:children=[text]
     return math_box('oMath',children)
 
-def build(text):
+def build(text,identity=None):
     inventory=read_json(QA/'template-inventory.json')
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     d=Document(REFERENCE)
     for p in list(d.paragraphs)[18:]:
         p._element.getparent().remove(p._element)
+    # Keep the supplied cover structure; use clear academic typography.
+    for run in d.paragraphs[2].runs:
+        run.font.name='黑体';run.font.size=Pt(26);run.font.bold=False
+        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'黑体')
     p=d.paragraphs[6]
     p.text='题  目：Transformer学习方法及其在\n三角网格神经渲染中的应用\n——以RenderFormer为例'
     p.paragraph_format.line_spacing=Pt(20);p.paragraph_format.space_after=Pt(0)
@@ -129,6 +133,26 @@ def build(text):
     for i in [7,8,9,10]:
         d.paragraphs[i].paragraph_format.line_spacing=Pt(8)
         d.paragraphs[i].paragraph_format.space_after=Pt(0)
+    profile=identity or {}
+    cover={11:f"学    院：   {profile.get('college','计算机科学与技术')}\n专    业：   {profile.get('major','计算机科学与技术')}",
+        12:f"班    级：   {profile.get('class','________________')}",
+        13:f"学生姓名：   {profile.get('name','________________')}",
+        14:f"学    号：   {profile.get('student_id','________________')}"}
+    for i,value in cover.items():
+        p=d.paragraphs[i];p.text=value;p.paragraph_format.line_spacing=Pt(27)
+        p.paragraph_format.space_before=Pt(0);p.paragraph_format.space_after=Pt(0)
+        p.paragraph_format.left_indent=Cm(2.7);p.paragraph_format.first_line_indent=Cm(0)
+        for run in p.runs:
+            run.font.name='宋体';run.font.size=Pt(14);run.font.bold=False
+            run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
+    p=d.paragraphs[15];p.paragraph_format.left_indent=Cm(2.7);p.paragraph_format.first_line_indent=Cm(0)
+    for run in p.runs:
+        run.font.name='宋体';run.font.size=Pt(14)
+        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
+    for i in range(11,16):
+        indent=d.paragraphs[i]._p.get_or_add_pPr().find(qn('w:ind'))
+        for key in ['firstLineChars','leftChars','hangingChars','hanging']:
+            indent.attrib.pop(qn('w:'+key),None)
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
@@ -189,7 +213,7 @@ def build(text):
         if match:
             caption,filename=match.groups();path=(HERE/filename).resolve()
             p=para('');p.alignment=1;p.paragraph_format.first_line_indent=Cm(0);p.paragraph_format.keep_with_next=True
-            shape=p.add_run().add_picture(str(path),width=Cm(13 if 'cornell-control' in filename else 14))
+            shape=p.add_run().add_picture(str(path),width=Cm(13 if 'official-comparison' in filename else 14))
             shape._inline.docPr.set('descr',caption)
             figures.append(dict(path=str(path.relative_to(STUDY)),width_cm=shape.width.cm,height_cm=shape.height.cm,area_cm2=shape.width.cm*shape.height.cm))
             para(caption,'CourseCaption');continue
@@ -211,14 +235,23 @@ def build(text):
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         a,b=[etree.fromstring(z.read('word/document.xml')) for z in [original,final]]
         assert etree.tostring(a.find('.//w:sectPr',ns))==etree.tostring(b.find('.//w:sectPr',ns))
-        for i in [0,1,2,3,4,5,11,12,13,14,15,16,17]:
+        for i in [0,1,3,4,5,16,17]:
             assert etree.tostring(a.findall('./w:body/w:p',ns)[i])==etree.tostring(b.findall('./w:body/w:p',ns)[i]),i
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     return figures
 
 def main():
+    global OUTPUT
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--identity',type=Path,help='Local JSON for the private submission cover; never publish this file.')
+    parser.add_argument('--output',type=Path)
+    args=parser.parse_args()
+    if args.identity:
+        assert args.output,'Provide a separate output for a personalized submission.'
+    if args.output:OUTPUT=args.output.resolve()
+    identity=read_json(args.identity) if args.identity else None
     text,records=content();(HERE/'report-draft.md').write_text(text,encoding='utf-8')
-    figures=build(text)
+    figures=build(text,identity)
     inputs=[REFERENCE,HERE/'report-content.md',Path(__file__),CORNELL/'parameters.json',CORNELL/'train.yaml',CORNELL/'status.json',CORNELL/'report/learning-analysis.json']
     inputs += [CORNELL/'evaluations'/m['label']/'metrics.json' for m in records]
     inputs += [CORNELL/'evaluations/pretrained/metrics.json',STUDY/'site/docs/assets/course-control/cornell-measurements.json']
@@ -233,7 +266,8 @@ def main():
         input_sha256={str(p.relative_to(STUDY)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
         output_sha256=hashlib.sha256(OUTPUT.read_bytes()).hexdigest(),preserve_parts_verified=True,
         cover_untouched_slots_verified=True,layout_check='pending Word export and page PNG inspection')
-    (QA/'build-verification.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+    manifest['personalized_cover']=bool(identity)
+    (QA/('submission-verification.json' if identity else 'build-verification.json')).write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     print(f'Built {OUTPUT}; verified {len(records)} complete validation checkpoints.')
 
 if __name__=='__main__':main()

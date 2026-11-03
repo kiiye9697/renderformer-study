@@ -17,6 +17,8 @@
 !/scripts/
 /scripts/*
 !/scripts/*.py
+!/scripts/showcase.css
+!/scripts/showcase.js
 !/unity-exporter/
 !/docs/
 !/public-data/
