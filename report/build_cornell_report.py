@@ -119,40 +119,41 @@ def build(text,identity=None):
     d=Document(REFERENCE)
     for p in list(d.paragraphs)[18:]:
         p._element.getparent().remove(p._element)
-    # Keep the supplied cover structure; use clear academic typography.
-    for run in d.paragraphs[2].runs:
-        run.font.name='黑体';run.font.size=Pt(26);run.font.bold=False
-        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'黑体')
-    p=d.paragraphs[6]
-    p.text='题  目：Transformer学习方法及其在\n三角网格神经渲染中的应用\n——以RenderFormer为例'
-    p.paragraph_format.line_spacing=Pt(20);p.paragraph_format.space_after=Pt(0)
-    p.paragraph_format.alignment=1;p.paragraph_format.first_line_indent=Cm(0)
-    for run in p.runs:
-        run.font.name='宋体';run.font.size=Pt(14)
-        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
-    for i in [7,8,9,10]:
-        d.paragraphs[i].paragraph_format.line_spacing=Pt(8)
-        d.paragraphs[i].paragraph_format.space_after=Pt(0)
-    profile=identity or {}
-    cover={11:f"学    院：   {profile.get('college','计算机科学与技术')}\n专    业：   {profile.get('major','计算机科学与技术')}",
-        12:f"班    级：   {profile.get('class','________________')}",
-        13:f"学生姓名：   {profile.get('name','________________')}",
-        14:f"学    号：   {profile.get('student_id','________________')}"}
-    for i,value in cover.items():
-        p=d.paragraphs[i];p.text=value;p.paragraph_format.line_spacing=Pt(27)
-        p.paragraph_format.space_before=Pt(0);p.paragraph_format.space_after=Pt(0)
-        p.paragraph_format.left_indent=Cm(2.7);p.paragraph_format.first_line_indent=Cm(0)
-        for run in p.runs:
-            run.font.name='宋体';run.font.size=Pt(14);run.font.bold=False
-            run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
-    p=d.paragraphs[15];p.paragraph_format.left_indent=Cm(2.7);p.paragraph_format.first_line_indent=Cm(0)
-    for run in p.runs:
-        run.font.name='宋体';run.font.size=Pt(14)
-        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),'宋体')
-    for i in range(11,16):
-        indent=d.paragraphs[i]._p.get_or_add_pPr().find(qn('w:ind'))
-        for key in ['firstLineChars','leftChars','hangingChars','hanging']:
+    # Preserve the original 36 pt cover heading, furniture and date row.
+    # Only fill the original title/identity area; keep its ruled fields.
+    def cover_run(p,value,size,font='宋体',underline=False):
+        run=p.add_run(value);run.font.name=font;run.font.size=Pt(size)
+        run.font.underline=underline;run.font.bold=False
+        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),font)
+        return run
+    def cover_paragraph(p,left,height):
+        p.clear();f=p.paragraph_format
+        f.alignment=0;f.left_indent=Cm(left);f.first_line_indent=Cm(0)
+        f.space_before=Pt(0);f.space_after=Pt(0);f.line_spacing=Pt(height)
+        indent=p._p.get_or_add_pPr().find(qn('w:ind'))
+        for key in ['firstLineChars','leftChars','rightChars','hangingChars','hanging']:
             indent.attrib.pop(qn('w:'+key),None)
+        f.tab_stops.clear_all();disable_grid(p)
+    from docx.enum.text import WD_TAB_ALIGNMENT
+    title_lines=['Transformer学习方法及其在','三角网格神经渲染中的应用','——以RenderFormer为例']
+    for i,value in zip([6,7,8],title_lines):
+        p=d.paragraphs[i];cover_paragraph(p,1.9 if i==6 else 5.7,28)
+        p.paragraph_format.tab_stops.add_tab_stop(Cm(10.25),WD_TAB_ALIGNMENT.CENTER)
+        p.paragraph_format.tab_stops.add_tab_stop(Cm(14.8),WD_TAB_ALIGNMENT.LEFT)
+        if i==6:cover_run(p,'题    目  ：',18,'黑体')
+        cover_run(p,'\t'+value+'\t',15,underline=True)
+    profile=identity or {}
+    cover={10:('院    系：',profile.get('college','计算机科学与技术')),
+        11:('专    业：',profile.get('major','计算机科学与技术')),
+        12:('班    级：',profile.get('class','')),
+        13:('学生姓名：',profile.get('name','')),
+        14:('学    号：',profile.get('student_id',''))}
+    for i,(label,value) in cover.items():
+        p=d.paragraphs[i];cover_paragraph(p,3.1,31.2)
+        p.paragraph_format.tab_stops.add_tab_stop(Cm(9.0),WD_TAB_ALIGNMENT.CENTER)
+        p.paragraph_format.tab_stops.add_tab_stop(Cm(12.2),WD_TAB_ALIGNMENT.LEFT)
+        cover_run(p,label,16)
+        cover_run(p,'\t'+value+'\t',16,underline=True)
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
@@ -235,7 +236,7 @@ def build(text,identity=None):
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         a,b=[etree.fromstring(z.read('word/document.xml')) for z in [original,final]]
         assert etree.tostring(a.find('.//w:sectPr',ns))==etree.tostring(b.find('.//w:sectPr',ns))
-        for i in [0,1,3,4,5,16,17]:
+        for i in [0,1,2,3,4,5,15,16,17]:
             assert etree.tostring(a.findall('./w:body/w:p',ns)[i])==etree.tostring(b.findall('./w:body/w:p',ns)[i]),i
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     return figures
