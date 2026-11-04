@@ -2,7 +2,7 @@
 from pathlib import Path
 from io import BytesIO
 from zipfile import ZipFile, ZIP_DEFLATED
-import argparse,hashlib, json, math, re, statistics
+import argparse,hashlib, json, math, re, statistics, shutil
 from docx import Document
 from docx.shared import Pt, Cm, RGBColor
 from docx.enum.style import WD_STYLE_TYPE
@@ -116,12 +116,16 @@ def equation(text):
 def build(text,identity=None):
     inventory=read_json(QA/'template-inventory.json')
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
-    d=Document(REFERENCE)
+    # Start each build from a fresh physical copy of the teacher's document.
+    working_copy=QA/('template-working-submission.docx' if identity else 'template-working-public.docx')
+    shutil.copyfile(REFERENCE,working_copy)
+    assert working_copy.read_bytes()==REFERENCE.read_bytes()
+    d=Document(working_copy)
     for p in list(d.paragraphs)[18:]:
         p._element.getparent().remove(p._element)
     # Exact template cover: change text inside existing underlined runs only.
     # All original paragraphs, spacing, run properties, labels and rules remain.
-    def fill_span(paragraph,indices,value):
+    def fill_span(paragraph,indices,value,tail=None):
         if not value:return
         runs=[paragraph.runs[i] for i in indices]
         units=lambda value:sum(2 if ord(ch)>127 else 1 for ch in value)
@@ -129,12 +133,18 @@ def build(text,identity=None):
         assert units(value)<=capacity,'Shorten the value to fit the original template slot.'
         remaining=capacity-units(value)
         runs[0].text=' '*(remaining//2)+value+' '*(remaining-remaining//2)
+        # Space glyph widths differ from CJK and mixed Latin/CJK text in this
+        # template. Text-only padding keeps the original underline endpoints;
+        # fonts, character spacing, paragraph properties and runs stay intact.
+        if tail is not None:
+            assert runs[0].text.endswith(' ')
+            runs[0].text=runs[0].text[:-1]+tail
         for run in runs[1:]:run.text=''
-    fill_span(d.paragraphs[6],list(range(6,12)),'Transformer神经渲染方法')
+    fill_span(d.paragraphs[6],list(range(6,12)),'Transformer神经渲染方法',tail='\u2005')
     if identity:
         assert identity.get('college')=='计算机科学与技术'
-        fill_span(d.paragraphs[12],list(range(3,8)),identity.get('class',''))
-        fill_span(d.paragraphs[13],list(range(1,6)),identity.get('name',''))
+        fill_span(d.paragraphs[12],list(range(3,8)),identity.get('class',''),tail='\u200a'*4)
+        fill_span(d.paragraphs[13],list(range(1,6)),identity.get('name',''),tail='\u2009'+'\u200a'*5)
         fill_span(d.paragraphs[14],list(range(3,8)),identity.get('student_id',''))
         if identity.get('completion_date'):
             year,month,day=map(int,identity['completion_date'].split('-'))
@@ -144,9 +154,10 @@ def build(text,identity=None):
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
-        st.font.name=font if name in ['CourseHeading','CourseSubheading'] else 'Times New Roman';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0);st.font.bold=False
-        st._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),font)
-        f=st.paragraph_format;f.line_spacing=1;f.space_after=Pt(5);f.space_before=Pt(0)
+        st.font.name=font;st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0);st.font.bold=False
+        for script in ['ascii','hAnsi','eastAsia','cs']:
+            st._element.get_or_add_rPr().rFonts.set(qn('w:'+script),font)
+        f=st.paragraph_format;f.line_spacing=1;f.space_after=Pt(0);f.space_before=Pt(0)
         f.first_line_indent=Cm(.8467) if name=='CourseBody' else Cm(0);f.widow_control=True
         if name=='CourseBody':f.alignment=3
         if name in ['CourseHeading','CourseSubheading']:
@@ -235,6 +246,18 @@ def build(text,identity=None):
             for j,(u,v) in enumerate(zip(ra,rb)):
                 up,vp=u.find('w:rPr',ns),v.find('w:rPr',ns)
                 assert (etree.tostring(up) if up is not None else None)==(etree.tostring(vp) if vp is not None else None),('cover run format',i,j)
+        # Teacher's body rules apply to all prose, including Latin text.
+        styles=etree.fromstring(final.read('word/styles.xml'))
+        for name,font in [('CourseBody','宋体'),('CourseHeading','黑体'),('CourseSubheading','黑体'),('CourseCaption','宋体'),('CourseReference','宋体')]:
+            st=styles.find(f'w:style[@w:styleId="{name}"]',ns)
+            fonts=st.find('w:rPr/w:rFonts',ns)
+            assert all(fonts.get(qn('w:'+script))==font for script in ['ascii','hAnsi','eastAsia','cs'])
+            spacing=st.find('w:pPr/w:spacing',ns)
+            assert spacing.get(qn('w:line'))=='240' and spacing.get(qn('w:lineRule'))=='auto'
+            assert spacing.get(qn('w:after'))=='0'
+            if name in ['CourseHeading','CourseSubheading']:
+                assert st.find('w:rPr/w:sz',ns).get(qn('w:val'))=='24'
+                assert spacing.get(qn('w:beforeLines'))=='50'
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     return figures
 
@@ -263,7 +286,9 @@ def main():
         figure_area_cm2=sum(x['area_cm2'] for x in figures),figures=figures,
         input_sha256={str(p.relative_to(STUDY)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
         output_sha256=hashlib.sha256(OUTPUT.read_bytes()).hexdigest(),preserve_parts_verified=True,
-        cover_untouched_slots_verified=True,layout_check='pending Word export and page PNG inspection')
+        cover_untouched_slots_verified=True,cover_all_run_and_paragraph_formats_verified=True,
+        fresh_template_copy_verified=True,body_teacher_format_verified=True,
+        layout_check='pending Word export and page PNG inspection')
     manifest['personalized_cover']=bool(identity)
     (QA/('submission-verification.json' if identity else 'build-verification.json')).write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     print(f'Built {OUTPUT}; verified {len(records)} complete validation checkpoints.')
