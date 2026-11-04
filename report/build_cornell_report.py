@@ -113,44 +113,45 @@ def equation(text):
     else:children=[text]
     return math_box('oMath',children)
 
-def build(text,identity=None):
+def build(text):
     inventory=read_json(QA/'template-inventory.json')
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     # Start each build from a fresh physical copy of the teacher's document.
-    working_copy=QA/('template-working-submission.docx' if identity else 'template-working-public.docx')
+    working_copy=QA/'template-working-blank-cover.docx'
     shutil.copyfile(REFERENCE,working_copy)
     assert working_copy.read_bytes()==REFERENCE.read_bytes()
     d=Document(working_copy)
     for p in list(d.paragraphs)[18:]:
         p._element.getparent().remove(p._element)
-    # Exact template cover: change text inside existing underlined runs only.
-    # All original paragraphs, spacing, run properties, labels and rules remain.
-    def fill_span(paragraph,indices,value,tail=None):
-        if not value:return
-        runs=[paragraph.runs[i] for i in indices]
-        units=lambda value:sum(2 if ord(ch)>127 else 1 for ch in value)
-        capacity=units(''.join(run.text for run in runs))
-        assert units(value)<=capacity,'Shorten the value to fit the original template slot.'
-        remaining=capacity-units(value)
-        runs[0].text=' '*(remaining//2)+value+' '*(remaining-remaining//2)
-        # Space glyph widths differ from CJK and mixed Latin/CJK text in this
-        # template. Text-only padding keeps the original underline endpoints;
-        # fonts, character spacing, paragraph properties and runs stay intact.
-        if tail is not None:
-            assert runs[0].text.endswith(' ')
-            runs[0].text=runs[0].text[:-1]+tail
-        for run in runs[1:]:run.text=''
-    fill_span(d.paragraphs[6],list(range(6,12)),'Transformer神经渲染方法',tail='\u2005')
-    if identity:
-        assert identity.get('college')=='计算机科学与技术'
-        fill_span(d.paragraphs[12],list(range(3,8)),identity.get('class',''),tail='\u200a'*4)
-        fill_span(d.paragraphs[13],list(range(1,6)),identity.get('name',''),tail='\u2009'+'\u200a'*5)
-        fill_span(d.paragraphs[14],list(range(3,8)),identity.get('student_id',''))
-        if identity.get('completion_date'):
-            year,month,day=map(int,identity['completion_date'].split('-'))
-            assert year==2026
-            fill_span(d.paragraphs[15],[8,9,10,11],str(month))
-            fill_span(d.paragraphs[15],[13,14,15],str(day))
+    # The complete original cover is untouched; the user will fill it by hand.
+    # Hide the first-page footer and number the six body pages from 1.
+    section=d.sections[0]
+    section.different_first_page_header_footer=True
+    # Explicit empty headers prevent Word from applying the template's latent
+    # Header style (which includes a rule) when first-page layout is enabled.
+    for header in [section.header,section.first_page_header]:
+        header.is_linked_to_previous=False
+        header.paragraphs[0].style=d.styles['Normal']
+        pr=header.paragraphs[0]._p.get_or_add_pPr()
+        pr.get_or_add_pStyle().val=d.styles['Normal'].style_id
+        borders=OxmlElement('w:pBdr')
+        for edge in ['top','left','bottom','right','between','bar']:
+            border=OxmlElement('w:'+edge);border.set(qn('w:val'),'nil');borders.append(border)
+        pr.append(borders)
+    section.first_page_footer.is_linked_to_previous=False
+    section.footer.is_linked_to_previous=False
+    page_number=OxmlElement('w:pgNumType');page_number.set(qn('w:start'),'0')
+    section._sectPr.insert_element_before(page_number,'w:cols','w:titlePg','w:docGrid')
+    footer=section.footer.paragraphs[0]
+    footer.alignment=1;footer.paragraph_format.first_line_indent=Pt(0)
+    footer.paragraph_format.space_before=Pt(0);footer.paragraph_format.space_after=Pt(0)
+    footer.paragraph_format.line_spacing=1;disable_grid(footer)
+    field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),' PAGE ')
+    run=OxmlElement('w:r');properties=OxmlElement('w:rPr');fonts=OxmlElement('w:rFonts')
+    for script in ['ascii','hAnsi','eastAsia','cs']:fonts.set(qn('w:'+script),'宋体')
+    properties.append(fonts);size=OxmlElement('w:sz');size.set(qn('w:val'),'18');properties.append(size)
+    run.append(properties);value=OxmlElement('w:t');value.text='1';run.append(value)
+    field.append(run);footer._p.append(field)
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
@@ -234,12 +235,16 @@ def build(text,identity=None):
             if entry['policy']=='preserve':assert final.read(name)==original.read(name),name
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         a,b=[etree.fromstring(z.read('word/document.xml')) for z in [original,final]]
-        assert etree.tostring(a.find('.//w:sectPr',ns))==etree.tostring(b.find('.//w:sectPr',ns))
+        original_section=a.find('.//w:sectPr',ns)
+        final_section=b.find('.//w:sectPr',ns)
+        # Only page-number/footer controls may be added to the original section.
+        for tag in ['headerReference','footerReference','titlePg','pgNumType']:
+            for node in final_section.findall('w:'+tag,ns):final_section.remove(node)
+        assert etree.tostring(original_section)==etree.tostring(final_section)
         original_cover=a.findall('./w:body/w:p',ns)[:18]
         final_cover=b.findall('./w:body/w:p',ns)[:18]
-        edited_slots={6}|({12,13,14,15} if identity else set())
         for i,(pa,pb) in enumerate(zip(original_cover,final_cover)):
-            if i not in edited_slots:assert etree.tostring(pa)==etree.tostring(pb),i
+            assert etree.tostring(pa)==etree.tostring(pb),i
             assert etree.tostring(pa.find('w:pPr',ns))==etree.tostring(pb.find('w:pPr',ns)),('cover paragraph format',i)
             ra,rb=pa.findall('w:r',ns),pb.findall('w:r',ns)
             assert len(ra)==len(rb),('cover run count',i)
@@ -264,15 +269,11 @@ def build(text,identity=None):
 def main():
     global OUTPUT
     parser=argparse.ArgumentParser()
-    parser.add_argument('--identity',type=Path,help='Local JSON for the private submission cover; never publish this file.')
     parser.add_argument('--output',type=Path)
     args=parser.parse_args()
-    if args.identity:
-        assert args.output,'Provide a separate output for a personalized submission.'
     if args.output:OUTPUT=args.output.resolve()
-    identity=read_json(args.identity) if args.identity else None
     text,records=content();(HERE/'report-draft.md').write_text(text,encoding='utf-8')
-    figures=build(text,identity)
+    figures=build(text)
     inputs=[REFERENCE,HERE/'report-content.md',Path(__file__),CORNELL/'parameters.json',CORNELL/'train.yaml',CORNELL/'status.json',CORNELL/'report/learning-analysis.json']
     inputs += [CORNELL/'evaluations'/m['label']/'metrics.json' for m in records]
     inputs += [CORNELL/'evaluations/pretrained/metrics.json',STUDY/'site/docs/assets/course-control/cornell-measurements.json']
@@ -287,10 +288,11 @@ def main():
         input_sha256={str(p.relative_to(STUDY)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
         output_sha256=hashlib.sha256(OUTPUT.read_bytes()).hexdigest(),preserve_parts_verified=True,
         cover_untouched_slots_verified=True,cover_all_run_and_paragraph_formats_verified=True,
+        cover_all_original_paragraphs_identical=True,body_page_number_start=1,cover_page_number_visible=False,
         fresh_template_copy_verified=True,body_teacher_format_verified=True,
         layout_check='pending Word export and page PNG inspection')
-    manifest['personalized_cover']=bool(identity)
-    (QA/('submission-verification.json' if identity else 'build-verification.json')).write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+    manifest['personalized_cover']=False
+    (QA/'build-verification.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     print(f'Built {OUTPUT}; verified {len(records)} complete validation checkpoints.')
 
 if __name__=='__main__':main()
