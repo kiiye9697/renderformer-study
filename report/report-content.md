@@ -1,4 +1,4 @@
-# Transformer学习方法及其在三角网格神经渲染中的应用——以RenderFormer为例
+# Transformer神经渲染方法
 
 ## 一 Transformer学习方法
 

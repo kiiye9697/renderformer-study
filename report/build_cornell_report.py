@@ -119,47 +119,28 @@ def build(text,identity=None):
     d=Document(REFERENCE)
     for p in list(d.paragraphs)[18:]:
         p._element.getparent().remove(p._element)
-    # Preserve the original 36 pt cover heading, furniture and date row.
-    # Only fill the original title/identity area; keep its ruled fields.
-    def cover_run(p,value,size,font='宋体',underline=False):
-        run=p.add_run(value);run.font.name=font;run.font.size=Pt(size)
-        run.font.underline=underline;run.font.bold=False
-        run._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),font)
-        return run
-    def cover_paragraph(p,left,height):
-        p.clear();f=p.paragraph_format
-        f.alignment=0;f.left_indent=Cm(left);f.first_line_indent=Cm(0)
-        f.space_before=Pt(0);f.space_after=Pt(0);f.line_spacing=Pt(height)
-        indent=p._p.get_or_add_pPr().find(qn('w:ind'))
-        for key in ['firstLineChars','leftChars','rightChars','hangingChars','hanging']:
-            indent.attrib.pop(qn('w:'+key),None)
-        f.tab_stops.clear_all();disable_grid(p)
-    from docx.enum.text import WD_TAB_ALIGNMENT
-    title_lines=['Transformer学习方法及其在','三角网格神经渲染中的应用','——以RenderFormer为例']
-    for i,value in zip([6,7,8],title_lines):
-        p=d.paragraphs[i];cover_paragraph(p,1.9 if i==6 else 5.7,28)
-        p.paragraph_format.tab_stops.add_tab_stop(Cm(10.25),WD_TAB_ALIGNMENT.CENTER)
-        p.paragraph_format.tab_stops.add_tab_stop(Cm(14.8),WD_TAB_ALIGNMENT.LEFT)
-        if i==6:cover_run(p,'题    目  ：',18,'黑体')
-        cover_run(p,'\t'+value+'\t',15,underline=True)
-    profile=identity or {}
-    cover={10:('院    系：',profile.get('college','计算机科学与技术')),
-        11:('专    业：',profile.get('major','计算机科学与技术')),
-        12:('班    级：',profile.get('class','')),
-        13:('学生姓名：',profile.get('name','')),
-        14:('学    号：',profile.get('student_id',''))}
-    for i,(label,value) in cover.items():
-        p=d.paragraphs[i];cover_paragraph(p,3.1,31.2)
-        p.paragraph_format.tab_stops.add_tab_stop(Cm(9.0),WD_TAB_ALIGNMENT.CENTER)
-        p.paragraph_format.tab_stops.add_tab_stop(Cm(12.2),WD_TAB_ALIGNMENT.LEFT)
-        cover_run(p,label,16)
-        cover_run(p,'\t'+value+'\t',16,underline=True)
-    if identity and identity.get('completion_date'):
-        year,month,day=map(int,identity['completion_date'].split('-'))
-        p=d.paragraphs[15];cover_paragraph(p,3.1,31.2)
-        cover_run(p,'完成日期：',16)
-        for value,suffix in [(str(year),'年'),(f'{month:02d}','月'),(f'{day:02d}','日')]:
-            cover_run(p,' '+value+' ',16,underline=True);cover_run(p,suffix,16)
+    # Exact template cover: change text inside existing underlined runs only.
+    # All original paragraphs, spacing, run properties, labels and rules remain.
+    def fill_span(paragraph,indices,value):
+        if not value:return
+        runs=[paragraph.runs[i] for i in indices]
+        units=lambda value:sum(2 if ord(ch)>127 else 1 for ch in value)
+        capacity=units(''.join(run.text for run in runs))
+        assert units(value)<=capacity,'Shorten the value to fit the original template slot.'
+        remaining=capacity-units(value)
+        runs[0].text=' '*(remaining//2)+value+' '*(remaining-remaining//2)
+        for run in runs[1:]:run.text=''
+    fill_span(d.paragraphs[6],list(range(6,12)),'Transformer神经渲染方法')
+    if identity:
+        assert identity.get('college')=='计算机科学与技术'
+        fill_span(d.paragraphs[12],list(range(3,8)),identity.get('class',''))
+        fill_span(d.paragraphs[13],list(range(1,6)),identity.get('name',''))
+        fill_span(d.paragraphs[14],list(range(3,8)),identity.get('student_id',''))
+        if identity.get('completion_date'):
+            year,month,day=map(int,identity['completion_date'].split('-'))
+            assert year==2026
+            fill_span(d.paragraphs[15],[8,9,10,11],str(month))
+            fill_span(d.paragraphs[15],[13,14,15],str(day))
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
@@ -243,8 +224,17 @@ def build(text,identity=None):
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         a,b=[etree.fromstring(z.read('word/document.xml')) for z in [original,final]]
         assert etree.tostring(a.find('.//w:sectPr',ns))==etree.tostring(b.find('.//w:sectPr',ns))
-        for i in [0,1,2,3,4,5,16,17]+([] if identity and identity.get('completion_date') else [15]):
-            assert etree.tostring(a.findall('./w:body/w:p',ns)[i])==etree.tostring(b.findall('./w:body/w:p',ns)[i]),i
+        original_cover=a.findall('./w:body/w:p',ns)[:18]
+        final_cover=b.findall('./w:body/w:p',ns)[:18]
+        edited_slots={6}|({12,13,14,15} if identity else set())
+        for i,(pa,pb) in enumerate(zip(original_cover,final_cover)):
+            if i not in edited_slots:assert etree.tostring(pa)==etree.tostring(pb),i
+            assert etree.tostring(pa.find('w:pPr',ns))==etree.tostring(pb.find('w:pPr',ns)),('cover paragraph format',i)
+            ra,rb=pa.findall('w:r',ns),pb.findall('w:r',ns)
+            assert len(ra)==len(rb),('cover run count',i)
+            for j,(u,v) in enumerate(zip(ra,rb)):
+                up,vp=u.find('w:rPr',ns),v.find('w:rPr',ns)
+                assert (etree.tostring(up) if up is not None else None)==(etree.tostring(vp) if vp is not None else None),('cover run format',i,j)
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     return figures
 
