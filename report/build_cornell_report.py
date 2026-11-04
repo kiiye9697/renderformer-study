@@ -154,10 +154,16 @@ def build(text,identity=None):
         p.paragraph_format.tab_stops.add_tab_stop(Cm(12.2),WD_TAB_ALIGNMENT.LEFT)
         cover_run(p,label,16)
         cover_run(p,'\t'+value+'\t',16,underline=True)
+    if identity and identity.get('completion_date'):
+        year,month,day=map(int,identity['completion_date'].split('-'))
+        p=d.paragraphs[15];cover_paragraph(p,3.1,31.2)
+        cover_run(p,'完成日期：',16)
+        for value,suffix in [(str(year),'年'),(f'{month:02d}','月'),(f'{day:02d}','日')]:
+            cover_run(p,' '+value+' ',16,underline=True);cover_run(p,suffix,16)
     # Separate styles preserve inherited cover typography.
     for name,font,size in [('CourseBody','宋体',12),('CourseHeading','黑体',12),('CourseSubheading','黑体',12),('CourseCaption','宋体',9),('CourseReference','宋体',9)]:
         st=d.styles.add_style(name,WD_STYLE_TYPE.PARAGRAPH);st.base_style=d.styles['Normal']
-        st.font.name='Times New Roman';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0);st.font.bold=False
+        st.font.name=font if name in ['CourseHeading','CourseSubheading'] else 'Times New Roman';st.font.size=Pt(size);st.font.color.rgb=RGBColor(0,0,0);st.font.bold=False
         st._element.get_or_add_rPr().rFonts.set(qn('w:eastAsia'),font)
         f=st.paragraph_format;f.line_spacing=1;f.space_after=Pt(5);f.space_before=Pt(0)
         f.first_line_indent=Cm(.8467) if name=='CourseBody' else Cm(0);f.widow_control=True
@@ -219,6 +225,7 @@ def build(text,identity=None):
             figures.append(dict(path=str(path.relative_to(STUDY)),width_cm=shape.width.cm,height_cm=shape.height.cm,area_cm2=shape.width.cm*shape.height.cm))
             para(caption,'CourseCaption');continue
         p=para(line,'CourseReference' if refs else 'CourseBody')
+        if line.startswith('对Sponza的检查'):p.paragraph_format.page_break_before=True
         if '完整commit见文献' in line:p.paragraph_format.alignment=0
         if re.match(r'^表\d+\s',line):p.style=d.styles['CourseCaption'];p.paragraph_format.keep_with_next=True
     d.core_properties.title=text.splitlines()[0][2:]
@@ -236,7 +243,7 @@ def build(text,identity=None):
         ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
         a,b=[etree.fromstring(z.read('word/document.xml')) for z in [original,final]]
         assert etree.tostring(a.find('.//w:sectPr',ns))==etree.tostring(b.find('.//w:sectPr',ns))
-        for i in [0,1,2,3,4,5,15,16,17]:
+        for i in [0,1,2,3,4,5,16,17]+([] if identity and identity.get('completion_date') else [15]):
             assert etree.tostring(a.findall('./w:body/w:p',ns)[i])==etree.tostring(b.findall('./w:body/w:p',ns)[i]),i
     assert hashlib.sha256(REFERENCE.read_bytes()).hexdigest()==inventory['sha256']
     return figures

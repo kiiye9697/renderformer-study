@@ -11,7 +11,7 @@
 | scripts/*.py, *.ps1 | 原创复现实验工具 | 环境、密钥、模型、第三方网格 |
 | scripts/training/*.py、*.md | 原创数据准备、审计、缓存、容量探测、DPT微调与评价脚本/说明 | __pycache__、特征缓存、数据集原图、模型和输出头权重 |
 | unity-exporter/ | package.json、Editor源码/asmdef、README、Tests~ | 任何原Unity工程或Sponza衍生资产 |
-| docs/ | 网页HTML/CSS/JS、状态JSON、脱敏training.json、已核实可公开的本机展示图、assets/course-report.docx（当前6页报告，个人信息留空） | 未运行冒充结果、原论文截图、未注明来源的第三方展示图 |
+| docs/ | 网页HTML/CSS/JS、状态JSON、脱敏training.json、已核实可公开的本机展示图、assets/course-report.docx（当前7页报告，个人信息留空） | 未运行冒充结果、原论文截图、未注明来源的第三方展示图 |
 | public-data/（如存在） | 清理后的版本/指标/实验配置、io-guide.json、训练划分与参数摘要 | 本机绝对路径、用户目录、原资产路径、秘密或原始日志 |
 
 整个runtime、vendor、experiments默认不公开。实验选定指标或配置应复制并清理到public-data，网页展示图复制到docs/assets后重新核验状态。所有H5、EXR、Blender、NPZ、FBX、OBJ、权重文件都被忽略。

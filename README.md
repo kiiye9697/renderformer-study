@@ -15,7 +15,7 @@ Transformer学习方法及其在三角网格神经渲染中的应用。
 
 ## 文件
 
-`docs/`为GitHub Pages内容；`scripts/build_learning_entry.py`生成入口、方法与结果页。课程报告共6页，见[Word报告](https://www.kiiye9697.cn/renderformer-study/assets/course-report.docx)，生成方式见`report/README.md`。本地输出为相邻的`../report/RenderFormer-课程报告.docx`；原有“期末报告”PDF/Word属于历史实验。
+`docs/`为GitHub Pages内容；`scripts/build_learning_entry.py`生成入口、方法与结果页。课程报告共7页，见[Word报告](https://www.kiiye9697.cn/renderformer-study/assets/course-report.docx)，生成方式见`report/README.md`。本地输出为相邻的`../report/RenderFormer-课程报告.docx`；原有“期末报告”PDF/Word属于历史实验。
 
 未验收的新参考图只留在本地审核材料中，不作为已完成结果发布。公开页面不包含原始资产、模型、HDR或缓存。
 
